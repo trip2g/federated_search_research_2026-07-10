@@ -34,17 +34,31 @@ of interest and why", following cross-links, and noticing cycles. The point is t
 see whether the model can move through a knowledge graph *deliberately* rather than
 thrash.
 
-## Run it
+## Reproduce it — one command
+
+Python 3 (stdlib only) and an OpenRouter key. Nothing else for the headline run.
 
 ```bash
-export OPENROUTER_KEY=sk-or-...        # your key; never committed
-export MODELS='["anthropic/claude-haiku-4.5","openai/gpt-5.4-mini"]'
-export BUDGET_USD=2.6                  # hard stop before the real ceiling
-python3 bench.py
+export OPENROUTER_KEY=sk-or-...   # your key; never committed
+make reproduce                    # v2 table, live hub, ~$0.69, halts at BUDGET_USD
 ```
 
-`bench.py` tracks spend from OpenRouter's own usage accounting and halts before
-`BUDGET_USD`. This study ran under a **$3** cap.
+`make reproduce` runs `bench.py` against the **live** hub
+`philosophers.2pub.me/_system/mcp` with the exact five models from the published
+v2 table — **no local setup**. Every run tracks spend from OpenRouter's own usage
+accounting and stops before `BUDGET_USD` (default `1.0`; override with
+`make reproduce BUDGET_USD=2`).
+
+| command | what it reproduces | needs | recorded cost |
+|---|---|---|---|
+| `make reproduce` (`v2`) | headline navigation/grounding/cost table | key only | **$0.69** |
+| `make v3` | walls-vs-flat (naive flat) | key + `~/projects/korpuses/*.2pub.me` | $0.13 |
+| `make v4` | flat-hybrid (vector + reranker) | key + a local memcli instance | ~$0.15 |
+
+The flat arms need local corpora because a "flat pile" and a "hybrid local store"
+only exist on your machine — the walled arm is the live hub. Steps for `v3`/`v4`
+data are in the arm sections below. Totals are small: a full re-run of every arm
+is well under **$1**.
 
 ## Notes & honesty
 

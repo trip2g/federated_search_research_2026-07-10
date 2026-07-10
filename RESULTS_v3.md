@@ -31,6 +31,17 @@ Same knowledge, two access modes:
 embeddings, no reranker. A serious flat store (vector + reranker) is a separate,
 ongoing build; treat these numbers as the *floor* of what "no walls" can do.
 
+> **Confound, stated plainly.** The WALLED arm is **not** full-text: the live
+> philosopher hubs run **vector search** (verified — an English paraphrase with no
+> shared words returns the right Russian notes, with `pN:cM` chunk match ids). So
+> this comparison varies *two* things at once — walls **and** the retrieval engine
+> (vector vs. substring). Much of the walled arm's correctness edge could be the
+> embeddings, not the walls. This table therefore reads as *"authored structure +
+> vector beats a crude keyword pile,"* **not** *"walls beat a flat store."* The
+> only clean test holds retrieval fixed — vector + reranker on **both** arms — and
+> that is exactly the flat-hybrid **v4** run (same corpora, one flat store, vector
+> + reranker). Read v3 as the floor; v4 is the controlled comparison.
+
 ## Results (2 models × 2 conditions × 6 questions, 1 run each)
 
 `correct` = judge says all preregistered facts stated; `facts` = required facts

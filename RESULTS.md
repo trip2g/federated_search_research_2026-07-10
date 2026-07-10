@@ -7,6 +7,22 @@ Two runs. **v1 was invalid** — a skeptic review ([`REVIEW.md`](./REVIEW.md))
 caught it and it was confirmed. **v2** is the corrected run. Read this whole page
 as a probe (n=6 questions, 1 run each), not a leaderboard.
 
+> **Honest headline, after three passes.** We measured, corrected, and measured
+> again — and each pass surfaced *another broken-retrieval-hidden-as-success*. v1:
+> targeted `kb_id` calls returned `not_configured` (models answered from memory).
+> v2 fixed that — but then **128 of 130 read-by-`pid` calls reached the model as
+> empty** (see [below](#the-second-hidden-failure-read-by-pid-came-back-empty-128130)):
+> the server actually *rejected* the model's string-shaped `pid` with a hard
+> error, and our harness swallowed that error into an empty result. So even the
+> "corrected" run fed models mostly *search snippets*, not the full notes they
+> tried to open. The robust findings are therefore narrow: models **navigate** a
+> federated graph reliably and cheaply, and **over-navigation cost (thrash)** is
+> real and large. Whether they **faithfully ground / understand** the principles
+> is *still unproven here* — retrieval the metrics assumed was intact was degraded
+> twice. The recurring lesson is the finding: a failed retrieval that looks like a
+> successful-but-empty one is invisible to every downstream metric — on the
+> endpoint side *and* the harness side.
+
 ## The v1 mistake (kept, on purpose)
 
 v1 pointed the harness at `https://trip2g.com/_system/mcp`. That hub does **not**
@@ -95,12 +111,49 @@ of the v1 endpoint bug.
   hard when the graph is structured (opponent lists, topic axes) and `kb_id`
   resolves — nano and an open 14B both did it reliably and cheaply.
 - **Do they understand / faithfully ground the principles?** **Not established
-  here.** They reach the right material but rarely quote it verbatim; the strict
-  metric is confounded by EN-answer/RU-corpus mismatch, and a proper
-  faithfulness check is future work.
+  here.** They reach the right *corpus* but their full-note reads silently returned
+  empty 128/130 times (the `pid` bug above), so they grounded on search snippets,
+  not full notes — and even then rarely quote verbatim; the strict metric is also
+  confounded by EN-answer/RU-corpus mismatch. A proper faithfulness check, on a
+  read path that actually returns content, is future work.
 - **What's the real cost lever?** Convergence, not intelligence: over-navigation
   (Haiku) is a ~35× cost multiplier; the win is a model + prompt that target and
   stop.
+
+## The second hidden failure: read-by-`pid` came back empty (128/130)
+
+Re-auditing the v2 traces surfaced a second broken-read-hidden-as-success — but,
+importantly, **not the way it first looked.** In **128 of 130** `note_html` /
+`federated_note_html` calls carrying a `pid`, the model received empty text. The
+models were doing the sensible thing: a `federated_search` result hands back a
+match id like `p36:c2` (a *passage:chunk* id) or a numeric note id, and the model
+replayed that as `pid` to open the full note.
+
+The cause was split across the server and our own harness, and we only pinned it
+down by replaying the exact failing calls against the live hub:
+
+- **Server side (ergonomics):** the `pid` field was typed `int64`. A string-shaped
+  `pid` — `"70"` or `"p36:c2"` — made the whole call fail with a hard JSON-RPC
+  error (`-32602 cannot unmarshal string … into int64`), **even when a valid
+  `path` was also supplied**. So the server was *loud*, not silent — but it threw
+  away a resolvable request over a type mismatch.
+- **Harness side (the actual "empty"):** our `bench.py` read only the JSON-RPC
+  `result` field and ignored `error`, so it turned every one of those errors into
+  `{"ok": true, "text": ""}` and fed the model an empty-but-successful read. *That*
+  is where the 128 empties came from — the metric never saw the server's error.
+
+Consequence for this study is unchanged in effect: even in the "corrected" v2 run,
+the *read the full note* step delivered nothing to the model 128/130 times, so its
+evidence base was `federated_search` snippets (which did carry text — that's why
+corpus-hit rate stayed ~5/6), not the full notes it tried to open. "They reach the
+material" should be read as **"they reach search snippets."** v3 sidesteps this
+(it doesn't hand models a `pid`), which is why its harness is the trustworthy one.
+Both bugs are now fixed: the endpoint accepts string/`match_id`-shaped pids and
+falls back to `path` (branch `fix/mcp-pid-empty-note`), and the harness must
+surface JSON-RPC errors instead of coercing them to empty. The lesson holds, just
+on two surfaces: *a failed retrieval that renders as successful-but-empty is
+invisible to every downstream metric — check the server's `error`, don't just read
+its `result`.*
 
 ## What this pilot still doesn't do (from `REVIEW.md`)
 

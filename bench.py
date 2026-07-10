@@ -53,6 +53,14 @@ def mcp_call(name, arguments):
     t0 = time.time()
     try:
         d = _post(MCP_URL, body, {})
+        # A JSON-RPC error is a 200 response carrying an `error` field (no
+        # exception). v2 originally read only `result` and silently turned these
+        # into ok+empty — that is what produced the 128 "empty" pid reads. Surface
+        # the error instead so a broken retrieval never looks like a successful one.
+        if d.get("error") is not None:
+            err = d["error"]
+            return {"ok": False, "error": f"jsonrpc {err.get('code')}: {err.get('message')}",
+                    "ms": int((time.time() - t0) * 1000)}
         res = d.get("result", {})
         parts = res.get("content", [])
         text = "\n".join(p.get("text", "") for p in parts if p.get("type") == "text")
