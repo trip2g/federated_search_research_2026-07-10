@@ -1,0 +1,445 @@
+[
+  {
+    "file": "flat__gpt-5.4-mini__q1.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "flat",
+    "qid": 1,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No attribution errors to the wrong thinker; the answer consistently attributes all claims to Nietzsche’s will to power as given in the knowledge base.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"No attribution errors to the wrong thinker; the answer consistently attributes all claims to Nietzsche’s will to power as given in the knowledge base.\"\n}",
+      "judge_cost": 0.000168
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-mini__q2.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "flat",
+    "qid": 2,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No clear wrong attribution or merging of positions beyond correctly contrasting Schopenhauer’s will-to-life/negation with Nietzsche’s will-to-power/affirmation.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"No clear wrong attribution or merging of positions beyond correctly contrasting Schopenhauer’s will-to-life/negation with Nietzsche’s will-to-power/affirmation.\"\n}",
+      "judge_cost": 0.000201
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-mini__q3.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "flat",
+    "qid": 3,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "The quoted sentence is presented as Epictetus’s core principle dividing what is up to us and not up to us.",
+          "attributed_to": "Epictetus",
+          "belongs_to": "Unknown (key does not provide this exact quote attribution)"
+        }
+      ],
+      "blending": false,
+      "note": "The candidate correctly matches the key’s content, but it asserts that the specific verbatim quote (and the Russian paraphrase) come from the knowledge base for Epictetus; the key does not establish this exact quotation’s provenance.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"The quoted sentence is presented as Epictetus’s core principle dividing what is up to us and not up to us.\",\n      \"attributed_to\": \"Epictetus\",\n      \"belongs_to\": \"Unknown (key does not provide this exact quote attribution)\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"The candidate correctly matches the key’s content, but it asserts that the specific verbatim quote (and the Russian paraphrase) come from the knowledge base for Epictetus; the key doe",
+      "judge_cost": 0.00025
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-mini__q4.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "flat",
+    "qid": 4,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No attribution errors detected: the answer correctly identifies Montaigne as the counterpoint to Epictetus and uses the knowledge-base grounds (“patchwork soul vs Stoic citadel,” “common measure not system” tied to control-dichotomy framing).",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"No attribution errors detected: the answer correctly identifies Montaigne as the counterpoint to Epictetus and uses the knowledge-base grounds (“patchwork soul vs Stoic citadel,” “common measure not system” tied to control-dichotomy framing).\"\n}",
+      "judge_cost": 0.000217
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-mini__q5.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "flat",
+    "qid": 5,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No clear attribution errors: the answer consistently attributes the tranquil “que sais-je?” to Montaigne and the abyss/wager/no-God anxiety to Pascal per the key.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"No clear attribution errors: the answer consistently attributes the tranquil “que sais-je?” to Montaigne and the abyss/wager/no-God anxiety to Pascal per the key.\"\n}",
+      "judge_cost": 0.000189
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-mini__q6.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "flat",
+    "qid": 6,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No clear attribution-to-wrong-thinker errors detected; Confucius claims are linked to ritual/rectifying conduct, and Laozi claims are linked to wu wei/non-interference as in the key.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"No clear attribution-to-wrong-thinker errors detected; Confucius claims are linked to ritual/rectifying conduct, and Laozi claims are linked to wu wei/non-interference as in the key.\"\n}",
+      "judge_cost": 0.000208
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-nano__q1.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "flat",
+    "qid": 1,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "Атрибутирование сделано Ницше; утверждения про вторичность самосохранения и широту «воли к власти» (вплоть до органики/познания) соответствуют ключу и не смешивают позиции других философов.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"Атрибутирование сделано Ницше; утверждения про вторичность самосохранения и широту «воли к власти» (вплоть до органики/познания) соответствуют ключу и не смешивают позиции других философов.\"\n}",
+      "judge_cost": 0.000211
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-nano__q2.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "flat",
+    "qid": 2,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "Nietzsche’s view is that the fundamental drive is ‘not self-preservation’ and instead ‘striving to manifest force, grow, appropriate, impose form’ and that ‘will to power’ is not political lust but ‘pro-forma of life’ from organic functions to cognition and philosophy; even ‘will to truth’ is a special case",
+          "attributed_to": "Nietzsche",
+          "belongs_to": "Nietzsche"
+        }
+      ],
+      "blending": true,
+      "note": "The answer correctly attributes core doctrines to Nietzsche and Schopenhauer, but it blends the *hub/axis-of-dispute summary* attribution (“Nietzsche takes Schopenhauer’s will but inverts the conclusion”) with specific framing as a direct contrast; it doesn’t clearly separate what comes from the knowledge-base ‘contradictions/axis’ pages versus original texts—though it generally assigns the doctrines to the right thinkers.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"Nietzsche’s view is that the fundamental drive is ‘not self-preservation’ and instead ‘striving to manifest force, grow, appropriate, impose form’ and that ‘will to power’ is not political lust but ‘pro-forma of life’ from organic functions to cognition and philosophy; even ‘will to truth’ is a special case\",\n      \"attributed_to\": \"Nietzsche\",\n      \"belongs_to\": \"Nietzsche\"\n    }\n  ],\n  \"blending\": true,\n  \"note\": \"The answer correctly attributes ",
+      "judge_cost": 0.000474
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-nano__q3.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "flat",
+    "qid": 3,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "Answer attributes the correct core “in our power / not in our power” distinction to Epictetus and does not merge multiple thinkers’ views.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"Answer attributes the correct core “in our power / not in our power” distinction to Epictetus and does not merge multiple thinkers’ views.\"\n}",
+      "judge_cost": 0.000143
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-nano__q4.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "flat",
+    "qid": 4,
+    "verdict": "incorrect",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "Wattles is the thinker who most directly argues against Stoic detachment/“external not in our power”.",
+          "attributed_to": "В этой базе знаний",
+          "belongs_to": "Nietzsche/Montaigne/La Rochefoucauld"
+        }
+      ],
+      "blending": false,
+      "note": "The key’s direct opponent list (Nietzsche/Montaigne/La Rochefoucauld) is not reflected; the answer instead identifies Wattles as the direct counter to Epictetus on the control/dichotomy axis.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"Wattles is the thinker who most directly argues against Stoic detachment/“external not in our power”.\",\n      \"attributed_to\": \"В этой базе знаний\",\n      \"belongs_to\": \"Nietzsche/Montaigne/La Rochefoucauld\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"The key’s direct opponent list (Nietzsche/Montaigne/La Rochefoucauld) is not reflected; the answer instead identifies Wattles as the direct counter to Epictetus on the control/dichotomy axis.\"\n}",
+      "judge_cost": 0.000354
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-nano__q5.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "flat",
+    "qid": 5,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "Паскаль прямо спорит с Монтенем и выводит из монтеневского скепсиса «бездну» и «ставку на Бога» вместо спокойного «que sais-je?» (в форме конкретного оппонентского ответа/позиционирования)",
+          "attributed_to": "Montaigne",
+          "belongs_to": "Pascal"
+        }
+      ],
+      "blending": true,
+      "note": "Текст кандидата описывает симметричную «перекинутую» оппозицию (и для Паскаля, и для Монтеня) как если бы оба «выводили» друг из друга, тем самым размывая односторонний тезис ключа: Паскаль спорит с Монтенем, а не Монтень с Паскалем.",
+      "raw": "{\"misattributions\":[{\"claim\":\"Паскаль прямо спорит с Монтенем и выводит из монтеневского скепсиса «бездну» и «ставку на Бога» вместо спокойного «que sais-je?» (в форме конкретного оппонентского ответа/позиционирования)\",\"attributed_to\":\"Montaigne\",\"belongs_to\":\"Pascal\"}],\"blending\":true,\"note\":\"Текст кандидата описывает симметричную «перекинутую» оппозицию (и для Паскаля, и для Монтеня) как если бы оба «выводили» друг из друга, тем самым размывая односторонний тезис ключа: Паскаль спорит с Монте",
+      "judge_cost": 0.00048
+    }
+  },
+  {
+    "file": "flat__gpt-5.4-nano__q6.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "flat",
+    "qid": 6,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "“победи себя и вернись к ритуалу”",
+          "attributed_to": "Конфуций",
+          "belongs_to": "—"
+        }
+      ],
+      "blending": false,
+      "note": "Основные приписывания соответствуют ключу (Конфуций↔ритуал/самовоспитание; Лао-цзы↔у-вэй/правление через недеяние); явного смешения фигур нет. Единственная неопределённость: не выделена явная верификация, что цитата строго из базы закреплена именно за Конфуцием, а не как общий/поздний ход.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"“победи себя и вернись к ритуалу”\",\n      \"attributed_to\": \"Конфуций\",\n      \"belongs_to\": \"—\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"Основные приписывания соответствуют ключу (Конфуций↔ритуал/самовоспитание; Лао-цзы↔у-вэй/правление через недеяние); явного смешения фигур нет. Единственная неопределённость: не выделена явная верификация, что цитата строго из базы закреплена именно за Конфуцием, а не как общий/поздний ход.\"\n}",
+      "judge_cost": 0.000363
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-mini__q1.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "walled",
+    "qid": 1,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No clear attribution errors: all claims are correctly presented as Nietzsche’s will to power per the knowledge base quotes and summary.",
+      "raw": "{\"misattributions\":[],\"blending\":false,\"note\":\"No clear attribution errors: all claims are correctly presented as Nietzsche’s will to power per the knowledge base quotes and summary.\"}",
+      "judge_cost": 0.000159
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-mini__q2.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "walled",
+    "qid": 2,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "the Nietzsche corpus says that willing is fundamentally affirmative and creative, with life overreaching/turning against limits (and that human beings are driven toward self-overcoming and independence/command).",
+          "attributed_to": "Schopenhauer",
+          "belongs_to": "Nietzsche"
+        }
+      ],
+      "blending": false,
+      "note": "The answer correctly attributes core doctrines to Nietzsche (will to power) and Schopenhauer (will to live) and does not noticeably swap their roles; the only potential issue is minor mixing of Nietzsche's framing of self-overcoming/affirmation with the stated contrast, but not misattributing to the wrong thinker.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"the Nietzsche corpus says that willing is fundamentally affirmative and creative, with life overreaching/turning against limits (and that human beings are driven toward self-overcoming and independence/command).\",\n      \"attributed_to\": \"Schopenhauer\",\n      \"belongs_to\": \"Nietzsche\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"The answer correctly attributes core doctrines to Nietzsche (will to power) and Schopenhauer (will to live) and does not noti",
+      "judge_cost": 0.00036
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-mini__q3.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "walled",
+    "qid": 3,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No clear misattribution: the answer correctly attributes the dichotomy of control (quote and summary) to Epictetus.",
+      "raw": "{\"misattributions\":[],\"blending\":false,\"note\":\"No clear misattribution: the answer correctly attributes the dichotomy of control (quote and summary) to Epictetus.\"}",
+      "judge_cost": 0.00014
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-mini__q4.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "walled",
+    "qid": 4,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "Montaigne directly opposes Stoic detachment by denying a stable unified self and Stoic-like mastery",
+          "attributed_to": "Montaigne",
+          "belongs_to": "Montaigne (no misattribution detected)"
+        },
+        {
+          "claim": "The knowledge base states that Epictetus’ position is that what is not in our power (body, property, reputation, children, wife, even life) is indifferent ('безразлично') and that this is not coldness",
+          "attributed_to": "Epictetus",
+          "belongs_to": "Epictetus (no misattribution detected)"
+        },
+        {
+          "claim": "Montaigne rejects the idea of a constant solid core governing from above (quote about authors trying to make us constant and solid fabric)",
+          "attributed_to": "Montaigne",
+          "belongs_to": "Montaigne (no misattribution detected)"
+        },
+        {
+          "claim": "In 'Против жестокости', Montaigne treats cruelty as the worst vice and uses vivid bodily examples of torture; therefore he is 'much less detached than Epictetus'",
+          "attributed_to": "Montaigne",
+          "belongs_to": "Montaigne (possible extrapolation, but not a clear wrong-attribution vs key)"
+        },
+        {
+          "claim": "The Epictetus note says 'жестокость у Монтеня — худший порок' and 'мерить её надо начиная с себя'",
+          "attributed_to": "Epictetus",
+          "belongs_to": "Montaigne"
+        }
+      ],
+      "blending": true,
+      "note": "The answer treats Montaigne quotes ('жестокость у Монтеня…') as if they are supported by the Epictetus note, conflating the sources.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"Montaigne directly opposes Stoic detachment by denying a stable unified self and Stoic-like mastery\",\n      \"attributed_to\": \"Montaigne\",\n      \"belongs_to\": \"Montaigne (no misattribution detected)\"\n    },\n    {\n      \"claim\": \"The knowledge base states that Epictetus’ position is that what is not in our power (body, property, reputation, children, wife, even life) is indifferent ('безразлично') and that this is not coldness\",\n      \"attributed_to\":",
+      "judge_cost": 0.000716
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-mini__q5.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "walled",
+    "qid": 5,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "“из его скепсиса Паскаль выводит бездну и ставку, а не покойное ‘que sais-je?’”",
+          "attributed_to": "Montaigne",
+          "belongs_to": "Pascal"
+        },
+        {
+          "claim": "“из того же скепсиса Паскаль выводит бездну и Бога, Монтень остаётся в спокойном ‘que sais-je?’”",
+          "attributed_to": "Montaigne",
+          "belongs_to": "Pascal"
+        }
+      ],
+      "blending": false,
+      "note": "The answer correctly states Pascal vs. Montaigne at a high level, but it misattributes the “derives abyss/wager/God from skepticism” moves as if they were Montaigne’s entry contents rather than Pascal’s position; otherwise no clear blending.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"“из его скепсиса Паскаль выводит бездну и ставку, а не покойное ‘que sais-je?’”\",\n      \"attributed_to\": \"Montaigne\",\n      \"belongs_to\": \"Pascal\"\n    },\n    {\n      \"claim\": \"“из того же скепсиса Паскаль выводит бездну и Бога, Монтень остаётся в спокойном ‘que sais-je?’”\",\n      \"attributed_to\": \"Montaigne\",\n      \"belongs_to\": \"Pascal\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"The answer correctly states Pascal vs. Montaigne at a high level, but ",
+      "judge_cost": 0.000382
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-mini__q6.json",
+    "model": "openai/gpt-5.4-mini",
+    "condition": "walled",
+    "qid": 6,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No thinker is explicitly misattributed; the answer correctly attributes ritual/example governance to Confucius and wuwei/non-interference to Laozi, matching the key.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"No thinker is explicitly misattributed; the answer correctly attributes ritual/example governance to Confucius and wuwei/non-interference to Laozi, matching the key.\"\n}",
+      "judge_cost": 0.000195
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-nano__q1.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "walled",
+    "qid": 1,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "«жизнь есть воля к власти, а не самосохранение»",
+          "attributed_to": "Ницше",
+          "belongs_to": "Ницше (нет ошибки) "
+        },
+        {
+          "claim": "«всё живое стремится разряжать силу, мораль — лишь её симптом»",
+          "attributed_to": "Ницше",
+          "belongs_to": "Ницше (нет ошибки) "
+        },
+        {
+          "claim": "«Воля к власти ≠ политическая „жажда власти“; по ту сторону добра и зла ≠ „аморальность“»",
+          "attributed_to": "Ницше",
+          "belongs_to": "Ницше (нет ошибки) "
+        }
+      ],
+      "blending": false,
+      "note": "Ошибок атрибуции к другому мыслителю не обнаружено; текст приписывает обсуждаемым тезисам Ницше и не смешивает позиции разных авторов.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"«жизнь есть воля к власти, а не самосохранение»\",\n      \"attributed_to\": \"Ницше\",\n      \"belongs_to\": \"Ницше (нет ошибки) \"\n    },\n    {\n      \"claim\": \"«всё живое стремится разряжать силу, мораль — лишь её симптом»\",\n      \"attributed_to\": \"Ницше\",\n      \"belongs_to\": \"Ницше (нет ошибки) \"\n    },\n    {\n      \"claim\": \"«Воля к власти ≠ политическая „жажда власти“; по ту сторону добра и зла ≠ „аморальность“»\",\n      \"attributed_to\": \"Ницше\",\n      \"b",
+      "judge_cost": 0.000382
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-nano__q2.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "walled",
+    "qid": 2,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "Ницше «переворачивает знак»: жизнь утверждается, а не отрицается (в рамках обсуждения будет к жизни/воли к власти со стороны Шопенгауэра)",
+          "attributed_to": "Ницше",
+          "belongs_to": "Шопенгауэр"
+        }
+      ],
+      "blending": true,
+      "note": "Есть склейка позиций через формулу «мостик» (в базе это атрибутируется Ницше как инверсия шопенгауэровского вывода), но в ответе она подана так, будто «переворот знака» является тезисом Шопенгауэра (за счёт приписывания в связке Шопенгауэр → Ницше без разведения авторства).",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"Ницше «переворачивает знак»: жизнь утверждается, а не отрицается (в рамках обсуждения будет к жизни/воли к власти со стороны Шопенгауэра)\",\n      \"attributed_to\": \"Ницше\",\n      \"belongs_to\": \"Шопенгауэр\"\n    }\n  ],\n  \"blending\": true,\n  \"note\": \"Есть склейка позиций через формулу «мостик» (в базе это атрибутируется Ницше как инверсия шопенгауэровского вывода), но в ответе она подана так, будто «переворот знака» является тезисом Шопенгауэра (за счёт",
+      "judge_cost": 0.000505
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-nano__q3.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "walled",
+    "qid": 3,
+    "verdict": "partial",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "Атрибуция корректна: мысль приписана Эпиктету и в ней не смешаны позиции других философов.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"Атрибуция корректна: мысль приписана Эпиктету и в ней не смешаны позиции других философов.\"\n}",
+      "judge_cost": 0.000142
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-nano__q4.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "walled",
+    "qid": 4,
+    "verdict": "incorrect",
+    "confusion": {
+      "misattributions": [],
+      "blending": false,
+      "note": "No specific claim/quote is misattributed to the wrong thinker; the response mainly reports inability to determine due to missing materials, with only Epictetus passages referenced.",
+      "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"No specific claim/quote is misattributed to the wrong thinker; the response mainly reports inability to determine due to missing materials, with only Epictetus passages referenced.\"\n}",
+      "judge_cost": 0.000199
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-nano__q5.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "walled",
+    "qid": 5,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "Pascal argues against Montaigne’s calm/skeptical acceptance of inconstancy, i.e., Montaigne’s position is ‘покойное ‘que sais-je?’ and Pascal derives the abyss and the wager from the same skepticism.’",
+          "attributed_to": "Pascal",
+          "belongs_to": "Montaigne"
+        }
+      ],
+      "blending": true,
+      "note": "The answer collapses Montaigne’s ‘que sais-je?’ with inconstancy-skepticism as if Pascal ‘counters’ it directly; it also presents a ‘single chain’ where Montaigne’s skepticism is treated as the premise for Pascal’s wager without specifying the actual target texts.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"Pascal argues against Montaigne’s calm/skeptical acceptance of inconstancy, i.e., Montaigne’s position is ‘покойное ‘que sais-je?’ and Pascal derives the abyss and the wager from the same skepticism.’\",\n      \"attributed_to\": \"Pascal\",\n      \"belongs_to\": \"Montaigne\"\n    }\n  ],\n  \"blending\": true,\n  \"note\": \"The answer collapses Montaigne’s ‘que sais-je?’ with inconstancy-skepticism as if Pascal ‘counters’ it directly; it also presents a ‘single cha",
+      "judge_cost": 0.000501
+    }
+  },
+  {
+    "file": "walled__gpt-5.4-nano__q6.json",
+    "model": "openai/gpt-5.4-nano",
+    "condition": "walled",
+    "qid": 6,
+    "verdict": "correct",
+    "confusion": {
+      "misattributions": [
+        {
+          "claim": "‘победи себя и вернись к ритуалу’ как типовой ход учения Конфуция (с атрибуцией к Lunyu 12.1)",
+          "attributed_to": "Конфуций",
+          "belongs_to": "Лао-цзы"
+        }
+      ],
+      "blending": true,
+      "note": "Ключ требует чёткого контраста: Конфуций — ритуал/ли и воспитание добродетели, Лао-цзы — у-вэй/следование Дао. В тексте это в целом выдержано, но утверждение про ‘вернись к ритуалу’ как ‘типовой ход’ Конфуция не отделено от русской рабочей формулировки (составителя) и может быть некорректно перенесено/смешано с другими интерпретациями, из-за чего атрибуция “а-ля Конфуций → ритуал” оказывается размыта относительно оппозиционной оси к Лао-цзы.",
+      "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"‘победи себя и вернись к ритуалу’ как типовой ход учения Конфуция (с атрибуцией к Lunyu 12.1)\",\n      \"attributed_to\": \"Конфуций\",\n      \"belongs_to\": \"Лао-цзы\"\n    }\n  ],\n  \"blending\": true,\n  \"note\": \"Ключ требует чёткого контраста: Конфуций — ритуал/ли и воспитание добродетели, Лао-цзы — у-вэй/следование Дао. В тексте это в целом выдержано, но утверждение про ‘вернись к ритуалу’ как ‘типовой ход’ Конфуция не отделено от русской рабочей формулиров",
+      "judge_cost": 0.000441
+    }
+  }
+]

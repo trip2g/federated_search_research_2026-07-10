@@ -1,0 +1,186 @@
+{
+  "model": "openai/gpt-5.4-nano",
+  "condition": "flat-hybrid",
+  "qid": 1,
+  "q": "What does Nietzsche mean by the will to power? Answer using only the knowledge base and quote it verbatim in the source language.",
+  "kind": "single-corpus grounding",
+  "wall_s": 82.7,
+  "judge": {
+    "verdict": "correct",
+    "facts_covered": [
+      1,
+      2,
+      3
+    ],
+    "note": "Ответ утверждает, что воля к власти — базовая направленность жизни на проявление силы (факт 1), что самосохранение лишь побочное следствие (факт 2), и что это не политическая жажда господства и распространяется на более широкие проявления жизни/познание (факт 3).",
+    "raw": "{\"facts_covered\":[1,2,3],\"note\":\"Ответ утверждает, что воля к власти — базовая направленность жизни на проявление силы (факт 1), что самосохранение лишь побочное следствие (факт 2), и что это не политическая жажда господства и распространяется на более широкие проявления жизни/познание (факт 3).\"}",
+    "judge_cost": 0.000197
+  },
+  "confusion": {
+    "misattributions": [
+      {
+        "claim": "«воля к власти» — не о самосохранении и не о политической жажде господства, а о базовой направленности жизни на проявление силы",
+        "attributed_to": "Ницше",
+        "belongs_to": "Ницше"
+      }
+    ],
+    "blending": false,
+    "note": "Атрибуции в ответе в целом корректны (всё приписывается Ницше); явного смешения позиций разных мыслителей нет.",
+    "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"«воля к власти» — не о самосохранении и не о политической жажде господства, а о базовой направленности жизни на проявление силы\",\n      \"attributed_to\": \"Ницше\",\n      \"belongs_to\": \"Ницше\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"Атрибуции в ответе в целом корректны (всё приписывается Ницше); явного смешения позиций разных мыслителей нет.\"\n}",
+    "judge_cost": 0.000255
+  },
+  "trace": [
+    {
+      "cost": 8e-05,
+      "model_ms": 2618,
+      "tokens": {
+        "in": 211,
+        "out": 28
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Ницше воля к власти что это значит определение"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "nietzsche/moc",
+            "philosophers/ru/hub/nietzsche",
+            "philosophers/ru/topics/volya",
+            "philosophers/ru/topics/vlast",
+            "philosophers/en/hub/nietzsche",
+            "nietzsche/concepts/volya_k_istine",
+            "philosophers/ru/contradictions"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=1.000] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а...…\n\n### nietzsche/moc\n[VECTOR score=0.963] Ницше — карта базы знаний\n…## Понятия (concepts/) ### Ядро: власть, истина, перспектива - [[volya-k-vlasti]] — жизнь как воля к власти, не самосохранение - [[volya-k-istine]] — подозрение к «истине любой ценой» -...…\n\n### philosophers/ru/hub/nietzsche\n[VECTOR score=0.951] Ницше — По ту сторону добра и зла\n…�я к власти](https://nietzsche.2pub.me/volya-k-vlasti) — жизнь как воля к власти, не самосохранение (bge.13); самый уплощаемый термин. ## Не уплощать - Воля к власти ≠ политическая ",
+          "ms": 30102
+        }
+      ]
+    },
+    {
+      "cost": 0.00025,
+      "model_ms": 1123,
+      "tokens": {
+        "in": 980,
+        "out": 40
+      },
+      "tool_calls": [
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "BGE воля к власти не политическая жажда господства стремление проявлять силу навязывать форму"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "philosophers/en/hub/nietzsche",
+            "nietzsche/principles/zhizn_est_volya_k_vlasti",
+            "philosophers/ru/hub/nietzsche",
+            "nietzsche/concepts/perspektivizm",
+            "adler/concepts/stremlenie_k_prevoskhodstvu",
+            "wattles/principles/volyu_primenyay_tolko_k_sebe",
+            "nietzsche/concepts/kritika_svobody_voli"
+          ],
+          "origins": [
+            "HYBRID",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[HYBRID score=1.000] Воля к власти\n……движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а «проформа жизни»: от органических функций ……\n\n### philosophers/en/hub/nietzsche\n[VECTOR score=0.635] Nietzsche — Beyond Good and Evil\n…� the trunk argument of BGE 1→211. - The concept [will to power](https://nietzsche.2pub.me/volya-k-vlasti) — life as will to power, not self-preservation (bge.13); the most flattened of his terms. ##...…\n\n### nietzsche/principles/zhizn_est_volya_k_vlasti\n[VECTOR score=0.613] Жизнь есть воля к власти, а не самосохранение\n…ika-svobody-voli]] — хотение как отношение команды и подчинения - [[zhestokost-i-poznanie]] — познание как фо",
+          "ms": 23246
+        }
+      ]
+    },
+    {
+      "cost": 0.00041,
+      "model_ms": 1247,
+      "tokens": {
+        "in": 1813,
+        "out": 39
+      },
+      "tool_calls": [
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "Прежде всего нечто живое хочет проявлять свою силу присваивать навязывать форму Воля к власти"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "nietzsche/principles/zhizn_est_volya_k_vlasti",
+            "philosophers/ru/topics/volya",
+            "wattles/principles/volyu_primenyay_tolko_k_sebe",
+            "nietzsche/chains/ot_voli_k_istine_k_vole_k_vlasti",
+            "adler/concepts/stremlenie_k_prevoskhodstvu",
+            "philosophers/en/topics/volya",
+            "philosophers/en/topics/vlast"
+          ],
+          "origins": [
+            "HYBRID",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[HYBRID score=1.000] Воля к власти\n……ше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а «проформа жизни»: от органич……\n\n### nietzsche/principles/zhizn_est_volya_k_vlasti\n[VECTOR score=0.635] Жизнь есть воля к власти, а не самосохранение\n…**Принцип:** Живое прежде всего хочет проявлять силу и расти; самосохранение — лишь побочное следствие, а не цель. Это принцип, а не тезис одной главы: он несёт на себе онтологию (BGE 36), биологию...…\n\n### philosophers/ru/topics/volya\n[VECTOR score=0.408] Воля\n…жизни, инструмент достижения, предмет дисциплины — или слепая сила и лишнее усилие, от которых отказываются. ## Воля — сущность и двигатель ",
+          "ms": 17794
+        }
+      ]
+    },
+    {
+      "cost": 0.00048,
+      "model_ms": 2337,
+      "tokens": {
+        "in": 2606,
+        "out": 189
+      },
+      "final_text": "В «воле к власти» Ницше говорит не о самосохранении и не о политической жажде господства, а о базовой направленности жизни на проявление силы:\n\n> «…о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.»  \n\nИ уточняется, что:\n\n> «В BGE воля к власти — не политическая жажда господства, а „проформа жизни“…»\n\nТакже формулируется «принцип» так:\n\n> «Живое прежде всего хочет проявлять силу и расти; самосохранение — лишь побочное следствие, а не цель.»  \n\nЕсли вам нужно, могу собрать ответ в виде краткого определения (в 2–3 предложениях) строго из этих фрагментов."
+    }
+  ],
+  "final": "В «воле к власти» Ницше говорит не о самосохранении и не о политической жажде господства, а о базовой направленности жизни на проявление силы:\n\n> «…о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.»  \n\nИ уточняется, что:\n\n> «В BGE воля к власти — не политическая жажда господства, а „проформа жизни“…»\n\nТакже формулируется «принцип» так:\n\n> «Живое прежде всего хочет проявлять силу и расти; самосохранение — лишь побочное следствие, а не цель.»  \n\nЕсли вам нужно, могу собрать ответ в виде краткого определения (в 2–3 предложениях) строго из этих фрагментов.",
+  "forced_final": false,
+  "tool_calls": 3,
+  "first_relevant_call": 1,
+  "model_ms": 7325,
+  "tool_ms": 71142,
+  "grounding": {
+    "quotes": 3,
+    "quotes_in_retrieval": 1
+  },
+  "retrieved_chars": 6857,
+  "retrieval": {
+    "results": 24,
+    "offtarget": 4,
+    "offtarget_corpora": {
+      "adler": 2,
+      "wattles": 2
+    },
+    "origins": {
+      "VECTOR": 22,
+      "HYBRID": 2
+    }
+  }
+}

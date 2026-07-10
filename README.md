@@ -53,12 +53,34 @@ accounting and stops before `BUDGET_USD` (default `1.0`; override with
 |---|---|---|---|
 | `make reproduce` (`v2`) | headline navigation/grounding/cost table | key only | **$0.69** |
 | `make v3` | walls-vs-flat (naive flat) | key + `~/projects/korpuses/*.2pub.me` | $0.13 |
-| `make v4` | flat-hybrid (vector + reranker) | key + a local memcli instance | ~$0.15 |
+| `make v4` | flat-hybrid (vector + reranker) | key + a local memcli instance | $0.07 |
 
 The flat arms need local corpora because a "flat pile" and a "hybrid local store"
 only exist on your machine — the walled arm is the live hub. Steps for `v3`/`v4`
 data are in the arm sections below. Totals are small: a full re-run of every arm
 is well under **$1**.
+
+## Reproduce the flat-hybrid arm (v4)
+
+v4 re-runs the flat condition with a real retrieval stack instead of v3's
+naive TF scoring: one local trip2g instance holding all 22 corpora (1344
+notes) flat, searched via BM25 + bge-m3 vectors (RRF) + a bge-reranker-v2-m3
+cross-encoder — everything local (the arm64-native
+`embedding-reranker-server` sidecar from trip2g branch
+`feat/memcli-embedded-reranker`), only the benchmarked models are paid.
+
+```bash
+MODELS_DIR=/mnt/extssd/models node cli/memcli/dist/memcli.js up \
+  --embedded --reranker --folder ~/projects/trip2g_all_kbs --port 24091 --name allkbs
+export OPENROUTER_KEY=sk-or-...
+make v4                          # ~$0.07, halts at BUDGET_USD
+```
+
+Full setup (two-phase indexing on small-RAM boxes, cross-encoder warm-up, the
+rerank-timeout pitfall that silently downgrades the stack to RRF) and the
+findings — the flat-hybrid arm produced *more* who-said-what confusion than
+the walled hub, not less — are in
+[`RESULTS_flat_hybrid.md`](./RESULTS_flat_hybrid.md).
 
 ## Notes & honesty
 
