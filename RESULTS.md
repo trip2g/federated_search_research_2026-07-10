@@ -1,5 +1,8 @@
 # Results
 
+> **v3 exists:** [`RESULTS_v3.md`](./RESULTS_v3.md) runs the review's design
+> (answer keys, LLM judge, no turn cap) and adds the walls-vs-flat comparison.
+
 Two runs. **v1 was invalid** — a skeptic review ([`REVIEW.md`](./REVIEW.md))
 caught it and it was confirmed. **v2** is the corrected run. Read this whole page
 as a probe (n=6 questions, 1 run each), not a leaderboard.

@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "kind": "single-corpus grounding",
+    "expect_kb": ["nietzsche"],
+    "q": "What does Nietzsche mean by the will to power? Answer using only the knowledge base and quote it verbatim in the source language.",
+    "required_facts": [
+      "Will to power is what drives all living things: the drive to exert force, grow, appropriate, impose form — life itself is will to power",
+      "Self-preservation is only an indirect consequence of it, not the primary drive",
+      "It is not (merely) a political lust for domination; it extends to organic functions, knowledge/philosophy (will to truth as a special case)"
+    ],
+    "evidence": [
+      "сама жизнь есть воля к власти",
+      "самосохранение есть только одно из косвенных",
+      "не политическая жажда господства",
+      "духовная воля к власти"
+    ]
+  },
+  {
+    "id": 2,
+    "kind": "cross-corpus contrast",
+    "expect_kb": ["nietzsche", "schopenhauer"],
+    "q": "How does Nietzsche's will to power differ from Schopenhauer's will to live? Draw on the knowledge base for both thinkers and cite each in the source language.",
+    "required_facts": [
+      "Schopenhauer: the world's core is a blind, insatiable will to live; from it follow suffering, futility of striving, pessimism — and the answer is denial/negation of the will",
+      "Nietzsche grew out of Schopenhauer but inverted the conclusion: affirmation of life and self-overcoming instead of renunciation",
+      "For Nietzsche life is will to power (growth, exerting force), with self-preservation only an indirect consequence"
+    ],
+    "evidence": [
+      "не тщета воли и отказ от жизни",
+      "воля к жизни",
+      "сама жизнь есть воля к власти",
+      "первичный и коренной элемент человеческой природы"
+    ]
+  },
+  {
+    "id": 3,
+    "kind": "principle understanding",
+    "expect_kb": ["epictetus"],
+    "q": "State Epictetus's core principle about what is and is not 'up to us', with a verbatim quote from the knowledge base in the source language.",
+    "required_facts": [
+      "Up to us: opinion/judgment, impulse, desire, aversion — in a word, our own acts",
+      "Not up to us: body, property, reputation, offices — whatever are not our own acts",
+      "Things in our power are by nature free/unhindered; things not in our power are weak, slavish, in the power of others (misery comes from confusing the two)"
+    ],
+    "evidence": [
+      "в нашей власти — мнение, побуждение к вещи, желание, уклонение",
+      "не в нашей власти — тело, имущество, репутация",
+      "of things some are in our power, and others are not",
+      "по природе свободно"
+    ]
+  },
+  {
+    "id": 4,
+    "kind": "hub orientation",
+    "expect_kb": ["nietzsche", "montaigne", "larochefoucauld"],
+    "q": "Among the thinkers in this knowledge base, who argues most directly against Stoic detachment (Epictetus), and on what grounds? Ground the answer in the knowledge base.",
+    "required_facts": [
+      "Names at least one corpus-attested opponent of Stoic detachment: Nietzsche (pathos of will and affirmation vs peace through renouncing the uncontrollable), Montaigne (the soul is inconstant/patchwork, live by the common measure — vs the stoic citadel), or La Rochefoucauld (contempt for death is a final pose of pride/vanity)",
+      "States the grounds of the disagreement as found in the knowledge base (the contrast axis), not from general knowledge"
+    ],
+    "evidence": [
+      "лоскутная душа vs стоическая цитадель",
+      "покой через отказ от неподвластного vs пафос воли",
+      "презрение к смерти — последняя поза гордости",
+      "душа непостоянна и лоскутна"
+    ]
+  },
+  {
+    "id": 5,
+    "kind": "cross-link navigation",
+    "expect_kb": ["pascal", "montaigne"],
+    "q": "Where does Pascal argue against Montaigne, and what exactly is the disagreement? Use the knowledge base for both thinkers.",
+    "required_facts": [
+      "Montaigne is a target of Pascal's Pensées: Pascal argues against Montaigne's calm/skeptical acceptance of inconstancy",
+      "Pascal counters with anxiety about man's wretchedness/nothingness without God (the wager on God / the abyss without Him)"
+    ],
+    "evidence": [
+      "монтень — мишень «мыслей»",
+      "тревогу о ничтожестве человека без бога",
+      "ставку на бога и бездну без него",
+      "скептической невозмутимости"
+    ]
+  },
+  {
+    "id": 6,
+    "kind": "two-corpus principle",
+    "expect_kb": ["confucius", "laozi"],
+    "q": "Contrast Confucius and Laozi on how one should live and govern. Cite a concrete claim from the knowledge base for each thinker.",
+    "required_facts": [
+      "Confucius: live and govern through ritual/propriety (li) and cultivated virtue — form channels humanity; without it virtues degenerate (and ritual without inner content is empty)",
+      "Laozi: live and govern through non-action (wu wei) and following the Dao — not idleness but acting without forcing; the sage manages affairs without doing anything",
+      "The contrast: ritual and order vs non-action and following the Dao (they are opponents on this axis)"
+    ],
+    "evidence": [
+      "ритуалу и порядку лао-цзы противопоставляет недеяние",
+      "недеяние — не бездействие",
+      "the sage manages affairs without doing anything",
+      "without the rules of propriety"
+    ]
+  }
+]

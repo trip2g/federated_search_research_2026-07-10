@@ -1,4 +1,7 @@
 .env
 .env.*
+*.env
+or_key.env
+private/
 __pycache__/
 *.pyc
