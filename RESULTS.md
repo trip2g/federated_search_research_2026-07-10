@@ -1,117 +1,107 @@
 # Results
 
-Two experiments against the live `https://trip2g.com/_system/mcp` federated hub,
-2026-07-10. Total OpenRouter spend: **$0.88** (cap was $3). Raw traces in
-[`logs/`](./logs/); rollup in [`results/summary.json`](./results/summary.json).
+Two runs. **v1 was invalid** — a skeptic review ([`REVIEW.md`](./REVIEW.md))
+caught it and it was confirmed. **v2** is the corrected run. Read this whole page
+as a probe (n=6 questions, 1 run each), not a leaderboard.
 
-> Model note: `gpt-5.6-mini` is not on OpenRouter. We used **`gpt-5.4-mini`**
-> (the newest 5.x-mini available) and label it as such.
+## The v1 mistake (kept, on purpose)
 
-## A. Task benchmark — 6 questions × 2 models
+v1 pointed the harness at `https://trip2g.com/_system/mcp`. That hub does **not**
+resolve the philosopher corpus `kb_id`s: **37 of 44** targeted
+`federated_search(kb_id=…)` calls came back `"Federation is not configured for
+kb_id …"`. So the models mostly retrieved *nothing* and answered from parametric
+memory — while the v1 metrics ("finished" = stopped calling tools; "grounded" =
+a quote is present) happily scored that as success. The external review's verdict
+was blunt and correct: *the study had no valid task-success outcome.* The raw v1
+traces are preserved in [`logs_v1_broken_endpoint/`](./logs_v1_broken_endpoint/)
+and [`results/summary_v1.json`](./results/summary_v1.json) as the evidence.
 
-`fin` = produced a final answer (didn't hit the 10-turn cap or budget). `quo` =
-final contains a verbatim quote. `hitKB` = expected corpus(es) it actually
-targeted with `federated_search(kb_id=…)`.
+## What changed for v2
 
-| model | q | kind | tool calls | hitKB / expected | fin | quo | halted | wall |
-|---|---|---|---|---|---|---|---|---|
-| haiku-4.5 | 1 | single-corpus grounding | 10 | nietzsche / nietzsche | – | – | **max_turns** | 31s |
-| haiku-4.5 | 2 | cross-corpus contrast | 12 | nietzsche,schopenhauer / same | Y | Y | ok | 42s |
-| haiku-4.5 | 3 | principle understanding | 7 | epictetus / epictetus | Y | Y | ok | 27s |
-| haiku-4.5 | 4 | hub orientation | 17 | nietzsche / machiavelli,nietzsche | – | – | **max_turns** | 40s |
-| haiku-4.5 | 5 | cross-link navigation | 11 | – / montaigne,pascal | – | – | **max_turns** | 56s |
-| haiku-4.5 | 6 | two-corpus principle | 14 | confucius,laozi / same | Y | Y | ok | 40s |
-| gpt-5.4-mini | 1 | single-corpus grounding | 6 | nietzsche / nietzsche | Y | Y | ok | 14s |
-| gpt-5.4-mini | 2 | cross-corpus contrast | 5 | nietzsche,schopenhauer / same | Y | Y | ok | 15s |
-| gpt-5.4-mini | 3 | principle understanding | 3 | epictetus / epictetus | Y | Y | ok | 9s |
-| gpt-5.4-mini | 4 | hub orientation | 6 | nietzsche / machiavelli,nietzsche | Y | Y | ok | 14s |
-| gpt-5.4-mini | 5 | cross-link navigation | 7 | montaigne,pascal / same | Y | – | ok | 17s |
-| gpt-5.4-mini | 6 | two-corpus principle | 5 | (via hub) / confucius,laozi | Y | Y | ok | 10s |
+- **Endpoint:** `https://philosophers.2pub.me/_system/mcp` — the hub that actually
+  federates the 21 corpora by `kb_id` (verified: 0/67 targeted calls returned
+  `not_configured` in v2).
+- **Grounding is now measured, not assumed:** every quote in the final answer
+  (≥6 words) is checked to be a real substring of the concatenated tool output.
+  A quote the model didn't retrieve doesn't count.
+- Bug fixes surfaced on the way: the harness never imported `re`; and the hub's
+  front returns **403** to the default `python-urllib` user-agent (curl slips
+  through) — a real UA header was required.
 
-**Totals**
+## v2 results — 6 questions × 5 models
 
-| | finished | grounded (quote) | hit all expected kb | tool calls | avg wall |
-|---|---|---|---|---|---|
-| **haiku-4.5** | 3 / 6 | 3 / 6 | 4 / 6 | 71 | 39s |
-| **gpt-5.4-mini** | **6 / 6** | **5 / 6** | 4 / 6 | **32** | **13s** |
+`fin` = produced a final answer. **`grounded runs`** = runs with ≥1 quote actually
+found in the retrieved text. `valid/found` = verified quotes / total quotes the
+model emitted. `hitKB` = reached the expected corpus by `kb_id` (real content).
+Total v2 spend: **$0.69**.
 
-### Read
+| model | fin | grounded runs | quotes valid/found | hitKB | tool calls | **$/question** |
+|---|---|---|---|---|---|---|
+| gpt-5.4-nano | 6/6 | 2/6 | 3 / 7 | 5/6 | 35 | **$0.0028** |
+| gpt-5.4-mini | 6/6 | **4/6** | **8 / 20** | 5/6 | 36 | $0.0112 |
+| ministral-14b (open) | 6/6 | 1/6 | 2 / **43** | 5/6 | 31 | $0.0039 |
+| gemini-2.5-flash-lite | 6/6 | 3/6 | 7 / 15 | 4/6 | 16 | $0.0009 |
+| claude-haiku-4.5 | 4/6 | 1/6 | 2 / 16 | 5/6 | **48** | **$0.0967** |
 
-- **gpt-5.4-mini navigates the graph far more efficiently and reliably.** Half the
-  tool calls, 3× faster, and it *finishes every question*. Its pattern is
-  disciplined: one orienting call, then straight to `federated_search(kb_id=…)`
-  on the right corpus, then answer.
-- **Haiku is capable but undisciplined.** When it finished (q2/q3/q6 — the
-  explicitly multi-corpus ones) it targeted the right corpora and quoted them
-  well. But on the "simple" single-corpus lookup (q1) and the open hub-orientation
-  (q4) it **thrashed** — mixing local hub `search` with `federated_search`,
-  re-querying, and burning the 10-turn cap without ever concluding. Half its runs
-  died at the turn limit, not at a wrong answer.
-- The turn cap (10) is doing real work here. Haiku's failures are a *navigation
-  budget* problem, not a comprehension one — which Experiment B makes vivid.
-- `hit all expected kb` is only 4/6 for both, mostly because q4 ("who argues
-  against Stoic detachment") is genuinely open — Nietzsche is a defensible target,
-  so the loose oracle undercounts. Treat the expected-kb column as a hint, not a
-  grader.
+### What v2 actually shows
 
-## B. Free graph wander — Haiku, 30 hops, no question
+1. **Navigation is solid — and easy.** With a hub that resolves `kb_id`, every
+   model reached the expected corpus 5/6 (gemini 4/6), and **0** targeted calls
+   failed. Picking the right base by `kb_id` is not where models struggle.
+2. **Verbatim grounding is weak across the board — but the metric is confounded.**
+   Most quotes the models emit are *not* exact substrings of what the tools
+   returned (ministral quoted 43 times; 2 verified). Two things drive this, and
+   only one is a model failure:
+   - **Language mismatch (metric artifact):** the corpora are Russian-primary
+     (`concepts/volya-k-vlasti.md`, "Воля к власти"); the models answer in
+     English and quote English translations, which can never be a substring of
+     Russian source text. A strict substring check under-counts cross-lingual
+     grounding badly.
+   - **Real paraphrase/fabrication:** even allowing for that, the models clearly
+     reformat and invent quote-shaped strings rather than lifting verbatim.
+   So this pilot **cannot cleanly answer "do they understand the principles."**
+   v1's confident "yes" was unearned. The honest read: models navigate *to* the
+   material reliably; whether they faithfully ground on it needs a cross-lingual
+   claim-faithfulness check this pilot doesn't have (see `REVIEW.md` §3).
+3. **Cost-of-thrash is the one robust cross-run finding.** `claude-haiku-4.5`
+   again over-navigates (48 tool calls, 4/6 finished) at **$0.097/question** —
+   **~35× `gpt-5.4-nano`** ($0.0028) — because every wasted loop turn re-sends the
+   growing transcript. This held in both v1 and v2 and is about tokens, not answer
+   quality, so it survives the metric overhaul. If you build agents on federated
+   knowledge, *convergence behaviour* is the cost driver, more than model choice.
+4. `gemini-2.5-flash-lite` flipped from "lazy" (v1: 8 calls, 2/6 finished) to
+   engaged (v2: 16 calls, 6/6) — a reminder that at n=6, per-model quality counts
+   are noisy. Trust the behaviour classes and the cost ratios; don't trust the
+   third decimal.
 
-Full journal: [`logs/haiku_wander_journal.md`](./logs/haiku_wander_journal.md).
+## B. Free graph wander — Haiku, 30 hops
 
-Given the same tools but **no task** — just "wander deliberately, ask yourself
-what's next, notice cycles" — Haiku behaved completely differently from its
-benchmark self:
+Full journal: [`logs_v1_broken_endpoint/haiku_wander_journal.md`](./logs_v1_broken_endpoint/haiku_wander_journal.md).
+(Ran against trip2g.com, so its deep-corpus reads hit the same `not_configured`
+wall — it stayed mostly inside the hub's own topic/opponent notes. Treat it as a
+demo of *deliberate hub-level traversal + cycle detection*, not verified
+cross-corpus retrieval.) Given no task, Haiku oriented on the will/power axis,
+followed opponent links, mapped the same ~10 thinkers recurring across five topic
+axes, and flagged the cycles — coherent wandering, no thrash. Its own honest note
+that individual corpora were `not_configured` is, in hindsight, the first sighting
+of the v1 endpoint bug.
 
-- It **oriented** on a central axis (will / power), then followed *explicit
-  opposition links* across corpora: Nietzsche ↔ Schopenhauer ↔ Epictetus ↔ Laozi
-  ↔ Confucius.
-- It **read seven principles with verbatim grounding** and restated them
-  correctly in its own words (e.g. Epictetus's dichotomy of control, Laozi's
-  wu-wei), then checked whether the advertised opponents actually opposed — they
-  did.
-- It **detected cycles**: the same 8–10 thinkers recurring on opposite sides of
-  five different topic axes (Power, Will, Habit, Fate, Freedom), and flagged the
-  return paths as such.
-- Its own verdict: *"impossible to thrash — every step had clear justification,"*
-  crediting the hub's topology (per-corpus opponent lists + topical axes).
+## Answers, honestly
 
-So the model that hit the turn cap on a one-corpus lookup wandered 30 hops of a
-knowledge graph coherently when the task was open-ended. **Comprehension was
-never the bottleneck; disciplined convergence under a turn budget was.**
+- **Can small models navigate a federated MCP knowledge graph?** Yes, and it's not
+  hard when the graph is structured (opponent lists, topic axes) and `kb_id`
+  resolves — nano and an open 14B both did it reliably and cheaply.
+- **Do they understand / faithfully ground the principles?** **Not established
+  here.** They reach the right material but rarely quote it verbatim; the strict
+  metric is confounded by EN-answer/RU-corpus mismatch, and a proper
+  faithfulness check is future work.
+- **What's the real cost lever?** Convergence, not intelligence: over-navigation
+  (Haiku) is a ~35× cost multiplier; the win is a model + prompt that target and
+  stop.
 
-## Answers to the research question
+## What this pilot still doesn't do (from `REVIEW.md`)
 
-**Can small models navigate a federated knowledge graph over MCP, and do they
-understand the principles?**
-
-1. **Yes, they navigate it** — both models reliably went hub → correct corpus via
-   `kb_id`, and followed cross-corpus opposition links. The graph's structure
-   (opponent lists, topic axes, a contradictions index) is what makes navigation
-   tractable; the wander journal calls this out directly.
-2. **Yes, they understand the principles** — when they retrieve the material, both
-   restate it faithfully and quote verbatim. The wander shows genuine grasp
-   (correct restatement + verified oppositions), not pattern-matching.
-3. **The real differentiator is navigation discipline, not intelligence.** On
-   fixed tasks, gpt-5.4-mini's terse "orient once, target, answer" beat Haiku's
-   thrash-and-recheck by 2× on calls and 3× on latency, and finished every time.
-   Haiku's failures were turn-budget exhaustion, not wrong understanding — and it
-   out-explored gpt in the open-ended wander.
-4. **Practical implication for federated KBs:** a well-structured graph (explicit
-   cross-links + topical axes + a per-corpus "who to go to for X" manual) lets
-   even a small model navigate deliberately. The failure mode to design against is
-   *thrash* — so surfacing the right `kb_id` early (good hub cards / instructions)
-   matters more than model size.
-
-## Caveats
-
-- Live endpoint: real retrieval, real latency, real failure modes. The blind
-  `federated_search` with no `kb_id` **times out** on the current deployment
-  (unbounded fan-out over ~25 peers); both agents recovered by targeting a
-  `kb_id`. The wander also hit one `kb_id="nietzsche"` → `not_configured` from
-  inside a nested context; the controlled benchmark shows `kb_id="nietzsche"`
-  resolves fine directly, so treat that single wander hop as a transient/nested
-  artifact.
-- `MAX_TURNS=10` caps the loop; a higher cap would likely let Haiku finish more —
-  but the point stands that gpt-5.4-mini didn't need it.
-- `expect_kb` is a loose oracle for a hint, not a strict grader.
-- n = 6 questions, 1 wander. This is a probe, not a leaderboard.
+Preregistered answer propositions; cross-lingual claim faithfulness
+(entailed/unsupported/contradicted) instead of substring matching; navigation
+efficiency decoupled from a turn cap; paired controls (evidence-supplied vs
+corpus-supplied vs hub-only). That's the v3 design.

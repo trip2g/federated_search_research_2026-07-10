@@ -1,0 +1,24 @@
+{
+  "model": "google/gemini-2.5-flash-lite",
+  "qid": 4,
+  "q": "Among the thinkers in this hub, who argues most directly against Stoic detachment, and on what grounds? Ground it in a corpus.",
+  "kind": "hub orientation",
+  "expect_kb": [
+    "nietzsche",
+    "machiavelli"
+  ],
+  "wall_s": 16.3,
+  "halted": null,
+  "final": null,
+  "trace": [
+    {
+      "turn": 0,
+      "cost": 0.00073,
+      "tokens": {
+        "in": 1162,
+        "out": 1533
+      },
+      "final_text": null
+    }
+  ]
+}

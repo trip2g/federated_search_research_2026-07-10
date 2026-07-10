@@ -1,0 +1,43 @@
+{
+  "model": "google/gemini-2.5-flash-lite",
+  "qid": 2,
+  "q": "How does Nietzsche's will to power differ from Schopenhauer's will to live? Draw on both corpora and cite each.",
+  "kind": "cross-corpus contrast",
+  "expect_kb": [
+    "nietzsche",
+    "schopenhauer"
+  ],
+  "wall_s": 3.2,
+  "halted": null,
+  "final": null,
+  "trace": [
+    {
+      "turn": 0,
+      "cost": 0.00012,
+      "tokens": {
+        "in": 1162,
+        "out": 8
+      },
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Nietzsche will to power"
+          },
+          "result_ok": true,
+          "result_preview": "Found 6 notes:\n\n1. Ницше — По ту сторону добра и зла\n   ru/hub/nietzsche.md\n   https://trip2g.com/ru/hub/nietzsche\n   # Ницше — По ту сторону добра и зла Фридрих Ницше, поздний период. База охватывает мировоззрение позднего Ницше, извлечённое из афоризмов 1–296 и предисловия к «По ту сторону добра и зла» (1886). Все...\n   match_id: p1440:c0\n\n2. Nietzsche — Beyond Good and Evil\n   en/hub/nietzsche.md\n   https://trip2g.com/en/hub/nietzsche\n   …d <mark>Nietzsche</mark>, extracted from aphorisms 1–2",
+          "ms": 786
+        }
+      ]
+    },
+    {
+      "turn": 1,
+      "cost": 0.0,
+      "tokens": {
+        "in": null,
+        "out": null
+      },
+      "final_text": null
+    }
+  ]
+}

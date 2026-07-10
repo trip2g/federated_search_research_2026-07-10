@@ -1,0 +1,87 @@
+{
+  "model": "google/gemini-2.5-flash-lite",
+  "qid": 3,
+  "q": "State Epictetus's core principle about what is and is not 'up to us', with a verbatim quote from the corpus.",
+  "kind": "principle understanding",
+  "expect_kb": [
+    "epictetus"
+  ],
+  "wall_s": 30.0,
+  "halted": null,
+  "final": "The core principle of Epictetus regarding what is and is not \"up to us\" is the dichotomy of control. This principle divides all existence into two categories: those things that are within our power and those that are not.\n\nAccording to Epictetus:\n\n*   **Things within our power** are our judgments, impulses, desires, aversions, and in short, all that is our own doing. These are naturally free and unhindered.\n*   **Things not within our power** include our body, property, reputation, offices, and in short, all that is not our own doing. These are weak, subject to restraint, and dependent on others.\n\nThe corpus states: \"Of things some are in our power, and others are not. In our power are opinion ([Greek: hupolaepsis]), movement towards a thing ([Greek: hormae]), desire, aversion ([Greek: echchlisis]), turning from a thing; and in a word, whatever are our acts. Not in our power are the body, property, reputation, offices (magisterial power), and in a word, whatever are not our own acts.\"",
+  "grounding": {
+    "quotes": 1,
+    "quotes_in_retrieval": 0
+  },
+  "retrieved_chars": 6733,
+  "trace": [
+    {
+      "turn": 0,
+      "cost": 5e-05,
+      "tokens": {
+        "in": 445,
+        "out": 22
+      },
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Epictetus core principle 'up to us'"
+          },
+          "result_ok": true,
+          "result_preview": "Found 6 notes:\n\n1. Epictetus — Enchiridion\n   en/hub/epictetus.md\n   https://philosophers.2pub.me/en/hub/epictetus\n   opinion about it, offer the second handle (\"everything has two handles\"), name the price, demand that you wish things to be as they are. The dichotomy is strictly binary, not a motivational spectrum....\n   match_id: p12:c2\n\n2. Freedom\n   en/topics/svoboda.md\n   https://philosophers.2pub.me/en/topics/svoboda\n   Axis: freedom is won by renouncing externals, by self-mastery, by inde",
+          "ms": 1161
+        }
+      ]
+    },
+    {
+      "turn": 1,
+      "cost": 0.00017,
+      "tokens": {
+        "in": 1592,
+        "out": 19
+      },
+      "tool_calls": [
+        {
+          "name": "federated_search",
+          "args": {
+            "query": "what is and is not up to us",
+            "kb_id": "epictetus"
+          },
+          "result_ok": true,
+          "result_preview": "Found 6 notes:\n\n1. Операционная рамка: дихотомия контроля как модель управления (для управления и агентов)\n   operatsionnaya-ramka.md\n   https://epictetus.2pub.me/operatsionnaya-ramka\n   � клиент). Метрика успеха агента — на «нашей» стороне раздела; исход учитывается отдельно, как внешний сигнал. ## 2. Не в твоей власти — «это меня не касается» Практическое следствие раздела:...\n   match_id: p28:c2\n\n2. Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n   concepts/dihotomiya-kontrolya.md\n   https://epictetus.2pub",
+          "ms": 1468
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "cost": 0.00053,
+      "tokens": {
+        "in": 6816,
+        "out": 25
+      },
+      "tool_calls": [
+        {
+          "name": "federated_note_html",
+          "args": {
+            "path": "concepts/dihotomiya-kontrolya.md",
+            "kb_id": "epictetus"
+          },
+          "result_ok": true,
+          "result_preview": "<div data-header=\"Дихотомия контроля (τὰ ἐφ' ἡμῖν)\" data-level=\"1\"><h1 id=\"dikhotomiya_kontrolya_\">Дихотомия контроля (τὰ ἐφ' ἡμῖν)</h1><p>Первое и главное деление всей системы, открывающее Мануал. Мир разрезан надвое:<br>\nто, что в нашей власти (суждение, побуждение, желание, уклонение — «наши<br>\nсобственные действия»), и то, что не в нашей власти (тело, имущество,<br>\nрепутация, должности). Первое по природе свободно и не встречает препятствий;<br>\nвторое слабо, рабственно, подвластно другим.",
+          "ms": 372
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "cost": 0.0013,
+      "tokens": {
+        "in": 12047,
+        "out": 237
+      },
+      "final_text": "The core principle of Epictetus regarding what is and is not \"up to us\" is the dichotomy of control. This principle divides all existence into two categories: those things that are within our power and those that are not.\n\nAccording to Epictetus:\n\n*   **Things within our power** are our judgments, impulses, desires, aversions, and in short, all that is our own doing. These are naturally free and unhindered.\n*   **Things not within our power** include our body, property, reputation, offices, and in short, all that is not our own doing. These are weak, subject to restraint, and dependent on others.\n\nThe corpus states: \"Of things some are in our power, and others are not. In our power are opinion ([Greek: hupolaepsis]), movement towards a thing ([Greek: hormae]), desire, aversion ([Greek: echchlisis]), turning from a thing; and in a word, whatever are our acts. Not in our power are the body, property, reputation, offices (magisterial power), and in a word, whatever are not our own acts.\""
+    }
+  ]
+}

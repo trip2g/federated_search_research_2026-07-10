@@ -15,9 +15,13 @@ baked in here — the raw logs are the deliverable; interpretation lives in RESU
 Cost is tracked from OpenRouter's own usage accounting and the run halts before a
 hard budget ceiling.
 """
-import json, os, sys, time, urllib.request, urllib.error
+import json, os, re, sys, time, urllib.request, urllib.error
 
-MCP_URL = "https://trip2g.com/_system/mcp"
+# v2 targets philosophers.2pub.me — the hub that actually resolves the corpus
+# kb_ids. v1 ran against trip2g.com, which returned "not_configured" for most
+# targeted federated_search(kb_id=...) calls, so models answered from parametric
+# memory (see logs_v1_broken_endpoint/ and REVIEW.md). v2 also validates quotes.
+MCP_URL = "https://philosophers.2pub.me/_system/mcp"
 OR_URL = "https://openrouter.ai/api/v1/chat/completions"
 OR_KEY = os.environ["OPENROUTER_KEY"]
 BUDGET_USD = float(os.environ.get("BUDGET_USD", "2.7"))  # stop before the real $3
@@ -29,9 +33,13 @@ _mcp_id = 0
 
 
 def _post(url, payload, headers, timeout=HTTP_TIMEOUT):
+    # A real User-Agent is required — the hub's front rejects the default
+    # python-urllib UA with 403.
     req = urllib.request.Request(
         url, data=json.dumps(payload).encode(),
-        headers={"content-type": "application/json", **headers}, method="POST")
+        headers={"content-type": "application/json",
+                 "user-agent": "trip2g-federated-search-research/1.0", **headers},
+        method="POST")
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode())
 
@@ -53,6 +61,24 @@ def mcp_call(name, arguments):
                 "ms": int((time.time() - t0) * 1000)}
     except Exception as e:  # noqa: BLE001 — record any failure verbatim
         return {"ok": False, "error": repr(e), "ms": int((time.time() - t0) * 1000)}
+
+
+def _norm(s):
+    return re.sub(r"\s+", " ", (s or "")).strip().lower()
+
+
+def grounding_check(final, retrieved):
+    """Codex's key metric: is each quoted span in the answer actually present in
+    what the tools returned? Extracts quotes (straight/curly/guillemets), keeps
+    spans >= 6 words, and checks each (normalised) is a substring of the retrieved
+    corpus text. Returns counts — quotes found vs. quotes verified-in-retrieval."""
+    hay = _norm(retrieved)
+    quotes = re.findall(r'"([^"]{12,})"|“([^”]{12,})”|«([^»]{12,})»|„([^“]{12,})“',
+                        final or "")
+    spans = [next(g for g in q if g) for q in quotes]
+    spans = [s for s in spans if len(s.split()) >= 6]
+    verified = sum(1 for s in spans if _norm(s) in hay)
+    return {"quotes": len(spans), "quotes_in_retrieval": verified}
 
 
 # Tool schemas handed to the model (OpenAI/OpenRouter function-calling format).
@@ -126,10 +152,12 @@ def run_question(model, q):
     messages = [{"role": "system", "content": sys_prompt},
                 {"role": "user", "content": q}]
     trace = []
+    retrieved = []  # full text of every tool result, for quote-validity
     for turn in range(MAX_TURNS):
         if _spent >= BUDGET_USD:
             trace.append({"halted": "budget", "spent": round(_spent, 4)})
-            return {"trace": trace, "final": None, "halted": "budget"}
+            return {"trace": trace, "final": None, "halted": "budget",
+                    "grounding": None, "retrieved_chars": len("".join(retrieved))}
         msg, cost, usage = or_chat(model, messages)
         messages.append(msg)
         step = {"turn": turn, "cost": round(cost, 5),
@@ -137,9 +165,12 @@ def run_question(model, q):
                            "out": usage.get("completion_tokens")}}
         tcalls = msg.get("tool_calls") or []
         if not tcalls:
-            step["final_text"] = msg.get("content", "")
+            final = msg.get("content", "")
+            step["final_text"] = final
             trace.append(step)
-            return {"trace": trace, "final": msg.get("content", ""), "halted": None}
+            return {"trace": trace, "final": final, "halted": None,
+                    "grounding": grounding_check(final, "\n".join(retrieved)),
+                    "retrieved_chars": len("".join(retrieved))}
         step["tool_calls"] = []
         for tc in tcalls:
             fn = tc["function"]["name"]
@@ -151,6 +182,8 @@ def run_question(model, q):
                 result = {"ok": False, "error": f"unknown tool {fn}"}
             else:
                 result = mcp_call(fn, args)
+                if result.get("text"):
+                    retrieved.append(result["text"])
             step["tool_calls"].append({"name": fn, "args": args,
                                        "result_ok": result.get("ok"),
                                        "result_preview": (result.get("text") or
@@ -160,7 +193,8 @@ def run_question(model, q):
                              "content": json.dumps(result)[:6000]})
         trace.append(step)
     trace.append({"halted": "max_turns"})
-    return {"trace": trace, "final": None, "halted": "max_turns"}
+    return {"trace": trace, "final": None, "halted": "max_turns",
+            "grounding": None, "retrieved_chars": len("".join(retrieved))}
 
 
 INSTRUCTIONS = ""
@@ -183,7 +217,10 @@ def main():
             rec = {"model": model, "qid": q["id"], "q": q["q"], "kind": q["kind"],
                    "expect_kb": q.get("expect_kb"),
                    "wall_s": round(time.time() - t0, 1),
-                   "halted": out["halted"], "final": out["final"], "trace": out["trace"]}
+                   "halted": out["halted"], "final": out["final"],
+                   "grounding": out.get("grounding"),
+                   "retrieved_chars": out.get("retrieved_chars"),
+                   "trace": out["trace"]}
             slug = model.split("/")[-1]
             with open(os.path.join(os.path.dirname(__file__), "logs",
                       f"{slug}__q{q['id']}.json"), "w") as f:

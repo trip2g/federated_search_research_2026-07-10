@@ -56,12 +56,24 @@ python3 bench.py
 - No API key, secret, or private data is in this repo. The corpora queried are
   public-domain philosophy.
 
+## Integrity note
+
+The first run (**v1**) was **invalid**: it targeted an endpoint that didn't
+resolve the corpus `kb_id`s, so models answered from memory while the metrics
+scored it as success. An external skeptic review ([`REVIEW.md`](./REVIEW.md))
+caught it; it was verified and corrected in **v2** (working endpoint + a
+quote-validity check). The flawed v1 traces are kept as evidence. See
+[`RESULTS.md`](./RESULTS.md) for the full story — including what this pilot still
+can't measure.
+
 ## Layout
 
 ```
-bench.py            harness: MCP client + OpenRouter tool loop + cost guard + logging
-questions.json      the 6 benchmark questions (kind + expected corpus)
-logs/               per-run full traces (bench) + the Haiku wander journal
-results/summary.json compact per-run rollup (tools used, kb_ids, latency, spend)
-RESULTS.md          interpretation
+bench.py                     harness: MCP client + tool loop + cost guard + quote-validity + logging
+questions.json               the 6 benchmark questions (kind + expected corpus)
+logs/                        v2 per-run full traces (working endpoint)
+logs_v1_broken_endpoint/     the invalidated v1 traces + Haiku wander journal (kept as evidence)
+results/summary.json         v2 rollup;  results/summary_v1.json  the v1 rollup
+RESULTS.md                   interpretation (v1 mistake → v2 correction → honest read)
+REVIEW.md                    external skeptic-methodologist critique + a better-test spec
 ```

@@ -1,0 +1,372 @@
+{
+  "spent_usd": 0.0298,
+  "runs": [
+    {
+      "model": "openai/gpt-5.4-nano",
+      "qid": 1,
+      "kind": "single-corpus grounding",
+      "n_tool_calls": 3,
+      "tools": [
+        "search",
+        "note_html",
+        "federated_search"
+      ],
+      "kb_ids": [
+        "nietzsche"
+      ],
+      "expect_kb": [
+        "nietzsche"
+      ],
+      "halted": null,
+      "wall_s": 9.3
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "qid": 2,
+      "kind": "cross-corpus contrast",
+      "n_tool_calls": 6,
+      "tools": [
+        "search",
+        "search",
+        "note_html",
+        "note_html",
+        "search",
+        "search"
+      ],
+      "kb_ids": [],
+      "expect_kb": [
+        "nietzsche",
+        "schopenhauer"
+      ],
+      "halted": null,
+      "wall_s": 12.6
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "qid": 3,
+      "kind": "principle understanding",
+      "n_tool_calls": 1,
+      "tools": [
+        "federated_search"
+      ],
+      "kb_ids": [
+        "epictetus"
+      ],
+      "expect_kb": [
+        "epictetus"
+      ],
+      "halted": null,
+      "wall_s": 7.3
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "qid": 4,
+      "kind": "hub orientation",
+      "n_tool_calls": 3,
+      "tools": [
+        "search",
+        "note_html",
+        "federated_search"
+      ],
+      "kb_ids": [
+        "nietzsche"
+      ],
+      "expect_kb": [
+        "nietzsche",
+        "machiavelli"
+      ],
+      "halted": null,
+      "wall_s": 9.0
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "qid": 5,
+      "kind": "cross-link navigation",
+      "n_tool_calls": 5,
+      "tools": [
+        "search",
+        "federated_search",
+        "federated_search",
+        "note_html",
+        "note_html"
+      ],
+      "kb_ids": [
+        "pascal",
+        "montaigne"
+      ],
+      "expect_kb": [
+        "pascal",
+        "montaigne"
+      ],
+      "halted": null,
+      "wall_s": 9.1
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "qid": 6,
+      "kind": "two-corpus principle",
+      "n_tool_calls": 2,
+      "tools": [
+        "federated_search",
+        "federated_search"
+      ],
+      "kb_ids": [
+        "confucius",
+        "laozi"
+      ],
+      "expect_kb": [
+        "confucius",
+        "laozi"
+      ],
+      "halted": null,
+      "wall_s": 4.1
+    },
+    {
+      "model": "mistralai/ministral-14b-2512",
+      "qid": 1,
+      "kind": "single-corpus grounding",
+      "n_tool_calls": 6,
+      "tools": [
+        "federated_search",
+        "federated_search",
+        "federated_note_html",
+        "federated_note_html",
+        "federated_expand",
+        "federated_note_html"
+      ],
+      "kb_ids": [
+        "nietzsche",
+        "philosophers",
+        "philosophers",
+        "philosophers",
+        "philosophers"
+      ],
+      "expect_kb": [
+        "nietzsche"
+      ],
+      "halted": null,
+      "wall_s": 17.7
+    },
+    {
+      "model": "mistralai/ministral-14b-2512",
+      "qid": 2,
+      "kind": "cross-corpus contrast",
+      "n_tool_calls": 2,
+      "tools": [
+        "federated_search",
+        "federated_search"
+      ],
+      "kb_ids": [
+        "nietzsche",
+        "schopenhauer"
+      ],
+      "expect_kb": [
+        "nietzsche",
+        "schopenhauer"
+      ],
+      "halted": null,
+      "wall_s": 12.3
+    },
+    {
+      "model": "mistralai/ministral-14b-2512",
+      "qid": 3,
+      "kind": "principle understanding",
+      "n_tool_calls": 5,
+      "tools": [
+        "federated_search",
+        "federated_note_html",
+        "federated_note_html",
+        "federated_expand",
+        "federated_note_html"
+      ],
+      "kb_ids": [
+        "philosophers",
+        "philosophers",
+        "philosophers",
+        "philosophers"
+      ],
+      "expect_kb": [
+        "epictetus"
+      ],
+      "halted": null,
+      "wall_s": 14.3
+    },
+    {
+      "model": "mistralai/ministral-14b-2512",
+      "qid": 4,
+      "kind": "hub orientation",
+      "n_tool_calls": 9,
+      "tools": [
+        "search",
+        "federated_search",
+        "federated_note_html",
+        "federated_search",
+        "federated_search",
+        "search",
+        "note_html",
+        "expand",
+        "note_html"
+      ],
+      "kb_ids": [
+        "markavrelii",
+        "schopenhauer",
+        "epictetus",
+        "nietzsche"
+      ],
+      "expect_kb": [
+        "nietzsche",
+        "machiavelli"
+      ],
+      "halted": null,
+      "wall_s": 25.2
+    },
+    {
+      "model": "mistralai/ministral-14b-2512",
+      "qid": 5,
+      "kind": "cross-link navigation",
+      "n_tool_calls": 6,
+      "tools": [
+        "search",
+        "federated_search",
+        "federated_search",
+        "federated_search",
+        "federated_note_html",
+        "federated_note_html"
+      ],
+      "kb_ids": [
+        "montaigne",
+        "pascal",
+        "philosophers",
+        "philosophers"
+      ],
+      "expect_kb": [
+        "pascal",
+        "montaigne"
+      ],
+      "halted": null,
+      "wall_s": 29.1
+    },
+    {
+      "model": "mistralai/ministral-14b-2512",
+      "qid": 6,
+      "kind": "two-corpus principle",
+      "n_tool_calls": 4,
+      "tools": [
+        "federated_search",
+        "federated_search",
+        "federated_note_html",
+        "federated_note_html"
+      ],
+      "kb_ids": [
+        "philosophers",
+        "philosophers"
+      ],
+      "expect_kb": [
+        "confucius",
+        "laozi"
+      ],
+      "halted": null,
+      "wall_s": 23.4
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "qid": 1,
+      "kind": "single-corpus grounding",
+      "n_tool_calls": 2,
+      "tools": [
+        "search",
+        "note_html"
+      ],
+      "kb_ids": [],
+      "expect_kb": [
+        "nietzsche"
+      ],
+      "halted": null,
+      "wall_s": 5.2
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "qid": 2,
+      "kind": "cross-corpus contrast",
+      "n_tool_calls": 1,
+      "tools": [
+        "search"
+      ],
+      "kb_ids": [],
+      "expect_kb": [
+        "nietzsche",
+        "schopenhauer"
+      ],
+      "halted": null,
+      "wall_s": 3.2
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "qid": 3,
+      "kind": "principle understanding",
+      "n_tool_calls": 1,
+      "tools": [
+        "federated_search"
+      ],
+      "kb_ids": [
+        "epictetus"
+      ],
+      "expect_kb": [
+        "epictetus"
+      ],
+      "halted": null,
+      "wall_s": 13.0
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "qid": 4,
+      "kind": "hub orientation",
+      "n_tool_calls": 0,
+      "tools": [],
+      "kb_ids": [],
+      "expect_kb": [
+        "nietzsche",
+        "machiavelli"
+      ],
+      "halted": null,
+      "wall_s": 16.3
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "qid": 5,
+      "kind": "cross-link navigation",
+      "n_tool_calls": 1,
+      "tools": [
+        "search"
+      ],
+      "kb_ids": [],
+      "expect_kb": [
+        "pascal",
+        "montaigne"
+      ],
+      "halted": null,
+      "wall_s": 28.9
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "qid": 6,
+      "kind": "two-corpus principle",
+      "n_tool_calls": 3,
+      "tools": [
+        "search",
+        "federated_search",
+        "federated_search"
+      ],
+      "kb_ids": [
+        "confucius",
+        "laozi"
+      ],
+      "expect_kb": [
+        "confucius",
+        "laozi"
+      ],
+      "halted": null,
+      "wall_s": 9.4
+    }
+  ]
+}
