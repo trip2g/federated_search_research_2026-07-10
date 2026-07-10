@@ -1,0 +1,189 @@
+{
+  "model": "openai/gpt-5.4-mini",
+  "condition": "flat-hybrid-clean",
+  "lang": "ru",
+  "qid": 1,
+  "q": "Что Ницше понимает под волей к власти? Ответь только по базе знаний и приведи дословную цитату на языке источника.",
+  "kind": "single-corpus grounding",
+  "wall_s": 69.0,
+  "judge": {
+    "verdict": "partial",
+    "facts_covered": [
+      1,
+      2
+    ],
+    "note": "Ответ прямо утверждает, что воля к власти движет всем живым как стремление проявлять силу/расти/присваивать/навязывать форму и что это не самосохранение. Факт 3 (про распространение на органические функции и познание/философию) в ответе не раскрыт.",
+    "raw": "{\"facts_covered\":[1,2],\"note\":\"Ответ прямо утверждает, что воля к власти движет всем живым как стремление проявлять силу/расти/присваивать/навязывать форму и что это не самосохранение. Факт 3 (про распространение на органические функции и познание/философию) в ответе не раскрыт.\"}",
+    "judge_cost": 0.0002
+  },
+  "confusion": {
+    "misattributions": [],
+    "blending": false,
+    "note": "Явных приписываний чужих позиций Ницше или смешения с другими мыслителями нет; ответ в целом согласован с ключевыми пунктами (кроме того, что не приведена дословная цитата из источника).",
+    "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"Явных приписываний чужих позиций Ницше или смешения с другими мыслителями нет; ответ в целом согласован с ключевыми пунктами (кроме того, что не приведена дословная цитата из источника).\"\n}",
+    "judge_cost": 0.000201
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Nietzsche: nietzsche/concepts/volya_k_vlasti — воля к власти как основная гипотеза о движении живого, не самосохранение",
+        "path": "nietzsche/concepts/volya_k_vlasti",
+        "corpus": "nietzsche",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 1,
+    "fabricated": 0,
+    "hub_cites": 0,
+    "judgeable": 1,
+    "author_mismatch": 0,
+    "provenance_ok": 1
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-mini",
+    "lang": "ru",
+    "qid": 1,
+    "verdict": "partial",
+    "facts_covered": 2,
+    "facts_required": 3,
+    "misattributions": 0,
+    "blending": false,
+    "cites": 1,
+    "cites_fabricated": 0,
+    "cites_judgeable": 1,
+    "cites_author_mismatch": 0,
+    "cites_hub": 0,
+    "retrieval_results": 16,
+    "retrieval_offtarget": 2,
+    "origins": {
+      "HYBRID": 8,
+      "VECTOR": 8
+    },
+    "quotes": 1,
+    "quotes_valid": 1,
+    "tool_calls": 2,
+    "first_relevant_call": 1,
+    "forced_final": false,
+    "cost_usd": 0.00374,
+    "wall_s": 69.0
+  },
+  "trace": [
+    {
+      "cost": 0.00041,
+      "model_ms": 935,
+      "tokens": {
+        "in": 316,
+        "out": 39
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Ницше воля к власти"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "philosophers/ru/hub/nietzsche",
+            "schopenhauer/concepts/nietzsche_predtecha",
+            "philosophers/ru/topics/vlast",
+            "philosophers/ru/topics/volya",
+            "nietzsche/concepts/volya_k_istine",
+            "nietzsche/moc",
+            "nietzsche/see_also"
+          ],
+          "origins": [
+            "HYBRID",
+            "HYBRID",
+            "HYBRID",
+            "HYBRID",
+            "HYBRID",
+            "HYBRID",
+            "HYBRID",
+            "HYBRID"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[HYBRID score=1.000] Воля к власти\n……гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а «проформа жизни»……\n\n### philosophers/ru/hub/nietzsche\n[HYBRID score=0.971] Ницше — По ту сторону добра и зла\n……у Ницше из избытка силы, у Адлера из дефицита; чувство общности — стадная мораль.Ла Рошфуко (larochefoucauld) — союзник по разоблачению морали, но тот сводит всё к самолюбию, Ницше — к воле к власти и……\n\n### schopenhauer/concepts/nietzsche_predtecha\n[HYBRID score=0.961] Шопенгауэр как предтеча и мишень Ницше\n……ых, цитатно-опорных страницах; тексты Ницше — в базеНицше, тексты Шопенгауэра — в «Афоризмах».\nТри оси спора\n1. Воля к",
+          "ms": 28654
+        }
+      ]
+    },
+    {
+      "cost": 0.001,
+      "model_ms": 1453,
+      "tokens": {
+        "in": 1171,
+        "out": 28
+      },
+      "tool_calls": [
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "site:nietzsche/concepts/volya_k_vlasti"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/moc",
+            "nietzsche/concepts/volya_k_vlasti",
+            "nietzsche/terminology",
+            "philosophers/ru/hub/nietzsche",
+            "philosophers/en/hub/nietzsche",
+            "philosophers/ru/topics/volya",
+            "adler/concepts/stremlenie_k_prevoskhodstvu",
+            "philosophers/ru/contradictions"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/moc\n[VECTOR score=1.000] Ницше — карта базы знаний\n…## Понятия (concepts/) ### Ядро: власть, истина, перспектива - [[volya-k-vlasti]] — жизнь как воля к власти, не самосохранение - [[volya-k-istine]] — подозрение к «истине любой ценой» -...…\n\n### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=0.919] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а...…\n\n### nietzsche/terminology\n[VECTOR score=0.905] TERMINOLOGY — canonical slugs (Nietzsche)\n…# TERMINOLOGY — canonical slugs (Nietzsche) Canonical slug table for this KB. Concept notes in `concepts/` are named by these slugs. Seeded from the corpus glossary (`how_to_build_n",
+          "ms": 29954
+        }
+      ]
+    },
+    {
+      "cost": 0.00233,
+      "model_ms": 5324,
+      "tokens": {
+        "in": 1941,
+        "out": 194
+      },
+      "final_text": "По базе знаний, у Ницше воля к власти — это не политическая «жажда власти», а основная гипотеза о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать и навязывать форму. В одной из заметок это сформулировано так: «Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму».  \n\nТо есть в этой базе воля к власти понимается как жизненный принцип/проформа жизни, а не как просто желание господствовать над другими.\n\nSOURCES\n- Nietzsche: nietzsche/concepts/volya_k_vlasti — воля к власти как основная гипотеза о движении живого, не самосохранение\n"
+    }
+  ],
+  "final": "По базе знаний, у Ницше воля к власти — это не политическая «жажда власти», а основная гипотеза о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать и навязывать форму. В одной из заметок это сформулировано так: «Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму».  \n\nТо есть в этой базе воля к власти понимается как жизненный принцип/проформа жизни, а не как просто желание господствовать над другими.\n\nSOURCES\n- Nietzsche: nietzsche/concepts/volya_k_vlasti — воля к власти как основная гипотеза о движении живого, не самосохранение\n",
+  "forced_final": false,
+  "tool_calls": 2,
+  "first_relevant_call": 1,
+  "model_ms": 7712,
+  "tool_ms": 58608,
+  "grounding": {
+    "quotes": 1,
+    "quotes_in_retrieval": 1
+  },
+  "retrieved_chars": 4514,
+  "retrieval": {
+    "results": 16,
+    "offtarget": 2,
+    "offtarget_corpora": {
+      "schopenhauer": 1,
+      "adler": 1
+    },
+    "origins": {
+      "HYBRID": 8,
+      "VECTOR": 8
+    }
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "model": "openai/gpt-5.4-mini",
+  "condition": "flat-hybrid-clean",
+  "lang": "ru",
+  "qid": 3,
+  "q": "Сформулируй главный принцип Эпиктета о том, что в нашей власти и что не в нашей власти, с дословной цитатой из базы знаний на языке источника.",
+  "kind": "principle understanding",
+  "wall_s": 238.5,
+  "judge": {
+    "verdict": "partial",
+    "facts_covered": [
+      1,
+      2
+    ],
+    "note": "Ответ содержит дословную цитату о разделении на «в нашей власти» и «не в нашей власти», но не приводит тезис про «по природе свободно/немощно (рабственно)» и про ошибку смешения двух списков из требуемого списка.",
+    "raw": "{\"facts_covered\":[1,2],\"note\":\"Ответ содержит дословную цитату о разделении на «в нашей власти» и «не в нашей власти», но не приводит тезис про «по природе свободно/немощно (рабственно)» и про ошибку смешения двух списков из требуемого списка.\"}",
+    "judge_cost": 0.000191
+  },
+  "confusion": {
+    "misattributions": [],
+    "blending": false,
+    "note": "Ошибок приписывания к неверному мыслителю не найдено: кандидат корректно приписывает принцип и цитируемые положения Эпиктету и не смешивает позиции двух авторов.",
+    "raw": "{\"misattributions\":[],\"blending\":false,\"note\":\"Ошибок приписывания к неверному мыслителю не найдено: кандидат корректно приписывает принцип и цитируемые положения Эпиктету и не смешивает позиции двух авторов.\"}",
+    "judge_cost": 0.000186
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Epictetus: epictetus/concepts/dihotomiya-kontrolya — things are divided into what is in our power and what is not",
+        "path": "epictetus/concepts/dihotomiya-kontrolya",
+        "corpus": "epictetus",
+        "named": [
+          "epictetus"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Epictetus: epictetus/concepts/proairesis — what is in our power is προαίρεσις, the capacity of choice",
+        "path": "epictetus/concepts/proairesis",
+        "corpus": "epictetus",
+        "named": [
+          "epictetus"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 2,
+    "fabricated": 0,
+    "hub_cites": 0,
+    "judgeable": 2,
+    "author_mismatch": 0,
+    "provenance_ok": 2
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-mini",
+    "lang": "ru",
+    "qid": 3,
+    "verdict": "partial",
+    "facts_covered": 2,
+    "facts_required": 3,
+    "misattributions": 0,
+    "blending": false,
+    "cites": 2,
+    "cites_fabricated": 0,
+    "cites_judgeable": 2,
+    "cites_author_mismatch": 0,
+    "cites_hub": 0,
+    "retrieval_results": 32,
+    "retrieval_offtarget": 0,
+    "origins": {
+      "VECTOR": 32
+    },
+    "quotes": 3,
+    "quotes_valid": 1,
+    "tool_calls": 4,
+    "first_relevant_call": null,
+    "forced_final": false,
+    "cost_usd": 0.00499,
+    "wall_s": 238.5
+  },
+  "trace": [
+    {
+      "cost": 0.0004,
+      "model_ms": 1160,
+      "tokens": {
+        "in": 326,
+        "out": 35
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет что в нашей власти и что не в нашей власти дословная цитата"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "epictetus/moc",
+            "epictetus/principles/svoboda-cherez-otkaz-ot-vneshnego",
+            "philosophers/en/contradictions",
+            "philosophers/en/hub/epictetus",
+            "epictetus/terminology",
+            "epictetus/concepts/proairesis",
+            "philosophers/ru/topics/vlast"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/dihotomiya-kontrolya\n[VECTOR score=1.000] Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n…�о не в нашей власти; и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается». ## Links - [[proairesis]] — то единственное «в нашей власти» и есть προαίρεσις,...…\n\n### epictetus/moc\n[VECTOR score=0.925] Эпиктет — карта базы знаний\n…## Понятия (concepts/) ### Ядро: что в нашей власти - [[dihotomiya-kontrolya]] — раздел «наше / не наше» (τὰ ἐφ' ἡμῖν) - [[proairesis]] — способность выбора, «ведущее начало» -...…\n\n### epictetus/principles/svoboda-cherez-otkaz-ot-vneshnego\n[VECTOR score=0.813] Свобода — через отказ желать неподвластное\n…# Свобода — через отказ желать неподвластное **Принцип:** Раб — не тот, кем помыкают, а тот, кто желает и избегает того, что во ",
+          "ms": 64937
+        }
+      ]
+    },
+    {
+      "cost": 0.00145,
+      "model_ms": 1714,
+      "tokens": {
+        "in": 1139,
+        "out": 132
+      },
+      "tool_calls": [
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "epictetus/concepts/dihotomiya-kontrolya τὰ ἐφ' ἡμῖν дословно"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/terminology",
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "epictetus/moc",
+            "philosophers/ru/topics/sudba_i_kontrol",
+            "philosophers/ru/hub/epictetus",
+            "epictetus/concepts/proairesis",
+            "epictetus/operatsionnaya-ramka",
+            "philosophers/en/topics/sudba_i_kontrol"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/terminology\n[VECTOR score=0.945] TERMINOLOGY — canonical slugs (Epictetus)\n…# TERMINOLOGY — canonical slugs (Epictetus) Canonical slug table for this KB. Concept notes in `concepts/` are named by these slugs. Greek given from the standard text (Schenkl / Perseus, PD) as...…\n\n### epictetus/concepts/dihotomiya-kontrolya\n[VECTOR score=0.942] Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n…�ерский «круг влияния», а строгий бинарный раздел: власть суждения — по одну сторону, *всё прочее* — по другую. ## Evidence > Of things some are in our power, and others are not. In our power are...…\n\n### epictetus/moc\n[VECTOR score=0.884] Эпиктет — карта базы знаний\n…## Понятия (concepts/) ### Ядро: что в нашей власти - [[dihotomiya-kontrolya]] — раздел «наше / не наше» (τὰ ἐφ' ἡμῖν) - [[proairesis]] — спос",
+          "ms": 46961
+        },
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "epictetus/concepts/proairesis προαίρεσις дословная цитата в нашей власти"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/proairesis",
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "epictetus/critic_report",
+            "epictetus/terminology",
+            "epictetus/moc",
+            "epictetus/sources/source_manifest",
+            "philosophers/ru/contradictions",
+            "epictetus/concepts/dolzhnoe-i-rol"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/proairesis\n[VECTOR score=0.992] Проайресис (προαίρεσις) — способность выбора\n…�ным, пусть не желает и не избегает ничего, что зависит от других: не соблюдающий этого правила неизбежно раб». ## Links - [[dihotomiya-kontrolya]] — προαίρεσις и есть содержимое списка «в нашей...…\n\n### epictetus/concepts/dihotomiya-kontrolya\n[VECTOR score=0.964] Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n…�о не в нашей власти; и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается». ## Links - [[proairesis]] — то единственное «в нашей власти» и есть προαίρεσις,...…\n\n### epictetus/critic_report\n[VECTOR score=0.938] CRITIC_REPORT — Epictetus KB, v1\n…### MAJOR findings: none ### MINOR findings 1. **προαίρεσις / ἡγεμονικόν conflation** — `concepts/proairesis.md` The c",
+          "ms": 60969
+        },
+        {
+          "n": 4,
+          "name": "search",
+          "args": {
+            "query": "epictetus/principles/svoboda-cherez-otkaz-ot-vneshnego дословно"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/ru/topics/svoboda",
+            "epictetus/principles/svoboda-cherez-otkaz-ot-vneshnego",
+            "philosophers/en/topics/svoboda",
+            "epictetus/moc",
+            "philosophers/ru/contradictions",
+            "epictetus/concepts/nevozmutimost",
+            "epictetus/concepts/proairesis",
+            "philosophers/ru/hub/schopenhauer"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/ru/topics/svoboda\n[VECTOR score=0.982] Свобода\n…стигается отказом от внешнего, самообладанием, независимостью средств — или её никто по-настоящему не хочет. ## Свобода через отказ от внешнего - **Эпиктет** (`epictetus`) — свободен лишь тот, кто не...…\n\n### epictetus/principles/svoboda-cherez-otkaz-ot-vneshnego\n[VECTOR score=0.958] Свобода — через отказ желать неподвластное\n…# Свобода — через отказ желать неподвластное **Принцип:** Раб — не тот, кем помыкают, а тот, кто желает и избегает того, что во власти других; свободен тот, кто не желает и не избегает ничего...…\n\n### philosophers/en/topics/svoboda\n[VECTOR score=0.916] Freedom\n…Axis: freedom is won by renouncing externals, by self-mastery, by independence of means — or nobody truly wants it. ## Freedom through renouncin",
+          "ms": 57893
+        }
+      ]
+    },
+    {
+      "cost": 0.00314,
+      "model_ms": 2391,
+      "tokens": {
+        "in": 3700,
+        "out": 234
+      },
+      "final_text": "Главный принцип Эпиктета в этой базе формулируется как строгий раздел между тем, что «в нашей власти», и всем остальным: «Of things some are in our power, and others are not. In our power are…» — то есть одни вещи зависят от нас, другие нет. В этой же записи поясняется, что к «в нашей власти» относится προαίρεσις, а всё, что касается неподвластного, следует не присваивать себе как область контроля.\n\nДословная цитата из базы знаний:\n> «Of things some are in our power, and others are not. In our power are...»  \n> «…если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается».\n\nSOURCES\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — things are divided into what is in our power and what is not\n- Epictetus: epictetus/concepts/proairesis — what is in our power is προαίρεσις, the capacity of choice"
+    }
+  ],
+  "final": "Главный принцип Эпиктета в этой базе формулируется как строгий раздел между тем, что «в нашей власти», и всем остальным: «Of things some are in our power, and others are not. In our power are…» — то есть одни вещи зависят от нас, другие нет. В этой же записи поясняется, что к «в нашей власти» относится προαίρεσις, а всё, что касается неподвластного, следует не присваивать себе как область контроля.\n\nДословная цитата из базы знаний:\n> «Of things some are in our power, and others are not. In our power are...»  \n> «…если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается».\n\nSOURCES\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — things are divided into what is in our power and what is not\n- Epictetus: epictetus/concepts/proairesis — what is in our power is προαίρεσις, the capacity of choice",
+  "forced_final": false,
+  "tool_calls": 4,
+  "first_relevant_call": null,
+  "model_ms": 5265,
+  "tool_ms": 230760,
+  "grounding": {
+    "quotes": 3,
+    "quotes_in_retrieval": 1
+  },
+  "retrieved_chars": 9182,
+  "retrieval": {
+    "results": 32,
+    "offtarget": 0,
+    "offtarget_corpora": {},
+    "origins": {
+      "VECTOR": 32
+    }
+  }
+}

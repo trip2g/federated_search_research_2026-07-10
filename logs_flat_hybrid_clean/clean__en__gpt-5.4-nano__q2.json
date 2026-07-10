@@ -1,0 +1,278 @@
+{
+  "model": "openai/gpt-5.4-nano",
+  "condition": "flat-hybrid-clean",
+  "lang": "en",
+  "qid": 2,
+  "q": "How does Nietzsche's will to power differ from Schopenhauer's will to live? Draw on the knowledge base for both thinkers and cite each in the source language.",
+  "kind": "cross-corpus contrast",
+  "wall_s": 135.1,
+  "judge": {
+    "verdict": "partial",
+    "facts_covered": [
+      1,
+      3
+    ],
+    "note": "Ответ полностью утверждает (1) шопенгауэровскую «волю к жизни» с отрицанием воли как ответ и (3) что у Ницше воля к власти не является самосохранением; остальные требуемые факты частично или не утверждены полностью.",
+    "raw": "{\n  \"facts_covered\": [3, 1],\n  \"note\": \"Ответ полностью утверждает (1) шопенгауэровскую «волю к жизни» с отрицанием воли как ответ и (3) что у Ницше воля к власти не является самосохранением; остальные требуемые факты частично или не утверждены полностью.\"\n}",
+    "judge_cost": 0.000335
+  },
+  "confusion": {
+    "misattributions": [
+      {
+        "claim": "Nietzsche’s will to power is the main driving force that seeks to grow, appropriate, and impose form",
+        "attributed_to": "Nietzsche",
+        "belongs_to": "Schopenhauer"
+      }
+    ],
+    "blending": false,
+    "note": "Непохоже, чтобы в ответе были приписывания позиций Шопенгауэра Ницше или наоборот; отличия в целом соответствуют ключу, а мисатрибуции/смешения позиций разных мыслителей не обнаружены.",
+    "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"Nietzsche’s will to power is the main driving force that seeks to grow, appropriate, and impose form\",\n      \"attributed_to\": \"Nietzsche\",\n      \"belongs_to\": \"Schopenhauer\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"Непохоже, чтобы в ответе были приписывания позиций Шопенгауэра Ницше или наоборот; отличия в целом соответствуют ключу, а мисатрибуции/смешения позиций разных мыслителей не обнаружены.\"\n}",
+    "judge_cost": 0.000408
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Nietzsche: nietzsche/concepts/volya_k_vlasti — «не самосохранение», а стремление проявлять силу, расти, присваивать, навязывать форму",
+        "path": "nietzsche/concepts/volya_k_vlasti",
+        "corpus": "nietzsche",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Nietzsche: philosophers/ru/hub/nietzsche — «жизнь как воля к власти, не самосохранение» и «Воля к власти ≠ политическая «жажда власти»»",
+        "path": "philosophers/ru/hub/nietzsche",
+        "corpus": "philosophers",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": true,
+        "author_match": null
+      },
+      {
+        "line": "- Schopenhauer: schopenhauer/concepts/volya_k_zhizni — «вещь-в-себе — слепая, безосновная воля к жизни» как метафизическое ядро мира",
+        "path": "schopenhauer/concepts/volya_k_zhizni",
+        "corpus": "schopenhauer",
+        "named": [
+          "schopenhauer"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Schopenhauer: schopenhauer/concepts/otritsanie_voli — выход: «не удовлетворение воли (невозможное), а её отрицание — аскеза… угашение воли к жизни»",
+        "path": "schopenhauer/concepts/otritsanie_voli",
+        "corpus": "schopenhauer",
+        "named": [
+          "schopenhauer"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 4,
+    "fabricated": 0,
+    "hub_cites": 1,
+    "judgeable": 3,
+    "author_mismatch": 0,
+    "provenance_ok": 3
+  },
+  "trace": [
+    {
+      "cost": 0.00023,
+      "model_ms": 1769,
+      "tokens": {
+        "in": 318,
+        "out": 135
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Nietzsche воля к власти отличие воля к власти воля к жизни"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "philosophers/en/hub/nietzsche",
+            "philosophers/ru/hub/nietzsche",
+            "philosophers/ru/contradictions",
+            "philosophers/ru/topics/volya",
+            "nietzsche/principles/zhizn_est_volya_k_vlasti",
+            "schopenhauer/concepts/volya_k_zhizni",
+            "nietzsche/moc"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=0.981] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а...…\n\n### philosophers/en/hub/nietzsche\n[VECTOR score=0.974] Nietzsche — Beyond Good and Evil\n…nowledgment of limits against a will that tears limits apart. - Tolstoy (`tolstoy`) — renunciation, compassion and \"useful labour\" as symptoms of a weak will; slave morality against master morality....…\n\n### philosophers/ru/hub/nietzsche\n[VECTOR score=0.958] Ницше — По ту сторону добра и зла\n…�я к власти](https://nietzsche.2pub.me/volya-k-vlasti) — жизнь как воля к власти, не самосохранение (bge.13); самый уплощаемый термин. ## Не упло",
+          "ms": 25341
+        },
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "Schopenhauer воля к жизни отличие от воли к власти Ницше"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/ru/hub/nietzsche",
+            "philosophers/ru/topics/volya",
+            "nietzsche/concepts/volya_k_vlasti",
+            "schopenhauer/concepts/nietzsche_predtecha",
+            "philosophers/en/hub/nietzsche",
+            "philosophers/en/contradictions",
+            "schopenhauer/concepts/volya_k_zhizni",
+            "goethe/concepts/otrechenie"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/ru/hub/nietzsche\n[VECTOR score=0.984] Ницше — По ту сторону добра и зла\n…�я к власти](https://nietzsche.2pub.me/volya-k-vlasti) — жизнь как воля к власти, не самосохранение (bge.13); самый уплощаемый термин. ## Не уплощать - Воля к власти ≠ политическая «жажда власти»; по...…\n\n### philosophers/ru/topics/volya\n[VECTOR score=0.962] Воля\n…�на: деятельность требует знания и меры, свобода — власти над собой. Опора: `svoboda-i-samoobladanie`, `deyatelnost-trebuet-znaniya-i-mery`. ## Воля — слепа или излишня - **Шопенгауэр**...…\n\n### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=0.951] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда г",
+          "ms": 33548
+        },
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "Шопенгауэр воля к жизни сущность мира страдание отрицание воли"
+          },
+          "result_ok": true,
+          "paths": [
+            "tolstoy/sources/units/ispoved_06",
+            "schopenhauer/concepts/otritsanie_voli",
+            "schopenhauer/concepts/volya_k_zhizni",
+            "schopenhauer/concepts/nietzsche_predtecha",
+            "philosophers/ru/hub/schopenhauer",
+            "philosophers/en/contradictions",
+            "goethe/concepts/otrechenie",
+            "schopenhauer/moc"
+          ],
+          "origins": [
+            "HYBRID",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### tolstoy/sources/units/ispoved_06\n[HYBRID score=0.961] Исповедь, глава VI\n……го из жизни тела. Если так, то как же нам не радоваться, когда смерть приходит к нам?»\n«Мудрец всю жизнь ищет смерть, и потому смерть не страшна ему».\n«Познавши внутреннюю сущность мира как волю, — го……\n\n### schopenhauer/concepts/otritsanie_voli\n[VECTOR score=0.652] Отрицание воли и аскеза\n…Единственный радикальный выход из страдания по метафизике Шопенгауэра: не удовлетворение воли (невозможное), а её **отрицание** — аскеза, святость, угашение воли к жизни. Это кульминация «Мира как...…\n\n### schopenhauer/concepts/volya_k_zhizni\n[VECTOR score=0.652] Воля к жизни (вещь-в-себе)\n…Метафизическое ядро Шопенгауэра: мир есть воля и представление, а вещь-в-себе — слепая, безосновная **воля к жизни**, объективирующаяся в",
+          "ms": 33475
+        },
+        {
+          "n": 4,
+          "name": "search",
+          "args": {
+            "query": "Ницше воля к власти интерпретация всей жизни сила борьба"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "philosophers/ru/topics/volya",
+            "nietzsche/moc",
+            "philosophers/en/topics/volya",
+            "philosophers/en/contradictions",
+            "schopenhauer/concepts/nietzsche_predtecha",
+            "philosophers/ru/hub/nietzsche",
+            "philosophers/ru/contradictions"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=1.000] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а...…\n\n### philosophers/ru/topics/volya\n[VECTOR score=0.964] Воля\n…жизни, инструмент достижения, предмет дисциплины — или слепая сила и лишнее усилие, от которых отказываются. ## Воля — сущность и двигатель - **Ницше** (`nietzsche`) — жизнь есть воля к власти, а не...…\n\n### nietzsche/moc\n[VECTOR score=0.815] Ницше — карта базы знаний\n…## Понятия (concepts/) ### Ядро: власть, истина, перспектива - [[volya-k-vlasti]] — жизнь как воля к власти, не самосохранение - [[volya-k-istine]] — подозрение к «истине любой ценой» -...…\n\n### phi",
+          "ms": 29924
+        }
+      ]
+    },
+    {
+      "cost": 0.00185,
+      "model_ms": 7655,
+      "tokens": {
+        "in": 3583,
+        "out": 903
+      },
+      "final_text": "У Ницше **воля к власти** — это не просто инстинкт самосохранения или “жажда господства”, а основная движущая сила живого: стремление проявлять силу, расти, присваивать и навязывать форму. В базе это формулируется так: «Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.» (Nietzsche: `nietzsche/concepts/volya_k_vlasti`). Также там же: «жизнь как воля к власти, не самосохранение» (Nietzsche: `philosophers/ru/hub/nietzsche`) и отдельно предостережение: «Воля к власти ≠ политическая «жажда власти»» (Nietzsche: `philosophers/ru/hub/nietzsche`).\n\nУ Шопенгауэра **воля к жизни** — метафизическое ядро мира: «мир есть воля и представление, а вещь-в-себе — слепая, безосновная воля к жизни» (Schopenhauer: `schopenhauer/concepts/volya_k_zhizni`). Из этой воли выводятся страдание, поскольку воля “вечна” и объективируется во всём сущем (Schopenhauer: `schopenhauer/concepts/volya_k_zhizni`). Кроме того, в материале зафиксирован радикальный выход из страдания: «не удовлетворение воли (невозможное), а её отрицание — аскеза, святость, угашение воли к жизни.» (Schopenhauer: `schopenhauer/concepts/otritsanie_voli`).\n\n### В чём различие (по базе знаний)\n- **Что является движущим принципом жизни:** у Ницше это стремление **проявлять силу** (“воля к власти”), у Шопенгауэра — слепая **воля к жизни** как вещь-в-себе мира. (Nietzsche: `nietzsche/concepts/volya_k_vlasti`; Schopenhauer: `schopenhauer/concepts/volya_k_zhizni`)\n- **Отношение к “самосохранению”:** в базе прямо сказано, что у Ницше воля к власти — **не самосохранение**. (Nietzsche: `philosophers/ru/hub/nietzsche`)\n- **Путь избавления от страдания:** у Шопенгауэра выход связан с **отрицанием воли** (аскеза/угашение), а не с её “удовлетворением”. (Schopenhauer: `schopenhauer/concepts/otritsanie_voli`)\n- **Предостережение о неверном понимании Ницше:** “воля к власти” не сводится к политической жажде господства. (Nietzsche: `philosophers/ru/hub/nietzsche`)\n\nЕсли вы хотите, я могу сформулировать это различие в виде краткой таблицы “Ницше vs Шопенгауэр” строго по тем формулировкам, которые есть в найденных заметках.\n\n## SOURCES\n- Nietzsche: nietzsche/concepts/volya_k_vlasti — «не самосохранение», а стремление проявлять силу, расти, присваивать, навязывать форму  \n- Nietzsche: philosophers/ru/hub/nietzsche — «жизнь как воля к власти, не самосохранение» и «Воля к власти ≠ политическая «жажда власти»»  \n- Schopenhauer: schopenhauer/concepts/volya_k_zhizni — «вещь-в-себе — слепая, безосновная воля к жизни» как метафизическое ядро мира  \n- Schopenhauer: schopenhauer/concepts/otritsanie_voli — выход: «не удовлетворение воли (невозможное), а её отрицание — аскеза… угашение воли к жизни»"
+    }
+  ],
+  "final": "У Ницше **воля к власти** — это не просто инстинкт самосохранения или “жажда господства”, а основная движущая сила живого: стремление проявлять силу, расти, присваивать и навязывать форму. В базе это формулируется так: «Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.» (Nietzsche: `nietzsche/concepts/volya_k_vlasti`). Также там же: «жизнь как воля к власти, не самосохранение» (Nietzsche: `philosophers/ru/hub/nietzsche`) и отдельно предостережение: «Воля к власти ≠ политическая «жажда власти»» (Nietzsche: `philosophers/ru/hub/nietzsche`).\n\nУ Шопенгауэра **воля к жизни** — метафизическое ядро мира: «мир есть воля и представление, а вещь-в-себе — слепая, безосновная воля к жизни» (Schopenhauer: `schopenhauer/concepts/volya_k_zhizni`). Из этой воли выводятся страдание, поскольку воля “вечна” и объективируется во всём сущем (Schopenhauer: `schopenhauer/concepts/volya_k_zhizni`). Кроме того, в материале зафиксирован радикальный выход из страдания: «не удовлетворение воли (невозможное), а её отрицание — аскеза, святость, угашение воли к жизни.» (Schopenhauer: `schopenhauer/concepts/otritsanie_voli`).\n\n### В чём различие (по базе знаний)\n- **Что является движущим принципом жизни:** у Ницше это стремление **проявлять силу** (“воля к власти”), у Шопенгауэра — слепая **воля к жизни** как вещь-в-себе мира. (Nietzsche: `nietzsche/concepts/volya_k_vlasti`; Schopenhauer: `schopenhauer/concepts/volya_k_zhizni`)\n- **Отношение к “самосохранению”:** в базе прямо сказано, что у Ницше воля к власти — **не самосохранение**. (Nietzsche: `philosophers/ru/hub/nietzsche`)\n- **Путь избавления от страдания:** у Шопенгауэра выход связан с **отрицанием воли** (аскеза/угашение), а не с её “удовлетворением”. (Schopenhauer: `schopenhauer/concepts/otritsanie_voli`)\n- **Предостережение о неверном понимании Ницше:** “воля к власти” не сводится к политической жажде господства. (Nietzsche: `philosophers/ru/hub/nietzsche`)\n\nЕсли вы хотите, я могу сформулировать это различие в виде краткой таблицы “Ницше vs Шопенгауэр” строго по тем формулировкам, которые есть в найденных заметках.\n\n## SOURCES\n- Nietzsche: nietzsche/concepts/volya_k_vlasti — «не самосохранение», а стремление проявлять силу, расти, присваивать, навязывать форму  \n- Nietzsche: philosophers/ru/hub/nietzsche — «жизнь как воля к власти, не самосохранение» и «Воля к власти ≠ политическая «жажда власти»»  \n- Schopenhauer: schopenhauer/concepts/volya_k_zhizni — «вещь-в-себе — слепая, безосновная воля к жизни» как метафизическое ядро мира  \n- Schopenhauer: schopenhauer/concepts/otritsanie_voli — выход: «не удовлетворение воли (невозможное), а её отрицание — аскеза… угашение воли к жизни»",
+  "forced_final": false,
+  "tool_calls": 4,
+  "first_relevant_call": 1,
+  "model_ms": 9424,
+  "tool_ms": 122288,
+  "grounding": {
+    "quotes": 9,
+    "quotes_in_retrieval": 5
+  },
+  "retrieved_chars": 8965,
+  "retrieval": {
+    "results": 32,
+    "offtarget": 3,
+    "offtarget_corpora": {
+      "goethe": 2,
+      "tolstoy": 1
+    },
+    "origins": {
+      "VECTOR": 31,
+      "HYBRID": 1
+    }
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-nano",
+    "lang": "en",
+    "qid": 2,
+    "verdict": "partial",
+    "facts_covered": 2,
+    "facts_required": 3,
+    "misattributions": 1,
+    "blending": false,
+    "cites": 4,
+    "cites_fabricated": 0,
+    "cites_judgeable": 3,
+    "cites_author_mismatch": 0,
+    "cites_hub": 1,
+    "retrieval_results": 32,
+    "retrieval_offtarget": 3,
+    "origins": {
+      "VECTOR": 31,
+      "HYBRID": 1
+    },
+    "quotes": 9,
+    "quotes_valid": 5,
+    "tool_calls": 4,
+    "first_relevant_call": 1,
+    "forced_final": false,
+    "cost_usd": 0.00208,
+    "wall_s": 135.1
+  }
+}

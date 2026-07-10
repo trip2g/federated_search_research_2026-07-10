@@ -1,0 +1,255 @@
+{
+  "model": "openai/gpt-5.4-mini",
+  "condition": "flat-hybrid-clean",
+  "lang": "en",
+  "qid": 6,
+  "q": "Contrast Confucius and Laozi on how one should live and govern. Cite a concrete claim from the knowledge base for each thinker.",
+  "kind": "two-corpus principle",
+  "wall_s": 172.4,
+  "judge": {
+    "verdict": "correct",
+    "facts_covered": [
+      1,
+      2,
+      3
+    ],
+    "note": "The answer explicitly states Confucius’s self-cultivation/propriety in governance, Laozi’s non-action (wuwei) as managing affairs without doing anything, and the contrast as an axis of ritual/order vs non-action/Dao.",
+    "raw": "{\n  \"facts_covered\": [1, 2, 3],\n  \"note\": \"The answer explicitly states Confucius’s self-cultivation/propriety in governance, Laozi’s non-action (wuwei) as managing affairs without doing anything, and the contrast as an axis of ritual/order vs non-action/Dao.\"\n}",
+    "judge_cost": 0.000205
+  },
+  "confusion": {
+    "misattributions": [
+      {
+        "claim": "‘Right/stilling rule’ is achieved by correcting oneself first ('Править — значит выправлять, начиная с себя.').",
+        "attributed_to": "Laozi",
+        "belongs_to": "Confucius"
+      }
+    ],
+    "blending": false,
+    "note": "The answer attributes the self-rectification/rectifying-from-the-self governance formula to the wrong thinker (it is used here as Laozi’s axis, while the key assigns it to Confucius).",
+    "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"‘Right/stilling rule’ is achieved by correcting oneself first ('Править — значит выправлять, начиная с себя.').\",\n      \"attributed_to\": \"Laozi\",\n      \"belongs_to\": \"Confucius\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"The answer attributes the self-rectification/rectifying-from-the-self governance formula to the wrong thinker (it is used here as Laozi’s axis, while the key assigns it to Confucius).\"\n}",
+    "judge_cost": 0.00028
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Confucius: confucius/principles/pravlenie — rule means rectifying oneself first; governance works by personal example",
+        "path": "confucius/principles/pravlenie",
+        "corpus": "confucius",
+        "named": [
+          "confucius"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Laozi: laozi/principles/pravlenie — govern less; wuwei means managing affairs without doing anything",
+        "path": "laozi/principles/pravlenie",
+        "corpus": "laozi",
+        "named": [
+          "laozi"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 2,
+    "fabricated": 0,
+    "hub_cites": 0,
+    "judgeable": 2,
+    "author_mismatch": 0,
+    "provenance_ok": 2
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-mini",
+    "lang": "en",
+    "qid": 6,
+    "verdict": "correct",
+    "facts_covered": 3,
+    "facts_required": 3,
+    "misattributions": 1,
+    "blending": false,
+    "cites": 2,
+    "cites_fabricated": 0,
+    "cites_judgeable": 2,
+    "cites_author_mismatch": 0,
+    "cites_hub": 0,
+    "retrieval_results": 32,
+    "retrieval_offtarget": 2,
+    "origins": {
+      "VECTOR": 32
+    },
+    "quotes": 2,
+    "quotes_valid": 1,
+    "tool_calls": 4,
+    "first_relevant_call": null,
+    "forced_final": false,
+    "cost_usd": 0.00482,
+    "wall_s": 172.4
+  },
+  "trace": [
+    {
+      "cost": 0.00078,
+      "model_ms": 1897,
+      "tokens": {
+        "in": 312,
+        "out": 122
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Конфуций как жить управлять добродетель правление путь правитель цитата"
+          },
+          "result_ok": true,
+          "paths": [
+            "laozi/principles/pravlenie",
+            "confucius/principles/pravlenie",
+            "confucius/concepts/zheng",
+            "philosophers/ru/topics/vlast",
+            "confucius/concepts/dao",
+            "philosophers/en/topics/vlast",
+            "laozi/concepts/shengren",
+            "laozi/principles/chains"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### laozi/principles/pravlenie\n[VECTOR score=0.964] pravlenie\n…ibute of all the valley streams, is their skill in being lower than they; **[66]** 以其不爭，故天下莫能與之爭。 > Because he does not strive, no one finds it possible to strive with him. **Оружие — орудие...…\n\n### confucius/principles/pravlenie\n[VECTOR score=0.949] pravlenie\n…Позиции Конфуция: власть и управление. **Править — значит выправлять, начиная с себя.** Когда собственное поведение правителя прямо, всё идёт без приказов; когда криво — приказам не подчинятся....…\n\n### confucius/concepts/zheng\n[VECTOR score=0.939] zheng\n…Правление у Конфуция — продолжение самовоспитания правителя: править значит выправлять, начиная с себя. Личный пример действует без приказов; добродетель и ритуал рождают стыд и исправление, законы и...…\n\n### philosoph",
+          "ms": 29825
+        },
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "Лао-цзы как жить управлять недеяние у-вэй цитата"
+          },
+          "result_ok": true,
+          "paths": [
+            "laozi/principles/pravlenie",
+            "laozi/principles/chains",
+            "laozi/concepts/wuwei",
+            "philosophers/ru/hub/laozi",
+            "james_allen/principles/bescelnost_eto_porok",
+            "laozi/concepts/de",
+            "philosophers/ru/topics/vlast",
+            "laozi/moc"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### laozi/principles/pravlenie\n[VECTOR score=1.000] pravlenie\n…Позиции Лао-цзы: власть и управление. Каждая формулировка — рабочий перевод составителя («перевод наш»); доказательства — verbatim Legge EN + китайский оригинал. **Правь меньше — управляй...…\n\n### laozi/principles/chains\n[VECTOR score=0.952] chains\n…�зиции Лао-цзы работают вместе. Каждый шаг ведёт к концепту, каждая цепочка заякорена цитатами. «Перевод наш». ## Цепочка 1. Путь недеяния От истока к способу действия: безымянное Дао → его закон...…\n\n### laozi/concepts/wuwei\n[VECTOR score=0.824] wuwei\n…�и: «I will take no trouble about it, and the people will of themselves become rich» [57]. - [[shengren]] — носитель 無為: правит, «managing affairs without doing anything» [2]. ## Осторожно - Не...…\n\n### philosophers/ru/hub/laozi\n[VEC",
+          "ms": 37190
+        },
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "Confucius governance virtue ritual live rule note"
+          },
+          "result_ok": true,
+          "paths": [
+            "confucius/principles/ritual_i_forma",
+            "philosophers/en/hub/confucius",
+            "confucius/principles/chains",
+            "confucius/principles/pravlenie",
+            "confucius/concepts/zheng",
+            "confucius/concepts/he",
+            "confucius/moc",
+            "confucius/concepts/li"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### confucius/principles/ritual_i_forma\n[VECTOR score=0.850] ritual-i-forma\n…Позиции Конфуция: форма поведения как часть истины. **Форма — не украшение: без неё достоинства вырождаются.** Почтительность без ритуала — суетливость, осторожность — трусость, смелость — смута,...…\n\n### philosophers/en/hub/confucius\n[VECTOR score=0.817] Confucius — The Analects\n…l and music as education through form → `ritual-i-forma`, `yue` - Government by example and the rectification of names → `zheng`, `zhengming`, `pravlenie`; Heaven and its decree → `tian`, `ming` ##...…\n\n### confucius/principles/chains\n[VECTOR score=0.602] chains\n…as right. **[12.1]** 克己復禮為仁。 > To subdue one's self and return to propriety, is perfect virtue. **[7.28]** 我欲仁，斯仁至矣。 > I wish to be virtuous, and lo! virtue is at hand. ## Цепоч",
+          "ms": 55192
+        },
+        {
+          "n": 4,
+          "name": "search",
+          "args": {
+            "query": "Laozi governance non-action live rule note"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/topics/vlast",
+            "laozi/terminology",
+            "smiles/principles/nebo_pomogaet_tem_kto_pomogaet_sebe",
+            "philosophers/en/hub/laozi",
+            "philosophers/en/topics/sudba_i_kontrol",
+            "laozi/moc",
+            "laozi/quote_authenticity",
+            "philosophers/ru/hub/laozi"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/topics/vlast\n[VECTOR score=0.947] Power\n…— the will to power is life itself; the question is not whether to rule but the rank of the one who rules: the pathos of distance. Grounding: `volya-k-vlasti`, `pafos-distantsii`, `poryadok-ranga`....…\n\n### laozi/terminology\n[VECTOR score=0.750] TERMINOLOGY — canonical slugs (Laozi)\n…�юбие», которое Лао-цзы критикует в [5,18,38]): 慈 — то, что он сам провозглашает ценностью; 仁 — симптом потери Дао | ## Ловушки Legge, зафиксированные для извлечения 1. **德 переводится по-разному.**...…\n\n### smiles/principles/nebo_pomogaet_tem_kto_pomogaet_sebe\n[VECTOR score=0.583] Небо помогает тем, кто помогает себе\n…**Как проявляется:** [[self-help]], [[dignity-of-labour]], [[perseverance-and-application]], [[character-the-crown]] ### Обоснование ",
+          "ms": 42426
+        }
+      ]
+    },
+    {
+      "cost": 0.00404,
+      "model_ms": 3025,
+      "tokens": {
+        "in": 3491,
+        "out": 315
+      },
+      "final_text": "Confucius and Laozi both care about order, but they propose different ways to achieve it.\n\n- **Confucius:** one should live by self-cultivation and propriety, and govern by correcting oneself first. The knowledge base says: **\"Править — значит выправлять, начиная с себя.\"** It also says that “Правление у Конфуция — продолжение самовоспитания правителя: править значит выправлять, начиная с себя. Личный пример действует без приказов; добродетель и ритуал рождают стыд и исправление...” So, for Confucius, good government comes from the ruler’s moral example and ritual order.\n\n- **Laozi:** one should live and govern with non-striving and minimal intervention. The knowledge base says: **\"Правь меньше — управляй...\"** and also describes the *wuwei* principle as **\"managing affairs without doing anything\"**. So, for Laozi, the best ruler governs least, letting things follow their natural course rather than forcing them.\n\nIn short: Confucius emphasizes moral self-rectification and exemplary rule; Laozi emphasizes restraint, non-contention, and governing by doing less.\n\nSOURCES\n- Confucius: confucius/principles/pravlenie — rule means rectifying oneself first; governance works by personal example\n- Laozi: laozi/principles/pravlenie — govern less; wuwei means managing affairs without doing anything"
+    }
+  ],
+  "final": "Confucius and Laozi both care about order, but they propose different ways to achieve it.\n\n- **Confucius:** one should live by self-cultivation and propriety, and govern by correcting oneself first. The knowledge base says: **\"Править — значит выправлять, начиная с себя.\"** It also says that “Правление у Конфуция — продолжение самовоспитания правителя: править значит выправлять, начиная с себя. Личный пример действует без приказов; добродетель и ритуал рождают стыд и исправление...” So, for Confucius, good government comes from the ruler’s moral example and ritual order.\n\n- **Laozi:** one should live and govern with non-striving and minimal intervention. The knowledge base says: **\"Правь меньше — управляй...\"** and also describes the *wuwei* principle as **\"managing affairs without doing anything\"**. So, for Laozi, the best ruler governs least, letting things follow their natural course rather than forcing them.\n\nIn short: Confucius emphasizes moral self-rectification and exemplary rule; Laozi emphasizes restraint, non-contention, and governing by doing less.\n\nSOURCES\n- Confucius: confucius/principles/pravlenie — rule means rectifying oneself first; governance works by personal example\n- Laozi: laozi/principles/pravlenie — govern less; wuwei means managing affairs without doing anything",
+  "forced_final": false,
+  "tool_calls": 4,
+  "first_relevant_call": null,
+  "model_ms": 4922,
+  "tool_ms": 164633,
+  "grounding": {
+    "quotes": 2,
+    "quotes_in_retrieval": 1
+  },
+  "retrieved_chars": 8583,
+  "retrieval": {
+    "results": 32,
+    "offtarget": 2,
+    "offtarget_corpora": {
+      "james_allen": 1,
+      "smiles": 1
+    },
+    "origins": {
+      "VECTOR": 32
+    }
+  }
+}

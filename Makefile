@@ -13,7 +13,7 @@
 MODELS ?= ["openai/gpt-5.4-nano","openai/gpt-5.4-mini","mistralai/ministral-14b-2512","google/gemini-2.5-flash-lite","anthropic/claude-haiku-4.5"]
 BUDGET_USD ?= 1.0
 
-.PHONY: reproduce v2 v3 v4 qmd check
+.PHONY: reproduce v2 v3 v4 v5 qmd check
 check:
 	@test -n "$$OPENROUTER_KEY" || { echo "ERROR: set OPENROUTER_KEY (export OPENROUTER_KEY=sk-or-...)"; exit 1; }
 	@echo "key set — runs halt at BUDGET_USD=$(BUDGET_USD). Recorded costs: v2 = \$$0.69, v3 = \$$0.13."
@@ -41,3 +41,8 @@ v4: check
 #   qmd embed
 qmd: check
 	BUDGET_USD=$(BUDGET_USD) python3 qmd_bench.py
+# v5: clean corpus (924 unique notes) + cite-and-verify provenance, EN+RU.
+# Same instance setup as v4 but on ~/projects/trip2g_all_kbs_clean
+# (see RESULTS_flat_hybrid_clean.md "Reproduce it").
+v5: check
+	BUDGET_USD=$(BUDGET_USD) python3 flat_hybrid_clean_bench.py
