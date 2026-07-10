@@ -54,6 +54,7 @@ accounting and stops before `BUDGET_USD` (default `1.0`; override with
 | `make reproduce` (`v2`) | headline navigation/grounding/cost table | key only | **$0.69** |
 | `make v3` | walls-vs-flat (naive flat) | key + `~/projects/korpuses/*.2pub.me` | $0.13 |
 | `make v4` | flat-hybrid (vector + reranker) | key + a local memcli instance | $0.07 |
+| `make qmd` | off-the-shelf qmd hybrid (same flat pile) | key + `npm i -g @tobilu/qmd` + embed | see RESULTS_qmd.md |
 
 The flat arms need local corpora because a "flat pile" and a "hybrid local store"
 only exist on your machine — the walled arm is the live hub. Steps for `v3`/`v4`
@@ -81,6 +82,29 @@ rerank-timeout pitfall that silently downgrades the stack to RRF) and the
 findings — the flat-hybrid arm produced *more* who-said-what confusion than
 the walled hub, not less — are in
 [`RESULTS_flat_hybrid.md`](./RESULTS_flat_hybrid.md).
+
+## Reproduce the qmd arm
+
+A third, fully independent retrieval stack over the same flat pile:
+[qmd](https://github.com/tobi/qmd) — a self-contained local hybrid engine
+(BM25 + EmbeddingGemma-300M GGUF vectors + Qwen3-Reranker-0.6B LLM rerank,
+all local via node-llama-cpp). No trip2g instance needed for this arm — qmd
+indexes the vault folder directly.
+
+```bash
+npm install -g @tobilu/qmd
+qmd collection add ~/projects/trip2g_all_kbs --name allkbs
+qmd context add qmd://allkbs "22 philosopher corpora, one flat store"
+qmd embed                        # downloads ~2GB of GGUF models, embeds all notes
+qmd query "воля к власти" -n 5 --json   # sanity: hybrid + rerank returns Nietzsche
+export OPENROUTER_KEY=sk-or-...
+make qmd                         # halts at BUDGET_USD
+```
+
+The harness shells `qmd query <q> -n 8 --json` per tool call — the CLI's
+implicit-expand mode (BM25 probe → LLM query expansion → vector → RRF →
+rerank), which is qmd's recommended path. Findings in
+[`RESULTS_qmd.md`](./RESULTS_qmd.md).
 
 ## Notes & honesty
 
