@@ -1,0 +1,14 @@
+[
+  {"id": 1, "kind": "single-corpus grounding", "expect_kb": ["nietzsche"],
+   "q": "What does Nietzsche mean by the will to power? Answer using the connected corpus and quote it verbatim."},
+  {"id": 2, "kind": "cross-corpus contrast", "expect_kb": ["nietzsche", "schopenhauer"],
+   "q": "How does Nietzsche's will to power differ from Schopenhauer's will to live? Draw on both corpora and cite each."},
+  {"id": 3, "kind": "principle understanding", "expect_kb": ["epictetus"],
+   "q": "State Epictetus's core principle about what is and is not 'up to us', with a verbatim quote from the corpus."},
+  {"id": 4, "kind": "hub orientation", "expect_kb": ["nietzsche", "machiavelli"],
+   "q": "Among the thinkers in this hub, who argues most directly against Stoic detachment, and on what grounds? Ground it in a corpus."},
+  {"id": 5, "kind": "cross-link navigation", "expect_kb": ["pascal", "montaigne"],
+   "q": "Where does Pascal argue against Montaigne, and what exactly is the disagreement? Use both corpora."},
+  {"id": 6, "kind": "two-corpus principle", "expect_kb": ["confucius", "laozi"],
+   "q": "Contrast Confucius and Laozi on how one should live and govern. Cite a concrete claim from each corpus."}
+]
