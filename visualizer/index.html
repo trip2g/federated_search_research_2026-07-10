@@ -39,6 +39,10 @@
   #config input:focus, #config textarea:focus { outline: none; border-color: var(--accent); }
   #config textarea { resize: vertical; min-height: 54px; }
   .row { display: flex; gap: 8px; align-items: center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .chips button { background: var(--bg); color: var(--dim); border: 1px solid var(--border); border-radius: 999px; padding: 3px 9px; font: inherit; font-size: 11px; cursor: pointer; }
+  .chips button:hover { border-color: var(--accent); }
+  .chips button.on { background: var(--accent); color: #04182e; border-color: var(--accent); font-weight: 600; }
   .hint { color: var(--dim); font-size: 11px; }
   .modes { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .modes button { flex: 1; background: var(--bg); color: var(--dim); border: none; padding: 6px; cursor: pointer; font: inherit; }
@@ -121,9 +125,16 @@
         <option value="openai/gpt-5.4-nano"></option>
         <option value="openai/gpt-5.4-mini"></option>
         <option value="anthropic/claude-haiku-4.5"></option>
-        <option value="anthropic/claude-sonnet-5"></option>
-        <option value="qwen/qwen3-14b"></option>
+        <option value="google/gemini-2.5-flash-lite"></option>
+        <option value="mistralai/ministral-14b-2512"></option>
       </datalist>
+      <div class="chips" id="modelchips">
+        <button data-m="openai/gpt-5.4-nano">nano — cheapest</button>
+        <button data-m="openai/gpt-5.4-mini">mini</button>
+        <button data-m="anthropic/claude-haiku-4.5">haiku</button>
+        <button data-m="google/gemini-2.5-flash-lite">flash-lite</button>
+        <button data-m="mistralai/ministral-14b-2512">ministral 14B</button>
+      </div>
     </div>
     <div>
       <label>MCP endpoint</label>
@@ -195,6 +206,15 @@ fetch('config').then(r => r.ok ? r.json() : null).then(c => {
   }
 }).catch(() => {});
 $('turns').addEventListener('input', e => $('turnsval').textContent = e.target.value);
+
+const syncChips = () => {
+  const v = $('model').value.trim();
+  document.querySelectorAll('#modelchips button').forEach(b => b.classList.toggle('on', b.dataset.m === v));
+};
+document.querySelectorAll('#modelchips button').forEach(b =>
+  b.onclick = () => { $('model').value = b.dataset.m; syncChips(); });
+$('model').addEventListener('input', syncChips);
+syncChips();
 $('mode-task').onclick = () => setMode('task');
 $('mode-wander').onclick = () => setMode('wander');
 function setMode(m) {
