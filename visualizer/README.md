@@ -7,6 +7,10 @@ serves the app, bridges CORS to the hub, and can hold the OpenRouter key server-
 **TL;DR:** `OPENROUTER_KEY=sk-or-... python3 proxy.py` → open <http://localhost:8787>
 → **Start walk**. Or press **Demo** — no key needed.
 
+A hosted version (same-origin MCP, no proxy needed) ships as a trip2g page:
+`docs/search_visualizer.md` + `docs/_layouts/search_visualizer.html` in the trip2g repo
+([trip2g#175](https://github.com/trip2g/trip2g/pull/175)).
+
 ## What you see
 
 - **The spine**: every tool call becomes a large numbered STEP node, chained
