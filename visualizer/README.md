@@ -9,14 +9,21 @@ serves the app, bridges CORS to the hub, and can hold the OpenRouter key server-
 
 ## What you see
 
-- **Center**: a force-directed graph growing live. Circles are notes (color = knowledge
-  base), diamonds are search queries, hexagon-ish purple nodes are federated-base
-  pointers. The node the model is currently on pulses blue.
+- **The spine**: every tool call becomes a large numbered STEP node, chained
+  step 1 → step 2 → … with long, strong links so consecutive steps sit visibly apart.
+  The current step pulses blue.
+- **Satellites**: the notes each step returned orbit it on short links (color =
+  knowledge base; purple = federated-base pointer). Results are **deduped by note
+  identity per kb** — a note returned by two different steps is ONE shared node with
+  edges to both steps, and node size grows with how many steps touched it, so
+  convergence hubs stand out. Notes the model actually opened with `note_html` glow
+  with a white outline.
 - **Each hop animates at the real tool-call latency** (measured per call, capped at
   2.5 s) — slow federated hops visibly take longer than local reads.
-- **Right sidebar**: journal streaming the model's reasoning text and every tool call
-  (name, args, latency, result snippet). Click an entry to highlight its node in the
-  graph; clicking a node on the canvas also selects it.
+- **Click anything**: a step opens an inspector with the tool name, query/args, kb,
+  latency, and the model's reasoning before that call; a result node shows its title,
+  path, URL, snippet, how many steps returned it, and the content excerpt if it was
+  read. Journal entries (right sidebar) are clickable too and highlight their step.
 - **Header**: running cost, summed from OpenRouter's `usage.cost`.
 - **End state**: the final answer (TASK mode) or the final resting place + emergent
   theme (WANDER mode) in an overlay.

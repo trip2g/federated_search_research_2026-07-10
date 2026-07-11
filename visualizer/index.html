@@ -88,6 +88,18 @@
   .ev .args { color: var(--dim); font-family: ui-monospace, monospace; font-size: 11px; word-break: break-all; margin-top: 2px; }
   .ev .snip { color: var(--dim); font-size: 11px; margin-top: 4px; max-height: 52px; overflow: hidden; }
   .turnhdr { color: var(--dim); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin: 10px 2px 5px; }
+  #inspect {
+    position: absolute; right: 10px; bottom: 10px; width: 310px; max-height: 48%;
+    overflow-y: auto; background: rgba(22,27,34,.95); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px; display: none; font-size: 12px;
+  }
+  #inspect h4 { font-size: 12px; color: var(--accent); margin-bottom: 5px; padding-right: 18px; }
+  #inspect .close { float: right; cursor: pointer; color: var(--dim); }
+  #inspect .kv { color: var(--dim); margin: 3px 0; }
+  #inspect .kv b { color: var(--text); font-weight: 600; }
+  #inspect pre { white-space: pre-wrap; word-break: break-word; font: 11px ui-monospace, monospace; color: var(--dim); background: var(--bg); border-radius: 6px; padding: 6px; margin-top: 5px; max-height: 170px; overflow-y: auto; }
+  #inspect a { color: var(--accent); word-break: break-all; }
+  #inspect .reason { color: var(--text); font-style: italic; margin-top: 5px; white-space: pre-wrap; }
 </style>
 </head>
 <body>
@@ -145,12 +157,13 @@
     <canvas id="cv"></canvas>
     <div id="answer"><span class="close" onclick="this.parentNode.style.display='none'">✕</span><h3 id="anshdr">Final answer</h3><div id="anstext"></div></div>
     <div id="legend">
-      <div class="lg"><span class="dot" style="background:#e6edf3"></span>hub root</div>
-      <div class="lg"><span class="dot" style="background:#8b949e"></span>search query</div>
-      <div class="lg"><span class="dot" style="background:#58a6ff"></span>note (color = knowledge base)</div>
+      <div class="lg"><span class="dot" style="background:#e6edf3;width:13px;height:13px"></span>step (numbered — the walk's spine)</div>
+      <div class="lg"><span class="dot" style="background:#58a6ff"></span>result note (color = knowledge base)</div>
+      <div class="lg"><span class="dot" style="background:#58a6ff;box-shadow:0 0 6px #58a6ff;border:1.5px solid #e6edf3"></span>note the model actually read</div>
       <div class="lg"><span class="dot" style="background:#d2a8ff"></span>federated base pointer</div>
-      <div class="lg">pulsing ring = where the model is now</div>
+      <div class="lg">bigger circle = returned by more steps · pulsing = current step · click anything for details</div>
     </div>
+    <div id="inspect"><span class="close" onclick="this.parentNode.style.display='none'">✕</span><div id="inspbody"></div></div>
   </div>
   <div id="journal"></div>
 </main>
@@ -194,40 +207,55 @@ const setStatus = s => $('status').textContent = s;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ============================== graph ============================== */
+// Two node kinds. 'step' = one tool call, numbered, chained into the walk's spine.
+// 'result'/'kb' = notes and base pointers orbiting their step; deduped by kb+note
+// identity, so a note returned by two steps becomes one shared node (degree > 1).
 const G = { nodes: new Map(), edges: [], focus: null, selected: null };
+let stepCount = 0, prevStep = null;
 function resetGraph() {
   G.nodes.clear(); G.edges.length = 0; G.focus = null; G.selected = null;
-  titleCache = {}; qCounter = 0;
-  addNode('hub', 'trip2g hub', 'root', null, null);
-  G.focus = 'hub';
+  titleCache = {}; qCounter = 0; stepCount = 0; prevStep = null;
+  $('inspect').style.display = 'none';
 }
 function kbHue(kb) { // stable hue per kb id
   let h = 0; for (const c of kb) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   return h % 360;
 }
 function nodeColor(n) {
-  if (n.kind === 'root') return '#e6edf3';
-  if (n.kind === 'query') return '#8b949e';
+  if (n.kind === 'step') return '#e6edf3';
   if (!n.kb || n.kb === 'hub') return n.kind === 'kb' ? '#d2a8ff' : '#58a6ff';
   const h = kbHue(n.kb);
   return `hsl(${h} ${n.kind === 'kb' ? 65 : 55}% ${n.kind === 'kb' ? 72 : 62}%)`;
 }
-function addNode(id, label, kind, kb, nearId) {
+function degree(id) { let d = 0; for (const e of G.edges) if (e.a === id || e.b === id) d++; return d; }
+function nodeRadius(n) {
+  if (n.kind === 'step') return 14;
+  let r = n.kind === 'kb' ? 8 : 5.5;
+  r += Math.min(6, (degree(n.id) - 1) * 2);   // shared nodes (convergence hubs) grow
+  if (n.read) r += 3;
+  return r;
+}
+function addNode(id, label, kind, kb, nearId, meta) {
   let n = G.nodes.get(id);
-  if (n) { if (label && !n.labelLocked) n.label = label; return n; }
+  if (n) {
+    if (label && !n.labelLocked) n.label = label;
+    if (meta) Object.assign(n.meta, meta);
+    return n;
+  }
   const near = nearId && G.nodes.get(nearId);
-  const a = Math.random() * Math.PI * 2, d = 60 + Math.random() * 40;
-  n = { id, label: label || id, kind, kb,
+  const a = Math.random() * Math.PI * 2, d = kind === 'step' ? 200 : 55 + Math.random() * 25;
+  n = { id, label: label || id, kind, kb, meta: meta || {},
         x: (near ? near.x : 0) + Math.cos(a) * d,
         y: (near ? near.y : 0) + Math.sin(a) * d,
         vx: 0, vy: 0, born: performance.now() };
   G.nodes.set(id, n);
   return n;
 }
-function addEdge(a, b, dur) {
-  if (a === b || !G.nodes.has(a) || !G.nodes.has(b)) return;
+function addEdge(a, b, dur, spine) {
+  if (!a || a === b || !G.nodes.has(a) || !G.nodes.has(b)) return;
   if (G.edges.some(e => (e.a === a && e.b === b) || (e.a === b && e.b === a))) return;
-  G.edges.push({ a, b, born: performance.now(), dur: Math.max(300, Math.min(dur || 600, CAP_MS)) });
+  G.edges.push({ a, b, spine: !!spine, born: performance.now(),
+                 dur: Math.max(300, Math.min(dur || 600, CAP_MS)) });
 }
 
 /* physics + render */
@@ -245,7 +273,10 @@ function tick() {
   for (const e of G.edges) {
     const A = G.nodes.get(e.a), B = G.nodes.get(e.b);
     let dx = B.x - A.x, dy = B.y - A.y, d = Math.sqrt(dx * dx + dy * dy) + 0.01;
-    const f = (d - 95) * 0.02;
+    // spine: long + strong so consecutive steps sit visibly apart;
+    // step->result satellites: short + weak
+    const rest = e.spine ? 230 : 70, k = e.spine ? 0.06 : 0.02;
+    const f = (d - rest) * k;
     dx /= d; dy /= d;
     A.vx += dx * f; A.vy += dy * f; B.vx -= dx * f; B.vy -= dy * f;
   }
@@ -253,6 +284,16 @@ function tick() {
     n.vx -= n.x * 0.002; n.vy -= n.y * 0.002;      // gravity to center
     n.vx *= 0.85; n.vy *= 0.85;
     n.x += n.vx; n.y += n.vy;
+  }
+  // collision: keep satellites from overlapping
+  for (let i = 0; i < ns.length; i++) for (let j = i + 1; j < ns.length; j++) {
+    const A = ns[i], B = ns[j];
+    const min = nodeRadius(A) + nodeRadius(B) + 10;
+    let dx = B.x - A.x, dy = B.y - A.y, d = Math.sqrt(dx * dx + dy * dy) + 0.01;
+    if (d < min) {
+      const push = (min - d) / 2 / d;
+      A.x -= dx * push; A.y -= dy * push; B.x += dx * push; B.y += dy * push;
+    }
   }
   // smooth auto-fit
   if (ns.length) {
@@ -278,17 +319,18 @@ function draw() {
     const A = G.nodes.get(e.a), B = G.nodes.get(e.b);
     const p = Math.min(1, (now - e.born) / e.dur);           // edge grows over real latency
     const ex = A.x + (B.x - A.x) * p, ey = A.y + (B.y - A.y) * p;
-    ctx.strokeStyle = p < 1 ? '#58a6ff' : '#30363d';
-    ctx.lineWidth = p < 1 ? 2 : 1.2;
+    ctx.strokeStyle = p < 1 ? '#58a6ff' : (e.spine ? '#768390' : '#30363d');
+    ctx.lineWidth = p < 1 ? 2 : (e.spine ? 2 : 1.2);
     ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(ex, ey); ctx.stroke();
     if (p < 1) { // travelling spark
       ctx.fillStyle = '#79c0ff';
       ctx.beginPath(); ctx.arc(ex, ey, 3.5, 0, 7); ctx.fill();
     }
   }
+  const fscale = Math.max(view.k, 0.7);
   for (const n of G.nodes.values()) {
     const age = Math.min(1, (now - n.born) / 400);
-    const r = (n.kind === 'root' ? 11 : n.kind === 'query' ? 6 : n.kind === 'kb' ? 10 : 8) * age;
+    const r = nodeRadius(n) * age;
     if (n.id === G.focus) {
       const pr = r + 6 + Math.sin(now / 260) * 3;
       ctx.strokeStyle = 'rgba(88,166,255,.8)'; ctx.lineWidth = 2;
@@ -298,18 +340,32 @@ function draw() {
       ctx.strokeStyle = '#d29922'; ctx.lineWidth = 2.5;
       ctx.beginPath(); ctx.arc(n.x, n.y, r + 5, 0, 7); ctx.stroke();
     }
-    ctx.fillStyle = nodeColor(n);
-    if (n.kind === 'query') {
-      ctx.save(); ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4);
-      ctx.fillRect(-r, -r, r * 2, r * 2); ctx.restore();
+    if (n.read) { // note the model actually opened: glow + outline
+      ctx.save();
+      ctx.shadowColor = nodeColor(n); ctx.shadowBlur = 14;
+      ctx.fillStyle = nodeColor(n);
+      ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 7); ctx.fill();
+      ctx.restore();
+      ctx.strokeStyle = '#e6edf3'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 7); ctx.stroke();
     } else {
+      ctx.fillStyle = nodeColor(n);
       ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 7); ctx.fill();
     }
-    ctx.fillStyle = n.kind === 'query' ? '#768390' : '#c9d1d9';
-    ctx.font = `${n.kind === 'root' ? 'bold ' : ''}${11 / Math.max(view.k, 0.7)}px ui-sans-serif`;
     ctx.textAlign = 'center';
-    const label = n.label.length > 30 ? n.label.slice(0, 29) + '…' : n.label;
-    ctx.fillText(label, n.x, n.y + r + 13 / Math.max(view.k, 0.7));
+    if (n.kind === 'step') {
+      ctx.fillStyle = '#0d1117';
+      ctx.font = `bold ${13 / fscale}px ui-sans-serif`;
+      ctx.fillText(n.num, n.x, n.y + 4.5 / fscale);
+      ctx.fillStyle = '#768390';
+      ctx.font = `${10 / fscale}px ui-monospace, monospace`;
+      ctx.fillText(n.label, n.x, n.y + r + 12 / fscale);
+    } else {
+      ctx.fillStyle = '#c9d1d9';
+      ctx.font = `${10.5 / fscale}px ui-sans-serif`;
+      const label = n.label.length > 28 ? n.label.slice(0, 27) + '…' : n.label;
+      ctx.fillText(label, n.x, n.y + r + 12 / fscale);
+    }
   }
   ctx.restore();
 }
@@ -322,50 +378,87 @@ function firstHeading(html) {
   const m = /<h[1-4][^>]*>(.*?)<\/h[1-4]>/i.exec(html || '');
   return m ? m[1].replace(/<[^>]+>/g, '') : null;
 }
-// Applies the result of one tool call to the graph. dur = real latency (capped in addEdge).
-function interpret(name, args, structured, text, dur) {
+// Applies one tool call to the graph: a new numbered STEP node chained onto the
+// spine, plus deduped result satellites. dur = real latency (capped in addEdge).
+function interpret(name, args, structured, text, dur, reasoning) {
   const kb = args.kb_id || null;
-  const prev = G.focus;
-  if (name === 'search' || name === 'federated_search') {
-    const qid = 'q' + (++qCounter);
-    addNode(qid, '🔍 ' + (args.query || '').slice(0, 40), 'query', kb, prev);
-    addEdge(prev, qid, dur);
-    const results = (structured && structured.results) || [];
-    for (const r of results.slice(0, 8)) {
-      const rkb = r.url && r.url.startsWith('https://trip2g.com') ? kb : (kb || kbFromUrl(r.url));
-      if (r.kind === 'federation_kb' && r.federation) {
-        const fid = fullKb(kb, r.federation.kb_id);
-        addNode('kb::' + fid, '⬢ ' + (r.title || fid), 'kb', fid, qid);
-        titleCache['kb::' + fid] = r.title;
-        addEdge(qid, 'kb::' + fid, dur);
-      } else {
-        const id = nid(rkb, r.note_id != null ? r.note_id : r.note_path);
-        addNode(id, r.title, 'note', rkb, qid);
-        titleCache[id] = r.title;
-        if (r.note_path != null) titleCache[nid(rkb, r.note_path)] = r.title;
-        addEdge(qid, id, dur);
-      }
+  const sid = 's' + (++stepCount);
+  const step = addNode(sid, name.replace('federated_', 'fed.'), 'step', kb, prevStep,
+                       { name, args, ms: dur, kb, reasoning: reasoning || '' });
+  step.num = stepCount;
+  step.labelLocked = true;
+  addEdge(prevStep, sid, dur, true);
+  prevStep = sid; G.focus = sid;
+
+  const addResult = (r) => {
+    const rkb = r.url && r.url.startsWith('https://trip2g.com') ? kb : (kb || kbFromUrl(r.url));
+    if (r.kind === 'federation_kb' && r.federation) {
+      const fid = fullKb(kb, r.federation.kb_id);
+      const kn = addNode('kb::' + fid, r.title || fid, 'kb', fid, sid,
+                         { title: r.title, kbId: fid, url: r.url, snippet: firstSnippet(r) });
+      kn.labelLocked = true;
+      addEdge(sid, 'kb::' + fid, dur);
+      return;
     }
-    G.focus = qid;
-    return qid;
+    // dedup by kb + note identity: a note two steps both return = ONE shared node
+    const id = nid(rkb, r.note_id != null ? r.note_id : r.note_path);
+    addNode(id, r.title, 'result', rkb, sid,
+            { title: r.title, path: r.note_path, url: r.url, snippet: firstSnippet(r) });
+    titleCache[id] = r.title;
+    if (r.note_path != null) titleCache[nid(rkb, r.note_path)] = r.title;
+    addEdge(sid, id, dur);
+  };
+
+  if (name.endsWith('search') || name.endsWith('similar')) {
+    for (const r of ((structured && structured.results) || []).slice(0, 8)) addResult(r);
   }
-  // note_html / expand / similar / federated_*: resolve target note
-  const key = args.pid != null ? args.pid : args.note_id != null ? args.note_id : (args.path || args.href || '?');
-  const id = nid(kb, key);
-  const label = titleCache[id] || firstHeading(text) || ((kb ? kb + ' ' : '') + 'note ' + key);
-  const n = addNode(id, label, 'note', kb, prev);
-  if (titleCache[id]) n.labelLocked = true;
-  addEdge(prev, id, dur);
-  if (name.endsWith('similar') && structured && structured.results) {
-    for (const r of structured.results.slice(0, 8)) {
-      const rid = nid(kb, r.note_id != null ? r.note_id : r.note_path);
-      addNode(rid, r.title, 'note', kb, id);
-      titleCache[rid] = r.title;
-      addEdge(id, rid, dur);
+  if (!name.endsWith('search')) {
+    // note_html / expand / similar operate ON a note: link it and, for note_html,
+    // promote it to "read" and keep the content for the inspector
+    const key = args.pid != null ? args.pid : args.note_id != null ? args.note_id : (args.path || args.href || '?');
+    const id = nid(kb, key);
+    const label = titleCache[id] || firstHeading(text) || ((kb ? kb + ' ' : '') + 'note ' + key);
+    const n = addNode(id, label, 'result', kb, sid, { title: label, path: args.path });
+    if (titleCache[id]) n.labelLocked = true;
+    addEdge(sid, id, dur);
+    if (name.endsWith('note_html')) {
+      n.read = true;
+      n.meta.content = (text || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 2000);
+      n.meta.tocPath = args.toc_path;
     }
   }
-  G.focus = id;
-  return id;
+  return sid;
+}
+function firstSnippet(r) {
+  const m = r.matches && r.matches[0];
+  return m ? m.snippet.replace(/<[^>]+>/g, '') : (r.snippet || '');
+}
+
+/* ============================== inspector ============================== */
+function showInspect(id) {
+  const n = G.nodes.get(id);
+  if (!n) return;
+  G.selected = id;
+  const kv = (k, v) => v ? `<div class="kv"><b>${esc(k)}:</b> ${esc(v)}</div>` : '';
+  let html;
+  if (n.kind === 'step') {
+    const m = n.meta;
+    html = `<h4>Step ${n.num} — ${esc(m.name)} <span style="color:var(--warn)">${m.ms} ms</span></h4>` +
+      kv('query', m.args.query) + kv('kb', m.kb) +
+      (m.reasoning ? `<div class="reason">${esc(m.reasoning)}</div>` : '') +
+      `<pre>${esc(JSON.stringify(m.args, null, 1))}</pre>`;
+  } else {
+    const m = n.meta;
+    html = `<h4>${esc(n.label)}${n.read ? ' <span style="color:var(--good)">· read</span>' : ''}${n.kind === 'kb' ? ' <span style="color:#d2a8ff">· federated base</span>' : ''}</h4>` +
+      kv('kb', n.kb || 'hub') + kv('path', m.path) +
+      kv('returned by', degree(id) + ' step(s)') +
+      (m.tocPath ? kv('section', JSON.stringify(m.tocPath)) : '') +
+      (m.url ? `<div class="kv"><a href="${esc(m.url)}" target="_blank">${esc(m.url)}</a></div>` : '') +
+      (m.snippet ? `<pre>${esc(m.snippet)}</pre>` : '') +
+      (m.content ? `<pre>${esc(m.content)}</pre>` : '');
+  }
+  $('inspbody').innerHTML = html;
+  $('inspect').style.display = 'block';
 }
 function kbFromUrl(url) {
   if (!url) return null;
@@ -393,7 +486,7 @@ function journalTool(name, args, ms, snippet, nodeId, isErr) {
   d.onclick = () => {
     document.querySelectorAll('.ev.sel').forEach(e => e.classList.remove('sel'));
     d.classList.add('sel');
-    G.selected = nodeId;
+    showInspect(nodeId);
   };
   $('journal').appendChild(d); d.scrollIntoView({ block: 'end' });
 }
@@ -442,7 +535,8 @@ function contentText(result) {
 function trimStructured(sc) {
   if (!sc) return null;
   const slim = r => ({ title: r.title, note_id: r.note_id, note_path: r.note_path, url: r.url,
-    kind: r.kind, federation: r.federation ? { kb_id: r.federation.kb_id } : undefined });
+    kind: r.kind, federation: r.federation ? { kb_id: r.federation.kb_id } : undefined,
+    snippet: (r.matches && r.matches[0] && r.matches[0].snippet || '').replace(/<[^>]+>/g, '').slice(0, 300) || undefined });
   const out = {};
   if (sc.results) out.results = sc.results.map(slim);
   if (sc.source) out.source = slim(sc.source);
@@ -500,9 +594,11 @@ async function runLive() {
         $('cost').textContent = '$' + trace.cost.toFixed(4);
       }
       const msg = j.choices[0].message;
+      let lastThought = '';
       if (msg.content) {
         journalAssistant(msg.content);
         trace.events.push({ t: 'assistant', text: msg.content });
+        lastThought = msg.content;
       }
       if (!msg.tool_calls || !msg.tool_calls.length) {
         trace.events.push({ t: 'final', text: msg.content || '(no text)' });
@@ -523,7 +619,7 @@ async function runLive() {
         const ms = Math.round(performance.now() - t0);
         const text = err ? '' : contentText(result);
         const structured = err ? null : (result.structuredContent || null);
-        const nodeId = err ? G.focus : interpret(tc.function.name, args, structured, text, ms);
+        const nodeId = err ? G.focus : interpret(tc.function.name, args, structured, text, ms, lastThought);
         journalTool(tc.function.name, args, ms, err || text.replace(/<[^>]+>/g, ' ').slice(0, 220), nodeId, !!err);
         trace.events.push({ t: 'tool', name: tc.function.name, args, ms, err,
           result: err ? null : { text: text.replace(/<[^>]+>/g, ' ').slice(0, 400), structured: trimStructured(structured) } });
@@ -557,18 +653,19 @@ async function replay(tr) {
   $('journal').innerHTML = ''; $('answer').style.display = 'none';
   resetGraph();
   $('cost').textContent = '$' + (tr.cost || 0).toFixed(4);
-  let turn = 0;
+  let turn = 0, lastThought = '';
   for (const ev of tr.events) {
     if (stopFlag) break;
     if (ev.t === 'assistant') {
       journalTurn(++turn);
       journalAssistant(ev.text);
+      lastThought = ev.text;
       await sleep(700);
     } else if (ev.t === 'tool') {
       setStatus(`replay: ${ev.name} (${ev.ms} ms)`);
       const text = (ev.result && ev.result.text) || '';
       const structured = ev.result && ev.result.structured;
-      const nodeId = ev.err ? G.focus : interpret(ev.name, ev.args, structured, text, ev.ms);
+      const nodeId = ev.err ? G.focus : interpret(ev.name, ev.args, structured, text, ev.ms, lastThought);
       journalTool(ev.name, ev.args, ev.ms, ev.err || text.slice(0, 220), nodeId, !!ev.err);
       await sleep(Math.min(ev.ms, CAP_MS));        // hop takes as long as the real call did
     } else if (ev.t === 'final') {
@@ -595,17 +692,19 @@ $('export').onclick = () => {
 };
 $('demo').onclick = () => { trace = DEMO_TRACE; replay(DEMO_TRACE); };
 
-/* click a node on canvas -> select it */
+/* click a node on canvas -> inspector */
 cv.addEventListener('click', e => {
   const r = cv.getBoundingClientRect();
   const x = (e.clientX - r.left - r.width / 2) / view.k + view.x;
   const y = (e.clientY - r.top - r.height / 2) / view.k + view.y;
-  let best = null, bd = 400;
+  let best = null, bd = 30 * 30;
   for (const n of G.nodes.values()) {
+    const hit = Math.max(nodeRadius(n) + 8, 16);
     const d = (n.x - x) ** 2 + (n.y - y) ** 2;
-    if (d < bd) { bd = d; best = n.id; }
+    if (d < hit * hit && d < bd) { bd = d; best = n.id; }
   }
-  G.selected = best;
+  if (best) showInspect(best);
+  else { G.selected = null; $('inspect').style.display = 'none'; }
 });
 
 /* ============================== demo trace ============================== */
@@ -641,21 +740,24 @@ const DEMO_TRACE = {
        "note_id": 658,
        "note_path": "en/user/federation.md",
        "url": "https://trip2g.com/en/user/federation",
-       "kind": "note"
+       "kind": "note",
+       "snippet": "MCP federation connects your trip2g knowledge base to other MCP-compatible bases so your AI agent can search across all of them through a single endpoint. You point your agent at your own hub once; fr…"
       },
       {
        "title": "One endpoint, many knowledge bases",
        "note_id": 1071,
        "note_path": "en/thoughts/public-hub.md",
        "url": "https://trip2g.com/en/thoughts/public_hub",
-       "kind": "note"
+       "kind": "note",
+       "snippet": "… points at the hub can reach it.\nThat is what MCP federation does. A KB-note — a note withmcp_federation_kb_url in its frontmatter — registers another MCP-compatible base.federated_search fans out acr…"
       },
       {
        "title": "MCP Server",
        "note_id": 530,
        "note_path": "en/user/mcp.md",
        "url": "https://trip2g.com/en/user/mcp",
-       "kind": "note"
+       "kind": "note",
+       "snippet": "… consultant. Connect it to any MCP-compatible client — Claude Desktop, Claude Code, Cursor, GitHub Copilot, Gemini CLI — and chat with your knowledge base directly.\nHow it works\nsequenceDiagram\n    pa…"
       },
       {
        "title": "MCP memory server: persistent, self-hosted memory for AI agents",
@@ -692,7 +794,7 @@ const DEMO_TRACE = {
    "ms": 763,
    "err": null,
    "result": {
-    "text": "Adding a private peer (two-step exchange)  Private peers authenticate with a shared HMAC secret. The setup is a one-time key exchange: each side generates a secret for the other. \n  sequenceDiagram\n    participant You as Your hub\n    participant Ch as Trusted channel\n    participant Bob as Bob&#39;s hub\n\n    Note over Bob: Admin -&gt; Federation -&gt; Add inbound secret\n    Bob-&gt;&gt;Bob: Gener",
+    "text": "Adding a private peer (two-step exchange)  Private peers authenticate with a shared HMAC secret. The setup is a one-time key exchange: each side generates a secret for the other. \n  sequenceDiagram\n    participant You as Your hub\n    participant Ch as Trusted channel\n    participant Bob as Bob&#39;s hub\n\n    Note over Bob: Admin -&gt; Federation -&gt; Add inbound secret\n    Bob-&gt;&gt;Bob: Generate secret for kid &#34;alice-2026&#34;&lt;br/&gt;pick allowed subgraphs\n    Bob-&gt;&gt;Ch: Send kid + secretHex\n    Ch-&gt;&gt;You: kid + secretHex\n    Note over You: Admin -&gt; Federation -&gt; Add outbound secret\n    You-&gt;&gt;You: Save kid, secretHex, Bob&#39;s kb_url\n    You-&gt;&gt;You: Create KB-note (mcp_federation_kb_url)\n    Note over You,Bob: Now your agent can federated_search Bob&",
     "structured": null
    }
   },
@@ -781,7 +883,8 @@ const DEMO_TRACE = {
        "note_id": 43,
        "note_path": "en/topics/sudba-i-kontrol.md",
        "url": "https://philosophers.2pub.me/en/topics/sudba_i_kontrol",
-       "kind": "note"
+       "kind": "note",
+       "snippet": "- **Tolstoy** (`tolstoy`) — life has meaning as the fulfilment of the will of Him who sent us: do not take apart the watch you live by. Grounding: `volya-boga`, `ne-razbiray-chasy-kotorymi-zhivesh`...."
       },
       {
        "title": "Machiavelli — The Prince",
@@ -791,14 +894,16 @@ const DEMO_TRACE = {
        "kind": "federation_kb",
        "federation": {
         "kb_id": "machiavelli"
-       }
+       },
+       "snippet": "ve of ch. XV→XVIII: the method, the lion and the fox, appearance. - Concept [virtù](https://machiavelli.2pub.me/virtu) — the prowess-grip-resolve that Marriott hides behind ability/valour/virtue. ##..."
       },
       {
        "title": "Макиавелли — Государь",
        "note_id": 67,
        "note_path": "ru/hub/machiavelli.md",
        "url": "https://philosophers.2pub.me/ru/hub/machiavelli",
-       "kind": "note"
+       "kind": "note",
+       "snippet": "кажимость. - Концепт [virtù](https://machiavelli.2pub.me/virtu) — доблесть-хватка-решимость, которую Marriott прячет за ability/valour/virtue. ## Не уплощать - Virtù ≠ моральная «добродетель» —..."
       },
       {
        "title": "Morality",
