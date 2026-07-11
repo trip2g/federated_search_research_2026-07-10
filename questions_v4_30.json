@@ -1,0 +1,804 @@
+[
+  {
+    "id": 1,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["nietzsche"],
+    "correct_thinkers": ["nietzsche"],
+    "tempting_thinkers": ["schopenhauer", "adler", "machiavelli"],
+    "q": "What does Nietzsche mean by the will to power? Answer using only the knowledge base and quote it verbatim in the source language.",
+    "required_facts": [
+      "Will to power is what drives all living things: the drive to exert force, grow, appropriate, impose form — life itself is will to power",
+      "Self-preservation is only an indirect consequence of it, not the primary drive",
+      "It is not (merely) a political lust for domination; it extends to organic functions, knowledge/philosophy (will to truth as a special case)"
+    ],
+    "evidence": [
+      "сама жизнь есть воля к власти",
+      "самосохранение есть только одно из косвенных",
+      "не политическая жажда господства",
+      "духовная воля к власти"
+    ],
+    "evidence_sources": [
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md"
+    ]
+  },
+  {
+    "id": 2,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["nietzsche", "schopenhauer"],
+    "correct_thinkers": ["nietzsche", "schopenhauer"],
+    "tempting_thinkers": ["goethe", "wattles"],
+    "q": "How does Nietzsche's will to power differ from Schopenhauer's will to live? Draw on the knowledge base for both thinkers and cite each in the source language.",
+    "required_facts": [
+      "Schopenhauer: the world's core is a blind, insatiable will to live; from it follow suffering, futility of striving, pessimism — and the answer is denial/negation of the will",
+      "Nietzsche grew out of Schopenhauer but inverted the conclusion: affirmation of life and self-overcoming instead of renunciation",
+      "For Nietzsche life is will to power (growth, exerting force), with self-preservation only an indirect consequence"
+    ],
+    "evidence": [
+      "воля к жизни",
+      "первичный и коренной элемент человеческой природы",
+      "не тщета воли и отказ от жизни, а её утверждение и самопреодоление",
+      "сама жизнь есть воля к власти"
+    ],
+    "evidence_sources": [
+      "schopenhauer.2pub.me/concepts/volya-k-zhizni.md",
+      "schopenhauer.2pub.me/concepts/volya-k-zhizni.md",
+      "nietzsche.2pub.me/peer-schopenhauer.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md"
+    ]
+  },
+  {
+    "id": 3,
+    "kind": "single-corpus grounding",
+    "split": "test",
+    "expect_kb": ["epictetus"],
+    "correct_thinkers": ["epictetus"],
+    "tempting_thinkers": ["james-allen", "wattles", "montaigne"],
+    "q": "State Epictetus's core principle about what is and is not 'up to us', with a verbatim quote from the knowledge base in the source language.",
+    "required_facts": [
+      "Up to us: opinion/judgment, impulse, desire, aversion — in a word, our own acts",
+      "Not up to us: body, property, reputation, offices — whatever are not our own acts",
+      "Things in our power are by nature free/unhindered; things not in our power are weak, slavish, in the power of others (misery comes from confusing the two)"
+    ],
+    "evidence": [
+      "Из существующего одно в нашей власти, другое не в нашей власти",
+      "мнение, побуждение к вещи, желание, уклонение",
+      "имущество, репутация, должности",
+      "по природе свободно"
+    ],
+    "evidence_sources": [
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md"
+    ]
+  },
+  {
+    "id": 4,
+    "kind": "hub-orientation",
+    "split": "test",
+    "expect_kb": ["philosophers", "nietzsche", "montaigne", "larochefoucauld"],
+    "correct_thinkers": ["nietzsche", "montaigne", "larochefoucauld"],
+    "tempting_thinkers": ["wattles", "goethe", "james-allen"],
+    "q": "Among the thinkers in this knowledge base, who argues most directly against Stoic detachment (Epictetus), and on what grounds? Ground the answer in the knowledge base.",
+    "required_facts": [
+      "Names at least one corpus-attested opponent of Stoic detachment: Nietzsche (pathos of will and affirmation vs peace through renouncing the uncontrollable), Montaigne (the soul is inconstant/patchwork, live by the common measure — vs the stoic citadel), or La Rochefoucauld (contempt for death is a final pose of pride/vanity)",
+      "States the grounds of the disagreement as found in the knowledge base (the contrast axis), not from general knowledge"
+    ],
+    "evidence": [
+      "лоскутная душа vs стоическая цитадель",
+      "покой через отказ от неподвластного vs пафос воли",
+      "душа непостоянна и лоскутна",
+      "апатия — отказ от жизни",
+      "Презрение к смерти как поза"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md (also in every corpus's see-also.md)",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "larochefoucauld.2pub.me/concepts/prezrenie-k-smerti.md"
+    ]
+  },
+  {
+    "id": 5,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["pascal", "montaigne"],
+    "correct_thinkers": ["pascal", "montaigne"],
+    "tempting_thinkers": ["larochefoucauld", "epictetus"],
+    "q": "Where does Pascal argue against Montaigne, and what exactly is the disagreement? Use the knowledge base for both thinkers.",
+    "required_facts": [
+      "Montaigne is a target of Pascal's Pensées: Pascal argues against Montaigne's calm/skeptical acceptance of inconstancy",
+      "Pascal counters with anxiety about man's wretchedness/nothingness without God (the wager on God / the abyss without Him)"
+    ],
+    "evidence": [
+      "Монтень — мишень «Мыслей»",
+      "тревогу о ничтожестве человека без Бога",
+      "ставку на Бога и бездну без Него",
+      "скептической невозмутимости"
+    ],
+    "evidence_sources": [
+      "pascal.2pub.me/peer-montaigne.md",
+      "pascal.2pub.me/peer-montaigne.md",
+      "montaigne.2pub.me/peer-pascal.md",
+      "montaigne.2pub.me/peer-pascal.md"
+    ]
+  },
+  {
+    "id": 6,
+    "kind": "cross-corpus contrast",
+    "split": "test",
+    "expect_kb": ["confucius", "laozi"],
+    "correct_thinkers": ["confucius", "laozi"],
+    "tempting_thinkers": ["machiavelli", "franklin", "smiles"],
+    "q": "Contrast Confucius and Laozi on how one should live and govern. Cite a concrete claim from the knowledge base for each thinker.",
+    "required_facts": [
+      "Confucius: live and govern through ritual/propriety (li) and cultivated virtue — form channels humanity; without it virtues degenerate (and ritual without inner content is empty)",
+      "Laozi: live and govern through non-action (wu wei) and following the Dao — not idleness but acting without forcing; the sage manages affairs without doing anything",
+      "The contrast: ritual and order vs non-action and following the Dao (they are opponents on this axis)"
+    ],
+    "evidence": [
+      "Ось: ритуал vs недеяние",
+      "форма — насилие над течением",
+      "Недеяние — не бездействие",
+      "без внутреннего содержания ритуал пуст",
+      "без неё достоинства вырождаются"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "laozi.2pub.me/concepts/wuwei.md",
+      "confucius.2pub.me/concepts/li.md",
+      "confucius.2pub.me/principles/ritual-i-forma.md"
+    ]
+  },
+  {
+    "id": 7,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["machiavelli"],
+    "correct_thinkers": ["machiavelli"],
+    "tempting_thinkers": ["lebon", "larochefoucauld", "nietzsche"],
+    "q": "What does Machiavelli mean by following the 'effectual truth of the matter' rather than the imagination of it, and what rule for the ruler follows from it? Quote the knowledge base verbatim.",
+    "required_facts": [
+      "The methodological foundation of The Prince: follow the real/effectual truth of things, not imagined republics that have never been seen",
+      "How one lives is so far from how one ought to live that neglecting what is done for what ought to be done leads to ruin, not preservation",
+      "Therefore the ruler must know how to do wrong / not be good, and use it according to necessity"
+    ],
+    "evidence": [
+      "many have pictured republics and principalities which in fact have never been known or seen",
+      "how one lives is so far distant from how one ought to live",
+      "уметь «поступать не по-доброму» и пользоваться этим по необходимости",
+      "«действительной правде вещей»"
+    ],
+    "evidence_sources": [
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md",
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md",
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md",
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md"
+    ]
+  },
+  {
+    "id": 8,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["lebon"],
+    "correct_thinkers": ["lebon"],
+    "tempting_thinkers": ["machiavelli", "nietzsche", "montaigne"],
+    "q": "According to Le Bon, what happens to the individual personality inside a crowd? Answer from the knowledge base with verbatim quotes.",
+    "required_facts": [
+      "In a crowd the conscious personality disappears; the person becomes an automaton no longer guided by his own will",
+      "By merely joining an organised crowd a man descends several rungs on the ladder of civilisation: isolated he may be cultivated, in a crowd he is a barbarian acting by instinct",
+      "The individual in a crowd is a grain of sand among grains of sand, stirred at will by the wind"
+    ],
+    "evidence": [
+      "become an automaton who has ceased to be guided by his will",
+      "человек спускается на несколько ступеней по лестнице цивилизации",
+      "Индивид в толпе — песчинка среди других песчинок",
+      "в толпе он варвар — то есть существо, действующее инстинктом"
+    ],
+    "evidence_sources": [
+      "lebon.2pub.me/concepts/disappearance-of-personality.md",
+      "lebon.2pub.me/concepts/disappearance-of-personality.md",
+      "lebon.2pub.me/concepts/disappearance-of-personality.md",
+      "lebon.2pub.me/concepts/disappearance-of-personality.md"
+    ]
+  },
+  {
+    "id": 9,
+    "kind": "single-corpus grounding",
+    "split": "test",
+    "expect_kb": ["hill"],
+    "correct_thinkers": ["hill"],
+    "tempting_thinkers": ["wattles", "james-allen", "smiles"],
+    "q": "What role do the 'definite chief aim' and burning desire play in Napoleon Hill's system? Answer from the knowledge base with verbatim quotes.",
+    "required_facts": [
+      "Without a single definite chief aim effort dissipates: 95% of people drift aimlessly through life without knowing the work they are best fitted for",
+      "Success depends on power, power is organized effort, and the first step of organization is a definite purpose",
+      "Strong, deeply rooted (burning) desire is the starting point / seed of all achievement, backing the aim"
+    ],
+    "evidence": [
+      "девяносто пять процентов людей бесцельно блуждают по жизни",
+      "Сильное, глубоко укоренившееся желание — отправная точка любого достижения",
+      "сила — это организованное усилие",
+      "подкреплена жгучим желанием её достижения"
+    ],
+    "evidence_sources": [
+      "hill.2pub.me/concepts/definite-chief-aim.md",
+      "hill.2pub.me/concepts/desire.md",
+      "hill.2pub.me/concepts/definite-chief-aim.md",
+      "hill.2pub.me/concepts/desire.md"
+    ]
+  },
+  {
+    "id": 10,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["ignatius"],
+    "correct_thinkers": ["ignatius"],
+    "tempting_thinkers": ["franklin", "pascal", "epictetus"],
+    "q": "What does Ignatius of Loyola mean by 'spiritual exercises', and what is the 'discernment of spirits'? Answer from the knowledge base with verbatim quotes.",
+    "required_facts": [
+      "Spiritual exercises = every way of examining conscience, meditating, contemplating, praying vocally and mentally — a practice, defined by bodily analogy (as walking and running are bodily exercises)",
+      "Their two-step goal: rid the soul of disordered attachments, then seek and find God's will for one's life",
+      "Discernment of spirits = rules for feeling and recognizing the different movements caused in the soul: the good to accept, the bad to reject"
+    ],
+    "evidence": [
+      "разумеется всякий способ испытывать совесть, размышлять, созерцать, молиться устно и мысленно",
+      "Ибо как прогулка, ходьба и бег суть упражнения телесные",
+      "отрешиться от всех беспорядочных привязанностей",
+      "ЧУВСТВОВАТЬ И РАСПОЗНАВАТЬ РАЗЛИЧНЫЕ ДВИЖЕНИЯ, ВЫЗЫВАЕМЫЕ В ДУШЕ"
+    ],
+    "evidence_sources": [
+      "ignatius.2pub.me/concepts/dukhovnye-uprazhneniya.md",
+      "ignatius.2pub.me/concepts/dukhovnye-uprazhneniya.md",
+      "ignatius.2pub.me/concepts/dukhovnye-uprazhneniya.md",
+      "ignatius.2pub.me/concepts/razlichenie-dukhov.md"
+    ]
+  },
+  {
+    "id": 11,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["hill", "schopenhauer"],
+    "correct_thinkers": ["hill", "schopenhauer"],
+    "tempting_thinkers": ["wattles", "james-allen", "nietzsche"],
+    "q": "Hill and Schopenhauer take opposite views of desire. Contrast them using the knowledge base of each, with verbatim quotes.",
+    "required_facts": [
+      "Hill: burning, deeply rooted desire is the seed and starting point of all achievement — the engine of success",
+      "Schopenhauer: striving has no satiation; pleasure only removes a hindrance and never lasts, so desire is the source of perpetual suffering — wanting a better lot than one has is blind folly; limit expectations",
+      "The axis (as the knowledge base states it): desire as engine of success vs desire as source of eternal suffering"
+    ],
+    "evidence": [
+      "ЖЕЛАНИЕ — это семя всякого достижения",
+      "удовольствие есть состояние, которое никогда не может длиться долго",
+      "желать доли лучшей, чем есть, — слепая глупость",
+      "Ось: желание — двигатель успеха vs источник вечного страдания."
+    ],
+    "evidence_sources": [
+      "hill.2pub.me/concepts/desire.md",
+      "schopenhauer.2pub.me/concepts/futilnost-stremleniya.md",
+      "schopenhauer.2pub.me/concepts/futilnost-stremleniya.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 12,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["tolstoy", "wattles"],
+    "correct_thinkers": ["tolstoy", "wattles"],
+    "tempting_thinkers": ["hill", "smiles", "rockefeller"],
+    "q": "Tolstoy and Wattles give opposite answers on wealth. Contrast their positions using the knowledge base of each, with verbatim quotes.",
+    "required_facts": [
+      "Wattles: getting rich is an exact science like algebra or arithmetic; wealth is the path to a full life",
+      "Tolstoy: the life of the rich circle is parasitism — 'I lived as a parasite and, asking why I live, got the answer: for nothing'; man must earn life not for himself but for all",
+      "The axis: wealth as path to fullness of life vs wealth as parasitism (both even appeal to God/Gospel but read them oppositely)"
+    ],
+    "evidence": [
+      "Я жил паразитом и, спросив себя, зачем я живу, получил ответ: ни зачем.",
+      "ему надо добывать ее не для себя, а для всех",
+      "Есть Наука о богатстве, и это точная наука, как алгебра или арифметика.",
+      "Богатство как путь к полноте жизни → богатство как паразитизм."
+    ],
+    "evidence_sources": [
+      "tolstoy.2pub.me/concepts/parazity-zhizni.md",
+      "tolstoy.2pub.me/concepts/trud-dobyvanie-zhizni.md",
+      "wattles.2pub.me/principles/bogatstvo-est-tochnaya-nauka.md",
+      "wattles.2pub.me/concepts/tolstoy-kontrast.md"
+    ]
+  },
+  {
+    "id": 13,
+    "kind": "cross-corpus contrast",
+    "split": "test",
+    "expect_kb": ["ford", "tolstoy"],
+    "correct_thinkers": ["ford", "tolstoy"],
+    "tempting_thinkers": ["smiles", "rockefeller", "hill"],
+    "q": "Ford and Tolstoy disagree about machines, industry and labor. Contrast their positions using the knowledge base of each, with verbatim quotes.",
+    "required_facts": [
+      "Ford: power and machinery, money and goods are useful only as they set us free to live — it is not the machine that takes life away but its absence; manual drudgery is a waste of a human being",
+      "Tolstoy: meaning lives in the plain labor of the working people who make life ('the actions of the laboring people appeared to me the one real deed'); machine civilization and division of labor enslave",
+      "The axis: renunciation/simplification vs productive ethics (machine as liberator)"
+    ],
+    "evidence": [
+      "Power and machinery, money and goods, are useful only as they set us free to live.",
+      "не машина отнимает жизнь, а её отсутствие",
+      "Действия же трудящегося народа, творящего жизнь, представились мне единым настоящим делом.",
+      "Толстой видит в машинной цивилизации и разделении труда порабощение"
+    ],
+    "evidence_sources": [
+      "ford.2pub.me/principles/mashina-osvobozhdaet-dlya-zhizni.md",
+      "ford.2pub.me/principles/mashina-osvobozhdaet-dlya-zhizni.md",
+      "tolstoy.2pub.me/concepts/trud-dobyvanie-zhizni.md",
+      "ford.2pub.me/principles/mashina-osvobozhdaet-dlya-zhizni.md"
+    ]
+  },
+  {
+    "id": 14,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["franklin", "larochefoucauld"],
+    "correct_thinkers": ["franklin", "larochefoucauld"],
+    "tempting_thinkers": ["smiles", "machiavelli", "hill"],
+    "q": "Franklin claims virtue pays; La Rochefoucauld claims virtues are disguised vices. Contrast the two positions using the knowledge base of each, with verbatim quotes.",
+    "required_facts": [
+      "Franklin: vicious actions are not hurtful because they are forbidden but forbidden because they are hurtful — so it is everyone's interest to be virtuous; virtue as profitable habit is no worse for it",
+      "La Rochefoucauld: our virtues are most frequently but vices disguised; vices enter the composition of virtues as poison enters medicines; interest speaks all languages",
+      "The axis: virtue-as-habit that pays off vs self-love dressed up as virtue"
+    ],
+    "evidence": [
+      "но запрещены, потому что вредны",
+      "vicious actions are not hurtful because they are forbidden, but forbidden because they are hurtful",
+      "Our virtues are most frequently but vices disguised.",
+      "Vices enter into the composition of virtues as poison into that of medicines.",
+      "Ось: добродетель-навык, которая окупается vs переодетое себялюбие."
+    ],
+    "evidence_sources": [
+      "franklin.2pub.me/principles/prosveshchenny-egoizm.md",
+      "franklin.2pub.me/principles/prosveshchenny-egoizm.md",
+      "larochefoucauld.2pub.me/principles/dobrodeteli-pereodetye-poroki.md",
+      "larochefoucauld.2pub.me/principles/dobrodeteli-pereodetye-poroki.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 15,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "ford", "wattles", "tolstoy", "schopenhauer"],
+    "correct_thinkers": ["ford", "rockefeller", "smiles", "franklin", "wattles", "hill", "schopenhauer", "tolstoy", "laozi"],
+    "tempting_thinkers": ["goethe", "confucius", "machiavelli"],
+    "q": "Across this knowledge base, which thinkers treat wealth as the result of service or an exact science, and which treat it as vanity or parasitism? Name at least two per camp with their grounds, per the knowledge base.",
+    "required_facts": [
+      "Wealth-affirming camp (at least two of): Ford (profit is the reward of service, work is a law of nature), Rockefeller (success imposes duties, give scientifically), Wattles (getting rich is an exact science), Hill (organized effort around a definite aim), Franklin/Smiles (industry and thrift)",
+      "Wealth-denying camp (at least two of): Tolstoy (the rich circle's life is parasitism on the people's labor), Schopenhauer (what a man is matters more than what he has; the chase is futile), Laozi (knowing the measure, contentment as wealth)",
+      "States the opposition as an axis found in the knowledge base, not from general knowledge"
+    ],
+    "evidence": [
+      "прибыль — награда за службу, а не основа дела",
+      "обогащение — точная наука",
+      "жизнь его круга — паразитизм на труде народа",
+      "то, что человек есть, важнее того, что он имеет"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md",
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md",
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md",
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md"
+    ]
+  },
+  {
+    "id": 16,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "montaigne", "epictetus", "tolstoy", "larochefoucauld"],
+    "correct_thinkers": ["montaigne", "epictetus", "tolstoy", "pascal", "schopenhauer", "larochefoucauld", "confucius"],
+    "tempting_thinkers": ["nietzsche", "ignatius", "goethe"],
+    "q": "How do the thinkers in this knowledge base differ on death? Identify at least three distinct positions with their holders, per the knowledge base.",
+    "required_facts": [
+      "Practice camp: Montaigne (to philosophize is to learn to die — thinking death through makes you free) and Epictetus (keep death before your eyes daily)",
+      "Death as the exam of meaning: Tolstoy (death destroys every finite meaning; only a meaning death cannot destroy will do) and/or Pascal (a condemned thinking reed between two abysses)",
+      "Unmasking/deflating camp: La Rochefoucauld (the sages' 'contempt for death' is a pose — the necessity of dying created all the constancy of philosophers) and/or Confucius (not knowing life, how know death)"
+    ],
+    "evidence": [
+      "философствовать — учиться умирать: продумавший смерть свободен",
+      "смерть уничтожает всякий конечный смысл",
+      "«презрение к смерти» мудрецов — поза",
+      "держи смерть перед глазами ежедневно",
+      "The necessity of dying created all the constancy of philosophers."
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "larochefoucauld.2pub.me/concepts/prezrenie-k-smerti.md"
+    ]
+  },
+  {
+    "id": 17,
+    "kind": "hub-orientation",
+    "split": "test",
+    "expect_kb": ["philosophers", "lebon", "adler", "nietzsche", "montaigne"],
+    "correct_thinkers": ["lebon", "nietzsche", "larochefoucauld", "montaigne", "adler", "confucius", "tolstoy"],
+    "also_defensible": ["franklin", "smiles", "machiavelli"],
+    "tempting_thinkers": ["epictetus", "pascal", "schopenhauer"],
+    "q": "In this knowledge base, who argues that the crowd/mass dissolves the individual, and who counters that community is the criterion and form of human value? Name the thinkers and their grounds per the knowledge base.",
+    "required_facts": [
+      "Dissolution side: Le Bon (in the crowd personality disappears — the crowd is a new being) and/or Nietzsche (herd morality calls evil whatever elevates the individual) and/or Montaigne (keep the back shop — a room entirely one's own)",
+      "Community side: Adler (social feeling is the sole criterion of a person's value) and/or Confucius (society holds together by ritual, names and relations) and/or Tolstoy (seek meaning with the people who make life)",
+      "States the axis as the knowledge base draws it (Le Bon vs Adler/Confucius), not from general knowledge"
+    ],
+    "evidence": [
+      "в толпе личность исчезает: толпа — новое существо",
+      "чувство общности — единственный критерий ценности человека",
+      "стадная мораль называет злым всё, что возвышает отдельного",
+      "сохрани заднюю лавку"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md",
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md",
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md",
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md"
+    ]
+  },
+  {
+    "id": 18,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "laozi", "smiles", "franklin", "hill", "james-allen", "ford"],
+    "correct_thinkers": ["laozi", "smiles", "franklin", "hill", "james-allen", "ford"],
+    "also_defensible": ["confucius", "machiavelli", "nietzsche"],
+    "tempting_thinkers": ["epictetus", "schopenhauer", "wattles"],
+    "q": "Which effort- and self-help thinkers does this knowledge base set against Laozi's non-action (wu wei), and on what axes? Name at least two opponents with their axes, per the knowledge base.",
+    "required_facts": [
+      "Names at least two of the indexed opponents: Smiles (self-help vs non-action), Franklin (method and accounting vs non-action), Hill (desire and definite aim vs desirelessness and soft power), James Allen (willed cultivation of mind vs it-grows-by-itself), Ford (active improvement vs non-action)",
+      "Laozi's side of the axis: effort, 'resolute determination' and accounting destroy what grows of itself; the soft overcomes the hard",
+      "The axes are stated as the knowledge base's contradiction index draws them, not from general knowledge"
+    ],
+    "evidence": [
+      "Ось: самопомощь vs недеяние.",
+      "«resolute determination» разрушает то, что растёт само",
+      "Ось: метод и учёт vs недеяние.",
+      "Ось: желание и определённая цель vs безжелание и мягкая сила.",
+      "Ось: деятельное улучшение vs недеяние."
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md (also laozi.2pub.me/see-also.md)",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 19,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "machiavelli", "larochefoucauld", "lebon", "confucius", "tolstoy"],
+    "correct_thinkers": ["machiavelli", "larochefoucauld", "lebon", "confucius", "tolstoy"],
+    "also_defensible": ["ford", "epictetus", "hill", "laozi", "smiles", "rockefeller"],
+    "tempting_thinkers": ["nietzsche", "franklin"],
+    "q": "Per this knowledge base, which thinkers are Machiavelli's allies in sober diagnosis, and which oppose his rule through fear and appearance — on what grounds? Ground the answer in the knowledge base.",
+    "required_facts": [
+      "Allies-in-diagnosis: La Rochefoucauld (self-love inside vs technique of power outside — 'allies in sobriety') and Le Bon (mechanics of mass psychology vs technique of the prince — 'allies-diagnosticians')",
+      "At least one opponent with the indexed axis: Confucius (rule through virtue and example vs through fear and appearance) or Tolstoy (force and necessity vs conscience and non-resistance)",
+      "The grounds are stated as the knowledge base's contradiction index draws them"
+    ],
+    "evidence": [
+      "союзники по трезвости",
+      "союзники-диагносты",
+      "Ось: правление через добродетель и пример vs через страх и видимость.",
+      "Ось: сила и необходимость vs совесть и непротивление.",
+      "казаться важнее, чем быть"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md (also machiavelli.2pub.me/_instructions.md)"
+    ]
+  },
+  {
+    "id": 20,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["wattles", "epictetus"],
+    "correct_thinkers": ["wattles", "epictetus"],
+    "tempting_thinkers": ["james-allen", "hill", "tolstoy"],
+    "q": "The Wattles knowledge base calls one dispute 'the sharpest of the base' and bridges to a Stoic. Which dispute is it, what is its axis, and what does each side claim? Follow the bridge into the other thinker's knowledge base.",
+    "required_facts": [
+      "The bridge is Wattles vs Epictetus, marked the sharpest dispute of the base; the axis: 'the external is not in our power' vs 'the external you can call forth by thought'",
+      "Epictetus: only judgments and will are in our power; body, property, reputation are not — wisdom is to not desire the external",
+      "Wattles: no boundary of control — thought plus personal action calls forth outer conditions; no possible combination of circumstances can defeat one proceeding scientifically"
+    ],
+    "evidence": [
+      "«внешнее ты можешь вызвать мыслью»",
+      "Самый острый спор базы",
+      "Из существующего одно в нашей власти, другое не в нашей власти",
+      "Никакая возможная комбинация обстоятельств не может победить"
+    ],
+    "evidence_sources": [
+      "wattles.2pub.me/concepts/epictetus-kontrast.md",
+      "wattles.2pub.me/concepts/epictetus-kontrast.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "wattles.2pub.me/principles/bogatstvo-est-tochnaya-nauka.md"
+    ]
+  },
+  {
+    "id": 21,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["schopenhauer", "nietzsche"],
+    "correct_thinkers": ["schopenhauer", "nietzsche"],
+    "tempting_thinkers": ["goethe", "tolstoy"],
+    "q": "The Schopenhauer knowledge base has a bridge note describing him as Nietzsche's precursor and later target. What are the three axes of that dispute? Follow the bridge and support at least one axis from the Nietzsche knowledge base.",
+    "required_facts": [
+      "Axis 1: will to live → will to power (Schopenhauer: blind insatiable will to be freed from; Nietzsche: life itself is will to power, affirmed not denied)",
+      "Axis 2: negation of suffering → discipline/education by suffering",
+      "Axis 3: compassion as basis of morality → compassion as danger ('compassion against compassion')"
+    ],
+    "evidence": [
+      "сделал шопенгауэровский пессимизм и этику сострадания главной мишенью переоценки",
+      "Воля к жизни → воля к власти",
+      "Сострадание-основа → сострадание-опасность",
+      "Итак, сострадание против сострадания!",
+      "Наше сострадание более высокое и более дальновидное"
+    ],
+    "evidence_sources": [
+      "schopenhauer.2pub.me/concepts/nietzsche-predtecha.md",
+      "schopenhauer.2pub.me/concepts/nietzsche-predtecha.md",
+      "schopenhauer.2pub.me/concepts/nietzsche-predtecha.md",
+      "nietzsche.2pub.me/concepts/sostradanie-zhalost.md",
+      "nietzsche.2pub.me/concepts/sostradanie-zhalost.md"
+    ]
+  },
+  {
+    "id": 22,
+    "kind": "cross-link-following",
+    "split": "test",
+    "expect_kb": ["tolstoy", "epictetus"],
+    "correct_thinkers": ["tolstoy", "epictetus"],
+    "tempting_thinkers": ["schopenhauer", "montaigne", "pascal"],
+    "q": "The Tolstoy knowledge base links to a Stoic as a peer. Who is it, what did Tolstoy take from him, and what is that Stoic's own core doctrine in his knowledge base? Follow the link.",
+    "required_facts": [
+      "The peer link is to Epictetus: Tolstoy leaned on the Stoics — power over oneself and indifference to the external ('what is in our power' is Epictetus's)",
+      "Epictetus's own doctrine: some things are in our power (judgment, impulse, desire, aversion) and others are not; what is in our power is by nature free, the rest is weak and slavish"
+    ],
+    "evidence": [
+      "Толстой опирался на стоиков: власть над собой и безразличие к внешнему.",
+      "И то, что в нашей власти, по природе свободно",
+      "а то, что не в нашей власти, немощно, рабственно"
+    ],
+    "evidence_sources": [
+      "tolstoy.2pub.me/peer-epictetus.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md"
+    ]
+  },
+  {
+    "id": 23,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["goethe", "schopenhauer", "nietzsche"],
+    "correct_thinkers": ["goethe", "schopenhauer", "nietzsche"],
+    "also_defensible": ["tolstoy", "ignatius", "pascal", "confucius", "machiavelli", "laozi"],
+    "tempting_thinkers": ["montaigne", "franklin"],
+    "q": "The Goethe knowledge base contains a debate map ('Goethe in debates'). What overall stance does it give Goethe, against whom does it stake positions, and what is Goethe's line against Schopenhauer specifically? Quote the knowledge base.",
+    "required_facts": [
+      "The map casts Goethe as active, reverent, anti-metaphysical realism, with front lines against Schopenhauer, Nietzsche (revered predecessor with a break over measure/limits), Tolstoy and Ignatius, Pascal",
+      "Against Schopenhauer: active life vs resignation from the will — the mind with active powers holding to the nearest task is the worthiest thing on earth; pity for those lost in contemplating earthly vanity, for we are here to make the transitory permanent",
+      "Notes the asymmetry: Goethe's corpus holds ~19 debate-contrast blocks while the counterpart corpora barely answer back (per the hub's contradiction index)"
+    ],
+    "evidence": [
+      "Мне жаль людей, которые много носятся с бренностью всех вещей",
+      "деятельный, благоговейный, антиметафизический реализм",
+      "«последним немцем, которого я почитаю»",
+      "у Гёте ~19 концептов с блоками «Контраст для дебатов»"
+    ],
+    "evidence_sources": [
+      "goethe.2pub.me/concepts/goethe-v-debatakh.md",
+      "goethe.2pub.me/concepts/goethe-v-debatakh.md",
+      "goethe.2pub.me/concepts/goethe-v-debatakh.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 24,
+    "kind": "cross-link-following",
+    "split": "test",
+    "expect_kb": ["wattles", "larochefoucauld"],
+    "correct_thinkers": ["wattles", "larochefoucauld"],
+    "tempting_thinkers": ["franklin", "hill", "smiles"],
+    "q": "The Wattles knowledge base bridges a dispute it calls 'the psychologist of suspicion vs the preacher of abundance'. With whom, over what, and what does each side claim? Follow the bridge into the opponent's knowledge base.",
+    "required_facts": [
+      "The bridge is Wattles vs La Rochefoucauld; the axis: 'give more than you take' vs 'every virtue is disguised interest'",
+      "Wattles: give everyone more in use value than you take in cash value — generosity is profitable and therefore genuine",
+      "La Rochefoucauld: that is amour-propre in new packaging — what we term virtue is often a mass of actions and interests arranged by fortune or industry"
+    ],
+    "evidence": [
+      "«всякая добродетель — переодетый интерес»",
+      "спор психолога подозрения с проповедником изобилия",
+      "What we term virtue is often but a mass of various actions and divers interests",
+      "Давай каждому больше в потребительской ценности, чем берёшь у него в денежной стоимости"
+    ],
+    "evidence_sources": [
+      "wattles.2pub.me/concepts/la-rochefoucauld-kontrast.md",
+      "wattles.2pub.me/concepts/la-rochefoucauld-kontrast.md",
+      "larochefoucauld.2pub.me/principles/dobrodeteli-pereodetye-poroki.md",
+      "wattles.2pub.me/principles/otdavat-bolshe-polzy-chem-berosh.md"
+    ]
+  },
+  {
+    "id": 25,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["epictetus", "james-allen"],
+    "correct_thinkers": ["epictetus", "james-allen"],
+    "tempting_thinkers": ["wattles", "hill"],
+    "q": "Epictetus and James Allen both start from 'work on your judgments/thoughts' — where exactly do they break? Synthesize the contradiction with quotes from both knowledge bases.",
+    "required_facts": [
+      "Epictetus draws a hard boundary: only judgment/will is ours; body and circumstances are not in our power — weak, slavish, indifferent",
+      "James Allen erases the boundary: thought is the cause reaching body and circumstances — circumstance does not make the man, it reveals him; men attract not what they want but what they are",
+      "The axis (as the knowledge base states it): the boundary of control is judgment only vs thought-as-cause down to body and circumstances"
+    ],
+    "evidence": [
+      "а то, что не в нашей власти, немощно, рабственно, подвержено запрету",
+      "Circumstance does not make the man; it reveals him to himself",
+      "Люди притягивают не то, что *хотят*, а то, чем они *являются*",
+      "Ось: граница контроля — только суждение vs мысль-причина до тела и обстоятельств."
+    ],
+    "evidence_sources": [
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "james-allen.2pub.me/concepts/thought-and-circumstance.md",
+      "james-allen.2pub.me/concepts/thought-and-circumstance.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 26,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["nietzsche", "tolstoy"],
+    "correct_thinkers": ["nietzsche", "tolstoy"],
+    "tempting_thinkers": ["schopenhauer", "larochefoucauld", "ignatius"],
+    "q": "Nietzsche calls humility and useful labor slave morality; Tolstoy calls them the force of life. Synthesize this contradiction with quotes from both knowledge bases.",
+    "required_facts": [
+      "Nietzsche: slave morality is in essence a morality of utility, born of fear; renunciation and compassion are symptoms of weak will",
+      "Tolstoy: faith is the force of life — humility and labor are strength, not weakness; the knowledge of life's meaning by which one lives rather than destroys oneself",
+      "The axis (as the knowledge base states it): slave morality vs master morality, with Tolstoy on the opposite side of Nietzsche's diagnosis"
+    ],
+    "evidence": [
+      "Мораль рабов по существу своему есть мораль полезности.",
+      "Вера есть сила жизни.",
+      "Ось: мораль рабов vs мораль господ.",
+      "смирение и труд — сила жизни, а не слабость"
+    ],
+    "evidence_sources": [
+      "nietzsche.2pub.me/concepts/moral-rabov-i-gospod.md",
+      "tolstoy.2pub.me/concepts/vera-sila-zhizni.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 27,
+    "kind": "contradiction-synthesis",
+    "split": "test",
+    "expect_kb": ["adler", "nietzsche"],
+    "correct_thinkers": ["adler", "nietzsche"],
+    "tempting_thinkers": ["hill", "lebon", "schopenhauer"],
+    "q": "Adler and Nietzsche both put striving upward at the center of human life but derive it from opposite sources, and disagree about community. Synthesize this contradiction with quotes from both knowledge bases.",
+    "required_facts": [
+      "Adler: striving starts from deficiency — the feeling of inferiority is the driving force and starting point of every childish striving; social feeling is the sole criterion of human value",
+      "Nietzsche: striving comes from excess of force; the feeling of community is herd morality (morality in Europe today is herd-animal morality)",
+      "The axis (as the knowledge base states it): striving upward out of deficit vs out of abundance"
+    ],
+    "evidence": [
+      "Ось: стремление вверх из дефицита vs из избытка.",
+      "is the driving force, the starting point",
+      "is the sole criterion of human values",
+      "стремление — из избытка силы",
+      "Мораль в Европе есть нынче мораль стадных животных"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "adler.2pub.me/concepts/chuvstvo-nepolnotsennosti.md",
+      "adler.2pub.me/principles/chuvstvo-obshchnosti-edinstvennyy-kriteriy.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "nietzsche.2pub.me/concepts/stadnaya-moral.md"
+    ]
+  },
+  {
+    "id": 28,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["laozi", "smiles"],
+    "correct_thinkers": ["laozi", "smiles"],
+    "tempting_thinkers": ["franklin", "hill", "james-allen", "ford"],
+    "q": "Smiles's self-help and Laozi's non-action contradict each other directly. Synthesize the contradiction with quotes from both knowledge bases.",
+    "required_facts": [
+      "Smiles: heaven helps those who help themselves; help from without enfeebles, help from within invariably invigorates; perseverance builds character",
+      "Laozi: purposive effort destroys what grows of itself — he who acts with an ulterior purpose does harm; the soft overcomes the hard and the weak the strong",
+      "The axis (as the knowledge base states it): self-help vs non-action"
+    ],
+    "evidence": [
+      "небо помогает тем, кто помогает себе; упорство строит характер",
+      "Help from without is often enfeebling in its effects, but help from within invariably invigorates.",
+      "The soft overcomes the hard; and the weak the strong.",
+      "He who acts (with an ulterior purpose) does harm",
+      "Помощь извне часто расслабляет, а помощь изнутри неизменно укрепляет"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "smiles.2pub.me/concepts/self-help.md",
+      "laozi.2pub.me/concepts/rouruo.md",
+      "laozi.2pub.me/concepts/wuwei.md",
+      "smiles.2pub.me/concepts/self-help.md"
+    ]
+  },
+  {
+    "id": 29,
+    "kind": "contradiction-synthesis",
+    "split": "test",
+    "expect_kb": ["rockefeller", "tolstoy"],
+    "correct_thinkers": ["rockefeller", "tolstoy"],
+    "also_defensible": ["larochefoucauld"],
+    "tempting_thinkers": ["ford", "franklin", "hill"],
+    "q": "Rockefeller preaches scientific philanthropy; Tolstoy calls effective philanthropy the rich man's self-justification. Synthesize this contradiction with quotes from both knowledge bases.",
+    "required_facts": [
+      "Rockefeller: the best philanthropy does the most good and the least harm; giving is a discipline, not a Sunday impulse of the heart — money without study is a feeble offering",
+      "Tolstoy: he renounced the life of his circle as parasitism; the answer is not administering wealth but refusing property ('effective philanthropy' is the rich man's self-justification)",
+      "The axis (as the knowledge base states it): administering wealth vs giving it away and repenting"
+    ],
+    "evidence": [
+      "«эффективная филантропия» — самооправдание богатого",
+      "The best philanthropy, the help that does the most good and the least harm",
+      "не воскресный импульс сердца, а дисциплина",
+      "Я отрекся от жизни нашего круга",
+      "Толстой требует не «эффективного» распределения богатства, а отказа от собственности"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "rockefeller.2pub.me/principles/davat-nado-nauchno.md",
+      "rockefeller.2pub.me/principles/davat-nado-nauchno.md",
+      "tolstoy.2pub.me/concepts/parazity-zhizni.md",
+      "rockefeller.2pub.me/principles/davat-nado-nauchno.md"
+    ]
+  },
+  {
+    "id": 30,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["montaigne", "nietzsche"],
+    "correct_thinkers": ["montaigne", "nietzsche"],
+    "tempting_thinkers": ["epictetus", "pascal", "goethe"],
+    "q": "Montaigne urges living by the common measure of man; Nietzsche locates greatness in separateness and the elevation of the type 'man'. Synthesize this contradiction with quotes from both knowledge bases.",
+    "required_facts": [
+      "Montaigne: transcendental humours frighten him — those who would exit the human condition turn into beasts, not angels; even on stilts you walk on your own legs; the finest lives follow the common human model",
+      "Nietzsche: the greatest is he who can be the most solitary, the most different; every elevation of the type 'man' has been the work of aristocratic society",
+      "The axis (as the knowledge base states it): the common measure of man vs the overman/greatness-in-separateness"
+    ],
+    "evidence": [
+      "Ось: общая мера человека vs сверхчеловек.",
+      "на ходулях всё равно идёшь своими ногами",
+      "instead of transforming themselves into angels, they transform themselves into beasts",
+      "самый великий тот, кто может быть самым одиноким",
+      "Всякое возвышение типа «человек» было до сих пор — и будет всегда — делом аристократического общества"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "montaigne.2pub.me/concepts/obshchaya-mera-cheloveka.md",
+      "montaigne.2pub.me/concepts/obshchaya-mera-cheloveka.md",
+      "nietzsche.2pub.me/principles/velichie-v-otdelnosti.md",
+      "nietzsche.2pub.me/concepts/znatnost-ranga.md"
+    ]
+  }
+]

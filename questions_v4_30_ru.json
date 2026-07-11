@@ -1,0 +1,804 @@
+[
+  {
+    "id": 1,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["nietzsche"],
+    "correct_thinkers": ["nietzsche"],
+    "tempting_thinkers": ["schopenhauer", "adler", "machiavelli"],
+    "q": "Что Ницше понимает под волей к власти? Ответь только по базе знаний и приведи дословную цитату на языке источника.",
+    "required_facts": [
+      "Воля к власти — то, что движет всем живым: стремление проявлять силу, расти, присваивать, навязывать форму — сама жизнь есть воля к власти",
+      "Самосохранение — лишь косвенное её следствие, а не первичное влечение",
+      "Это не (только) политическая жажда господства: она распространяется на органические функции и на познание/философию (воля к истине как её частный случай)"
+    ],
+    "evidence": [
+      "сама жизнь есть воля к власти",
+      "самосохранение есть только одно из косвенных",
+      "не политическая жажда господства",
+      "духовная воля к власти"
+    ],
+    "evidence_sources": [
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md"
+    ]
+  },
+  {
+    "id": 2,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["nietzsche", "schopenhauer"],
+    "correct_thinkers": ["nietzsche", "schopenhauer"],
+    "tempting_thinkers": ["goethe", "wattles"],
+    "q": "Чем воля к власти у Ницше отличается от воли к жизни у Шопенгауэра? Обопрись на базу знаний обоих мыслителей и процитируй каждого на языке источника.",
+    "required_facts": [
+      "Шопенгауэр: ядро мира — слепая, ненасытная воля к жизни; из неё следуют страдание, тщета стремлений, пессимизм — и ответ в отрицании воли",
+      "Ницше вырос из Шопенгауэра, но перевернул вывод: утверждение жизни и самопреодоление вместо отказа",
+      "Для Ницше жизнь есть воля к власти (рост, проявление силы), а самосохранение — лишь косвенное следствие"
+    ],
+    "evidence": [
+      "воля к жизни",
+      "первичный и коренной элемент человеческой природы",
+      "не тщета воли и отказ от жизни, а её утверждение и самопреодоление",
+      "сама жизнь есть воля к власти"
+    ],
+    "evidence_sources": [
+      "schopenhauer.2pub.me/concepts/volya-k-zhizni.md",
+      "schopenhauer.2pub.me/concepts/volya-k-zhizni.md",
+      "nietzsche.2pub.me/peer-schopenhauer.md",
+      "nietzsche.2pub.me/concepts/volya-k-vlasti.md"
+    ]
+  },
+  {
+    "id": 3,
+    "kind": "single-corpus grounding",
+    "split": "test",
+    "expect_kb": ["epictetus"],
+    "correct_thinkers": ["epictetus"],
+    "tempting_thinkers": ["james-allen", "wattles", "montaigne"],
+    "q": "Сформулируй главный принцип Эпиктета о том, что в нашей власти и что не в нашей власти, с дословной цитатой из базы знаний на языке источника.",
+    "required_facts": [
+      "В нашей власти: мнение/суждение, побуждение, желание, уклонение — словом, наши собственные действия",
+      "Не в нашей власти: тело, имущество, репутация, должности — всё, что не есть наши действия",
+      "То, что в нашей власти, по природе свободно и не встречает препятствий; то, что не в нашей власти, немощно, рабственно, во власти других (несчастье — от смешения двух списков)"
+    ],
+    "evidence": [
+      "Из существующего одно в нашей власти, другое не в нашей власти",
+      "мнение, побуждение к вещи, желание, уклонение",
+      "имущество, репутация, должности",
+      "по природе свободно"
+    ],
+    "evidence_sources": [
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md"
+    ]
+  },
+  {
+    "id": 4,
+    "kind": "hub-orientation",
+    "split": "test",
+    "expect_kb": ["philosophers", "nietzsche", "montaigne", "larochefoucauld"],
+    "correct_thinkers": ["nietzsche", "montaigne", "larochefoucauld"],
+    "tempting_thinkers": ["wattles", "goethe", "james-allen"],
+    "q": "Кто из мыслителей в этой базе знаний наиболее прямо спорит со стоической невозмутимостью (Эпиктетом) и на каких основаниях? Обоснуй ответ по базе знаний.",
+    "required_facts": [
+      "Назван хотя бы один засвидетельствованный в корпусе оппонент стоической невозмутимости: Ницше (пафос воли и утверждение против покоя через отказ от неподвластного), Монтень (душа непостоянна и лоскутна, жить по общей мере — против стоической цитадели) или Ларошфуко (презрение к смерти — притворная поза гордости)",
+      "Основания разногласия изложены так, как они даны в базе знаний (ось контраста), а не из общих знаний"
+    ],
+    "evidence": [
+      "лоскутная душа vs стоическая цитадель",
+      "покой через отказ от неподвластного vs пафос воли",
+      "душа непостоянна и лоскутна",
+      "апатия — отказ от жизни",
+      "Презрение к смерти как поза"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md (also in every corpus's see-also.md)",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "larochefoucauld.2pub.me/concepts/prezrenie-k-smerti.md"
+    ]
+  },
+  {
+    "id": 5,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["pascal", "montaigne"],
+    "correct_thinkers": ["pascal", "montaigne"],
+    "tempting_thinkers": ["larochefoucauld", "epictetus"],
+    "q": "Где Паскаль спорит с Монтенем и в чём именно состоит разногласие? Используй базу знаний обоих мыслителей.",
+    "required_facts": [
+      "Монтень — мишень «Мыслей» Паскаля: Паскаль спорит со спокойным/скептическим принятием непостоянства у Монтеня",
+      "Паскаль противопоставляет этому тревогу о ничтожестве человека без Бога (ставка на Бога / бездна без Него)"
+    ],
+    "evidence": [
+      "Монтень — мишень «Мыслей»",
+      "тревогу о ничтожестве человека без Бога",
+      "ставку на Бога и бездну без Него",
+      "скептической невозмутимости"
+    ],
+    "evidence_sources": [
+      "pascal.2pub.me/peer-montaigne.md",
+      "pascal.2pub.me/peer-montaigne.md",
+      "montaigne.2pub.me/peer-pascal.md",
+      "montaigne.2pub.me/peer-pascal.md"
+    ]
+  },
+  {
+    "id": 6,
+    "kind": "cross-corpus contrast",
+    "split": "test",
+    "expect_kb": ["confucius", "laozi"],
+    "correct_thinkers": ["confucius", "laozi"],
+    "tempting_thinkers": ["machiavelli", "franklin", "smiles"],
+    "q": "Сопоставь Конфуция и Лао-цзы: как, по их учениям, следует жить и править? Приведи по конкретному утверждению из базы знаний для каждого мыслителя.",
+    "required_facts": [
+      "Конфуций: жить и править через ритуал/благопристойность (li) и воспитанную добродетель — форма воспитывает человечность; без неё достоинства вырождаются (а ритуал без внутреннего содержания пуст)",
+      "Лао-цзы: жить и править через недеяние (у-вэй) и следование Дао — не бездействие, а действие без насилия над ходом вещей; мудрец ведёт дела, ничего не делая нарочито",
+      "Контраст: ритуал и порядок против недеяния и следования Дао (по этой оси они оппоненты)"
+    ],
+    "evidence": [
+      "Ось: ритуал vs недеяние",
+      "форма — насилие над течением",
+      "Недеяние — не бездействие",
+      "без внутреннего содержания ритуал пуст",
+      "без неё достоинства вырождаются"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "laozi.2pub.me/concepts/wuwei.md",
+      "confucius.2pub.me/concepts/li.md",
+      "confucius.2pub.me/principles/ritual-i-forma.md"
+    ]
+  },
+  {
+    "id": 7,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["machiavelli"],
+    "correct_thinkers": ["machiavelli"],
+    "tempting_thinkers": ["lebon", "larochefoucauld", "nietzsche"],
+    "q": "Что Макиавелли понимает под следованием «действительной правде вещей», а не воображаемой, и какое правило для правителя из этого следует? Процитируй базу знаний дословно.",
+    "required_facts": [
+      "Методологический фундамент «Государя»: следовать действительной правде вещей, а не воображаемой — слишком многие рисовали республики, которых никто не видел",
+      "Разрыв между тем, как живут, и тем, как должно жить, так велик, что пренебрегающий сущим ради должного губит себя, а не спасает",
+      "Отсюда правило: правителю необходимо уметь поступать не по-доброму и пользоваться этим по необходимости"
+    ],
+    "evidence": [
+      "many have pictured republics and principalities which in fact have never been known or seen",
+      "how one lives is so far distant from how one ought to live",
+      "уметь «поступать не по-доброму» и пользоваться этим по необходимости",
+      "«действительной правде вещей»"
+    ],
+    "evidence_sources": [
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md",
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md",
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md",
+      "machiavelli.2pub.me/concepts/effektivnaya-istina.md"
+    ]
+  },
+  {
+    "id": 8,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["lebon"],
+    "correct_thinkers": ["lebon"],
+    "tempting_thinkers": ["machiavelli", "nietzsche", "montaigne"],
+    "q": "Что, по Ле Бону, происходит с личностью человека в толпе? Ответь по базе знаний с дословными цитатами.",
+    "required_facts": [
+      "В толпе сознательная личность исчезает: человек становится автоматом, переставшим руководствоваться собственной волей",
+      "Одним лишь вхождением в организованную толпу человек спускается на несколько ступеней по лестнице цивилизации: в одиночку — культурный человек, в толпе — варвар, существо, действующее инстинктом",
+      "Индивид в толпе — песчинка среди других песчинок, которую ветер вздымает по своей воле"
+    ],
+    "evidence": [
+      "become an automaton who has ceased to be guided by his will",
+      "человек спускается на несколько ступеней по лестнице цивилизации",
+      "Индивид в толпе — песчинка среди других песчинок",
+      "в толпе он варвар — то есть существо, действующее инстинктом"
+    ],
+    "evidence_sources": [
+      "lebon.2pub.me/concepts/disappearance-of-personality.md",
+      "lebon.2pub.me/concepts/disappearance-of-personality.md",
+      "lebon.2pub.me/concepts/disappearance-of-personality.md",
+      "lebon.2pub.me/concepts/disappearance-of-personality.md"
+    ]
+  },
+  {
+    "id": 9,
+    "kind": "single-corpus grounding",
+    "split": "test",
+    "expect_kb": ["hill"],
+    "correct_thinkers": ["hill"],
+    "tempting_thinkers": ["wattles", "james-allen", "smiles"],
+    "q": "Какую роль в системе Наполеона Хилла играют «определённая главная цель» и жгучее желание? Ответь по базе знаний с дословными цитатами.",
+    "required_facts": [
+      "Без единственной ясно сформулированной главной цели усилие рассеивается: 95% людей бесцельно блуждают по жизни, не зная дела, для которого лучше всего подходят",
+      "Успех зависит от силы, сила — это организованное усилие, а первый шаг организации — определённая цель",
+      "Сильное, глубоко укоренившееся (жгучее) желание — отправная точка/семя всякого достижения, подкрепляющее цель"
+    ],
+    "evidence": [
+      "девяносто пять процентов людей бесцельно блуждают по жизни",
+      "Сильное, глубоко укоренившееся желание — отправная точка любого достижения",
+      "сила — это организованное усилие",
+      "подкреплена жгучим желанием её достижения"
+    ],
+    "evidence_sources": [
+      "hill.2pub.me/concepts/definite-chief-aim.md",
+      "hill.2pub.me/concepts/desire.md",
+      "hill.2pub.me/concepts/definite-chief-aim.md",
+      "hill.2pub.me/concepts/desire.md"
+    ]
+  },
+  {
+    "id": 10,
+    "kind": "single-corpus grounding",
+    "split": "train",
+    "expect_kb": ["ignatius"],
+    "correct_thinkers": ["ignatius"],
+    "tempting_thinkers": ["franklin", "pascal", "epictetus"],
+    "q": "Что Игнатий Лойола понимает под «духовными упражнениями» и что такое «различение духов»? Ответь по базе знаний с дословными цитатами.",
+    "required_facts": [
+      "Духовные упражнения = всякий способ испытывать совесть, размышлять, созерцать, молиться устно и мысленно — практика, определённая через телесную аналогию (как прогулка, ходьба и бег — упражнения тела)",
+      "Двухтактная цель: отрешиться от беспорядочных привязанностей и затем искать и находить волю Божию для своей жизни",
+      "Различение духов = правила, чтобы чувствовать и распознавать различные движения, вызываемые в душе: добрые — принимать, злые — отвергать"
+    ],
+    "evidence": [
+      "разумеется всякий способ испытывать совесть, размышлять, созерцать, молиться устно и мысленно",
+      "Ибо как прогулка, ходьба и бег суть упражнения телесные",
+      "отрешиться от всех беспорядочных привязанностей",
+      "ЧУВСТВОВАТЬ И РАСПОЗНАВАТЬ РАЗЛИЧНЫЕ ДВИЖЕНИЯ, ВЫЗЫВАЕМЫЕ В ДУШЕ"
+    ],
+    "evidence_sources": [
+      "ignatius.2pub.me/concepts/dukhovnye-uprazhneniya.md",
+      "ignatius.2pub.me/concepts/dukhovnye-uprazhneniya.md",
+      "ignatius.2pub.me/concepts/dukhovnye-uprazhneniya.md",
+      "ignatius.2pub.me/concepts/razlichenie-dukhov.md"
+    ]
+  },
+  {
+    "id": 11,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["hill", "schopenhauer"],
+    "correct_thinkers": ["hill", "schopenhauer"],
+    "tempting_thinkers": ["wattles", "james-allen", "nietzsche"],
+    "q": "Хилл и Шопенгауэр противоположно смотрят на желание. Сопоставь их по базе знаний каждого, с дословными цитатами.",
+    "required_facts": [
+      "Хилл: жгучее, глубоко укоренившееся желание — семя и отправная точка всякого достижения, двигатель успеха",
+      "Шопенгауэр: стремление не имеет насыщения; удовольствие лишь снимает помеху и никогда не длится долго, поэтому желание — источник вечного страдания; желать доли лучшей, чем есть, — слепая глупость, ожидания надо ограничить",
+      "Ось (как её формулирует база): желание — двигатель успеха vs источник вечного страдания"
+    ],
+    "evidence": [
+      "ЖЕЛАНИЕ — это семя всякого достижения",
+      "удовольствие есть состояние, которое никогда не может длиться долго",
+      "желать доли лучшей, чем есть, — слепая глупость",
+      "Ось: желание — двигатель успеха vs источник вечного страдания."
+    ],
+    "evidence_sources": [
+      "hill.2pub.me/concepts/desire.md",
+      "schopenhauer.2pub.me/concepts/futilnost-stremleniya.md",
+      "schopenhauer.2pub.me/concepts/futilnost-stremleniya.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 12,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["tolstoy", "wattles"],
+    "correct_thinkers": ["tolstoy", "wattles"],
+    "tempting_thinkers": ["hill", "smiles", "rockefeller"],
+    "q": "Толстой и Уоттлс дают противоположные ответы о богатстве. Сопоставь их позиции по базе знаний каждого, с дословными цитатами.",
+    "required_facts": [
+      "Уоттлс: обогащение — точная наука, как алгебра или арифметика; богатство — путь к полной жизни",
+      "Толстой: жизнь состоятельного круга — паразитизм («Я жил паразитом и, спросив себя, зачем я живу, получил ответ: ни зачем»); добывать жизнь надо не для себя, а для всех",
+      "Ось: богатство как путь к полноте жизни vs богатство как паразитизм (оба даже апеллируют к Богу/Евангелию, но читают их противоположно)"
+    ],
+    "evidence": [
+      "Я жил паразитом и, спросив себя, зачем я живу, получил ответ: ни зачем.",
+      "ему надо добывать ее не для себя, а для всех",
+      "Есть Наука о богатстве, и это точная наука, как алгебра или арифметика.",
+      "Богатство как путь к полноте жизни → богатство как паразитизм."
+    ],
+    "evidence_sources": [
+      "tolstoy.2pub.me/concepts/parazity-zhizni.md",
+      "tolstoy.2pub.me/concepts/trud-dobyvanie-zhizni.md",
+      "wattles.2pub.me/principles/bogatstvo-est-tochnaya-nauka.md",
+      "wattles.2pub.me/concepts/tolstoy-kontrast.md"
+    ]
+  },
+  {
+    "id": 13,
+    "kind": "cross-corpus contrast",
+    "split": "test",
+    "expect_kb": ["ford", "tolstoy"],
+    "correct_thinkers": ["ford", "tolstoy"],
+    "tempting_thinkers": ["smiles", "rockefeller", "hill"],
+    "q": "Форд и Толстой расходятся о машинах, индустрии и труде. Сопоставь их позиции по базе знаний каждого, с дословными цитатами.",
+    "required_facts": [
+      "Форд: власть и машина, деньги и товары ценны лишь тем, что освобождают для жизни — не машина отнимает жизнь, а её отсутствие; ручной надрыв — расточительство человека",
+      "Толстой: смысл — в простом труде народа, творящего жизнь («Действия же трудящегося народа... представились мне единым настоящим делом»); машинная цивилизация и разделение труда порабощают",
+      "Ось: отречение/опрощение vs продуктивная этика (машина как освободитель)"
+    ],
+    "evidence": [
+      "Power and machinery, money and goods, are useful only as they set us free to live.",
+      "не машина отнимает жизнь, а её отсутствие",
+      "Действия же трудящегося народа, творящего жизнь, представились мне единым настоящим делом.",
+      "Толстой видит в машинной цивилизации и разделении труда порабощение"
+    ],
+    "evidence_sources": [
+      "ford.2pub.me/principles/mashina-osvobozhdaet-dlya-zhizni.md",
+      "ford.2pub.me/principles/mashina-osvobozhdaet-dlya-zhizni.md",
+      "tolstoy.2pub.me/concepts/trud-dobyvanie-zhizni.md",
+      "ford.2pub.me/principles/mashina-osvobozhdaet-dlya-zhizni.md"
+    ]
+  },
+  {
+    "id": 14,
+    "kind": "cross-corpus contrast",
+    "split": "train",
+    "expect_kb": ["franklin", "larochefoucauld"],
+    "correct_thinkers": ["franklin", "larochefoucauld"],
+    "tempting_thinkers": ["smiles", "machiavelli", "hill"],
+    "q": "Франклин утверждает, что добродетель окупается; Ларошфуко — что добродетели суть переодетые пороки. Сопоставь обе позиции по базе знаний каждого, с дословными цитатами.",
+    "required_facts": [
+      "Франклин: порочные поступки вредны не потому, что запрещены, а запрещены, потому что вредны — поэтому быть добродетельным в интересах каждого; добродетель как выгодный навык не становится от этого хуже",
+      "Ларошфуко: наши добродетели — чаще всего переодетые пороки; пороки входят в состав добродетелей, как яд в состав лекарств; интерес говорит всеми языками",
+      "Ось: добродетель-навык, которая окупается vs переодетое себялюбие"
+    ],
+    "evidence": [
+      "но запрещены, потому что вредны",
+      "vicious actions are not hurtful because they are forbidden, but forbidden because they are hurtful",
+      "Our virtues are most frequently but vices disguised.",
+      "Vices enter into the composition of virtues as poison into that of medicines.",
+      "Ось: добродетель-навык, которая окупается vs переодетое себялюбие."
+    ],
+    "evidence_sources": [
+      "franklin.2pub.me/principles/prosveshchenny-egoizm.md",
+      "franklin.2pub.me/principles/prosveshchenny-egoizm.md",
+      "larochefoucauld.2pub.me/principles/dobrodeteli-pereodetye-poroki.md",
+      "larochefoucauld.2pub.me/principles/dobrodeteli-pereodetye-poroki.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 15,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "ford", "wattles", "tolstoy", "schopenhauer"],
+    "correct_thinkers": ["ford", "rockefeller", "smiles", "franklin", "wattles", "hill", "schopenhauer", "tolstoy", "laozi"],
+    "tempting_thinkers": ["goethe", "confucius", "machiavelli"],
+    "q": "Кто из мыслителей этой базы знаний видит в богатстве результат службы или точную науку, а кто — тщету и паразитизм? Назови минимум по два мыслителя на лагерь с их основаниями, по базе знаний.",
+    "required_facts": [
+      "Лагерь «за богатство» (минимум двое из): Форд (прибыль — награда за службу, труд — закон природы), Рокфеллер (успех налагает обязанности, давать надо научно), Уоттлс (обогащение — точная наука), Хилл (организованное усилие вокруг определённой цели), Франклин/Смайлс (трудолюбие и бережливость)",
+      "Лагерь «против» (минимум двое из): Толстой (жизнь его круга — паразитизм на труде народа), Шопенгауэр (то, что человек есть, важнее того, что он имеет; погоня тщетна), Лао-цзы (знающий меру доволен, довольство — богатство)",
+      "Противостояние сформулировано как ось из базы знаний, а не из общих знаний"
+    ],
+    "evidence": [
+      "прибыль — награда за службу, а не основа дела",
+      "обогащение — точная наука",
+      "жизнь его круга — паразитизм на труде народа",
+      "то, что человек есть, важнее того, что он имеет"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md",
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md",
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md",
+      "philosophers.2pub.me/ru/topics/bogatstvo-i-trud.md"
+    ]
+  },
+  {
+    "id": 16,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "montaigne", "epictetus", "tolstoy", "larochefoucauld"],
+    "correct_thinkers": ["montaigne", "epictetus", "tolstoy", "pascal", "schopenhauer", "larochefoucauld", "confucius"],
+    "tempting_thinkers": ["nietzsche", "ignatius", "goethe"],
+    "q": "Как мыслители этой базы знаний расходятся в отношении к смерти? Выдели минимум три разные позиции с их носителями, по базе знаний.",
+    "required_facts": [
+      "Лагерь упражнения: Монтень (философствовать — учиться умирать; продумавший смерть свободен) и Эпиктет (держи смерть перед глазами ежедневно)",
+      "Смерть как экзамен смысла: Толстой (смерть уничтожает всякий конечный смысл; годится лишь смысл, которого смерть не уничтожает) и/или Паскаль (мыслящий тростник, приговорённый и знающий об этом)",
+      "Лагерь разоблачения: Ларошфуко («презрение к смерти» мудрецов — поза; постоянство философов создано необходимостью умирать) и/или Конфуций (не зная жизни, как знать смерть)"
+    ],
+    "evidence": [
+      "философствовать — учиться умирать: продумавший смерть свободен",
+      "смерть уничтожает всякий конечный смысл",
+      "«презрение к смерти» мудрецов — поза",
+      "держи смерть перед глазами ежедневно",
+      "The necessity of dying created all the constancy of philosophers."
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "philosophers.2pub.me/ru/topics/smert.md",
+      "larochefoucauld.2pub.me/concepts/prezrenie-k-smerti.md"
+    ]
+  },
+  {
+    "id": 17,
+    "kind": "hub-orientation",
+    "split": "test",
+    "expect_kb": ["philosophers", "lebon", "adler", "nietzsche", "montaigne"],
+    "correct_thinkers": ["lebon", "nietzsche", "larochefoucauld", "montaigne", "adler", "confucius", "tolstoy"],
+    "also_defensible": ["franklin", "smiles", "machiavelli"],
+    "tempting_thinkers": ["epictetus", "pascal", "schopenhauer"],
+    "q": "Кто в этой базе знаний утверждает, что толпа/масса растворяет личность, а кто отвечает, что общность — критерий и форма человеческой ценности? Назови мыслителей и их основания по базе знаний.",
+    "required_facts": [
+      "Сторона растворения: Ле Бон (в толпе личность исчезает — толпа новое существо) и/или Ницше (стадная мораль называет злым всё, что возвышает отдельного) и/или Монтень (сохрани заднюю лавку — комнату целиком свою)",
+      "Сторона общности: Адлер (чувство общности — единственный критерий ценности человека) и/или Конфуций (общество держится ритуалом, именами и отношениями) и/или Толстой (смысл ищи у народа, который делает жизнь)",
+      "Ось названа так, как её проводит база (Ле Бон против Адлера и Конфуция), а не из общих знаний"
+    ],
+    "evidence": [
+      "в толпе личность исчезает: толпа — новое существо",
+      "чувство общности — единственный критерий ценности человека",
+      "стадная мораль называет злым всё, что возвышает отдельного",
+      "сохрани заднюю лавку"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md",
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md",
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md",
+      "philosophers.2pub.me/ru/topics/tolpa-i-obshchestvo.md"
+    ]
+  },
+  {
+    "id": 18,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "laozi", "smiles", "franklin", "hill", "james-allen", "ford"],
+    "correct_thinkers": ["laozi", "smiles", "franklin", "hill", "james-allen", "ford"],
+    "also_defensible": ["confucius", "machiavelli", "nietzsche"],
+    "tempting_thinkers": ["epictetus", "schopenhauer", "wattles"],
+    "q": "Кого из мыслителей усилия и самопомощи эта база знаний противопоставляет недеянию (у-вэй) Лао-цзы и по каким осям? Назови минимум двух оппонентов с осями, по базе знаний.",
+    "required_facts": [
+      "Названы минимум двое индексированных оппонентов: Смайлс (самопомощь vs недеяние), Франклин (метод и учёт vs недеяние), Хилл (желание и определённая цель vs безжелание и мягкая сила), Джеймс Аллен (волевое возделывание ума vs растёт само), Форд (деятельное улучшение vs недеяние)",
+      "Сторона Лао-цзы: усилие, «resolute determination» и учёт разрушают то, что растёт само; мягкое побеждает твёрдое",
+      "Оси названы так, как их проводит индекс противоречий базы, а не из общих знаний"
+    ],
+    "evidence": [
+      "Ось: самопомощь vs недеяние.",
+      "«resolute determination» разрушает то, что растёт само",
+      "Ось: метод и учёт vs недеяние.",
+      "Ось: желание и определённая цель vs безжелание и мягкая сила.",
+      "Ось: деятельное улучшение vs недеяние."
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md (also laozi.2pub.me/see-also.md)",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 19,
+    "kind": "hub-orientation",
+    "split": "train",
+    "expect_kb": ["philosophers", "machiavelli", "larochefoucauld", "lebon", "confucius", "tolstoy"],
+    "correct_thinkers": ["machiavelli", "larochefoucauld", "lebon", "confucius", "tolstoy"],
+    "also_defensible": ["ford", "epictetus", "hill", "laozi", "smiles", "rockefeller"],
+    "tempting_thinkers": ["nietzsche", "franklin"],
+    "q": "Кто в этой базе знаний — союзники Макиавелли по трезвому диагнозу, а кто оппоненты его правления страхом и видимостью — и на каких основаниях? Обоснуй ответ по базе знаний.",
+    "required_facts": [
+      "Союзники по диагнозу: Ларошфуко (самолюбие внутри vs техника власти снаружи — «союзники по трезвости») и Ле Бон (механика психологии массы vs техника государя — «союзники-диагносты»)",
+      "Хотя бы один оппонент с осью из индекса: Конфуций (правление через добродетель и пример vs через страх и видимость) или Толстой (сила и необходимость vs совесть и непротивление)",
+      "Основания изложены так, как их проводит индекс противоречий базы"
+    ],
+    "evidence": [
+      "союзники по трезвости",
+      "союзники-диагносты",
+      "Ось: правление через добродетель и пример vs через страх и видимость.",
+      "Ось: сила и необходимость vs совесть и непротивление.",
+      "казаться важнее, чем быть"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md (also machiavelli.2pub.me/_instructions.md)"
+    ]
+  },
+  {
+    "id": 20,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["wattles", "epictetus"],
+    "correct_thinkers": ["wattles", "epictetus"],
+    "tempting_thinkers": ["james-allen", "hill", "tolstoy"],
+    "q": "База знаний Уоттлса называет один спор «самым острым спором базы» и наводит мост к стоику. Что это за спор, какова его ось и что утверждает каждая сторона? Пройди по мосту в базу второго мыслителя.",
+    "required_facts": [
+      "Мост — Уоттлс против Эпиктета, помечен как самый острый спор базы; ось: «внешнее не в нашей власти» vs «внешнее ты можешь вызвать мыслью»",
+      "Эпиктет: в нашей власти только суждения и воля; тело, имущество, репутация — нет; мудрость — не желать внешнего",
+      "Уоттлс: границы контроля нет — мысль плюс личное действие вызывают внешние условия; никакая комбинация обстоятельств не победит действующего научно"
+    ],
+    "evidence": [
+      "«внешнее ты можешь вызвать мыслью»",
+      "Самый острый спор базы",
+      "Из существующего одно в нашей власти, другое не в нашей власти",
+      "Никакая возможная комбинация обстоятельств не может победить"
+    ],
+    "evidence_sources": [
+      "wattles.2pub.me/concepts/epictetus-kontrast.md",
+      "wattles.2pub.me/concepts/epictetus-kontrast.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "wattles.2pub.me/principles/bogatstvo-est-tochnaya-nauka.md"
+    ]
+  },
+  {
+    "id": 21,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["schopenhauer", "nietzsche"],
+    "correct_thinkers": ["schopenhauer", "nietzsche"],
+    "tempting_thinkers": ["goethe", "tolstoy"],
+    "q": "В базе знаний Шопенгауэра есть мостовая нота о нём как предтече и позднейшей мишени Ницше. Каковы три оси этого спора? Пройди по мосту и подкрепи хотя бы одну ось из базы Ницше.",
+    "required_facts": [
+      "Ось 1: воля к жизни → воля к власти (Шопенгауэр: слепая ненасытная воля, от которой надо освободиться; Ницше: сама жизнь есть воля к власти, её утверждают, а не отрицают)",
+      "Ось 2: отрицание страдания → воспитание страданием",
+      "Ось 3: сострадание — основа морали → сострадание — опасность («сострадание против сострадания»)"
+    ],
+    "evidence": [
+      "сделал шопенгауэровский пессимизм и этику сострадания главной мишенью переоценки",
+      "Воля к жизни → воля к власти",
+      "Сострадание-основа → сострадание-опасность",
+      "Итак, сострадание против сострадания!",
+      "Наше сострадание более высокое и более дальновидное"
+    ],
+    "evidence_sources": [
+      "schopenhauer.2pub.me/concepts/nietzsche-predtecha.md",
+      "schopenhauer.2pub.me/concepts/nietzsche-predtecha.md",
+      "schopenhauer.2pub.me/concepts/nietzsche-predtecha.md",
+      "nietzsche.2pub.me/concepts/sostradanie-zhalost.md",
+      "nietzsche.2pub.me/concepts/sostradanie-zhalost.md"
+    ]
+  },
+  {
+    "id": 22,
+    "kind": "cross-link-following",
+    "split": "test",
+    "expect_kb": ["tolstoy", "epictetus"],
+    "correct_thinkers": ["tolstoy", "epictetus"],
+    "tempting_thinkers": ["schopenhauer", "montaigne", "pascal"],
+    "q": "База знаний Толстого ссылается на одного стоика как на пира (peer). Кто это, что Толстой у него взял и в чём собственная центральная доктрина этого стоика в его базе? Пройди по ссылке.",
+    "required_facts": [
+      "Peer-ссылка ведёт к Эпиктету: Толстой опирался на стоиков — власть над собой и безразличие к внешнему («что в нашей власти» — у Эпиктета)",
+      "Собственная доктрина Эпиктета: одно в нашей власти (мнение, побуждение, желание, уклонение), другое нет; то, что в нашей власти, по природе свободно, остальное немощно и рабственно"
+    ],
+    "evidence": [
+      "Толстой опирался на стоиков: власть над собой и безразличие к внешнему.",
+      "И то, что в нашей власти, по природе свободно",
+      "а то, что не в нашей власти, немощно, рабственно"
+    ],
+    "evidence_sources": [
+      "tolstoy.2pub.me/peer-epictetus.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md"
+    ]
+  },
+  {
+    "id": 23,
+    "kind": "cross-link-following",
+    "split": "train",
+    "expect_kb": ["goethe", "schopenhauer", "nietzsche"],
+    "correct_thinkers": ["goethe", "schopenhauer", "nietzsche"],
+    "also_defensible": ["tolstoy", "ignatius", "pascal", "confucius", "machiavelli", "laozi"],
+    "tempting_thinkers": ["montaigne", "franklin"],
+    "q": "В базе знаний Гёте есть карта дебатов («Гёте в дебатах»). Какую общую позицию она даёт Гёте, против кого выставляет фронты и в чём линия Гёте против Шопенгауэра? Процитируй базу знаний.",
+    "required_facts": [
+      "Карта даёт Гёте деятельный, благоговейный, антиметафизический реализм; фронты — против Шопенгауэра, с Ницше и против него (почитаемый предок с разломом о мере/границах), против Толстого и Игнатия, против Паскаля",
+      "Против Шопенгауэра: деятельная жизнь против отставки от воли — ум с деятельными силами при ближайшей задаче есть достойнейшее на земле; жаль тех, кто теряется в созерцании земной тщеты — мы здесь, чтобы сделать преходящее непреходящим",
+      "Отмечена асимметрия: у Гёте ~19 концептов с блоками «Контраст для дебатов», а базы-оппоненты почти не отвечают (по индексу противоречий хаба)"
+    ],
+    "evidence": [
+      "Мне жаль людей, которые много носятся с бренностью всех вещей",
+      "деятельный, благоговейный, антиметафизический реализм",
+      "«последним немцем, которого я почитаю»",
+      "у Гёте ~19 концептов с блоками «Контраст для дебатов»"
+    ],
+    "evidence_sources": [
+      "goethe.2pub.me/concepts/goethe-v-debatakh.md",
+      "goethe.2pub.me/concepts/goethe-v-debatakh.md",
+      "goethe.2pub.me/concepts/goethe-v-debatakh.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 24,
+    "kind": "cross-link-following",
+    "split": "test",
+    "expect_kb": ["wattles", "larochefoucauld"],
+    "correct_thinkers": ["wattles", "larochefoucauld"],
+    "tempting_thinkers": ["franklin", "hill", "smiles"],
+    "q": "База знаний Уоттлса наводит мост спора, который называет «спором психолога подозрения с проповедником изобилия». С кем спор, о чём, и что утверждает каждая сторона? Пройди по мосту в базу оппонента.",
+    "required_facts": [
+      "Мост — Уоттлс против Ларошфуко; ось: «дай больше, чем берёшь» vs «всякая добродетель — переодетый интерес»",
+      "Уоттлс: давай каждому больше в потребительской ценности, чем берёшь в денежной — щедрость выгодна и потому подлинна",
+      "Ларошфуко: это amour-propre в новой упаковке — то, что зовут добродетелью, часто лишь набор действий и интересов, устроенный фортуной или ловкостью"
+    ],
+    "evidence": [
+      "«всякая добродетель — переодетый интерес»",
+      "спор психолога подозрения с проповедником изобилия",
+      "What we term virtue is often but a mass of various actions and divers interests",
+      "Давай каждому больше в потребительской ценности, чем берёшь у него в денежной стоимости"
+    ],
+    "evidence_sources": [
+      "wattles.2pub.me/concepts/la-rochefoucauld-kontrast.md",
+      "wattles.2pub.me/concepts/la-rochefoucauld-kontrast.md",
+      "larochefoucauld.2pub.me/principles/dobrodeteli-pereodetye-poroki.md",
+      "wattles.2pub.me/principles/otdavat-bolshe-polzy-chem-berosh.md"
+    ]
+  },
+  {
+    "id": 25,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["epictetus", "james-allen"],
+    "correct_thinkers": ["epictetus", "james-allen"],
+    "tempting_thinkers": ["wattles", "hill"],
+    "q": "Эпиктет и Джеймс Аллен оба начинают с «работай над суждениями/мыслями» — где именно они расходятся? Синтезируй противоречие с цитатами из обеих баз знаний.",
+    "required_facts": [
+      "Эпиктет проводит жёсткую границу: наше — только суждение/воля; тело и обстоятельства не в нашей власти — немощны, рабственны, безразличны",
+      "Джеймс Аллен стирает границу: мысль — причина вплоть до тела и обстоятельств; обстоятельство не делает человека, а раскрывает его; люди притягивают не то, что хотят, а то, что они есть",
+      "Ось (как её формулирует база): граница контроля — только суждение vs мысль-причина до тела и обстоятельств"
+    ],
+    "evidence": [
+      "а то, что не в нашей власти, немощно, рабственно, подвержено запрету",
+      "Circumstance does not make the man; it reveals him to himself",
+      "Люди притягивают не то, что *хотят*, а то, чем они *являются*",
+      "Ось: граница контроля — только суждение vs мысль-причина до тела и обстоятельств."
+    ],
+    "evidence_sources": [
+      "epictetus.2pub.me/concepts/dihotomiya-kontrolya.md",
+      "james-allen.2pub.me/concepts/thought-and-circumstance.md",
+      "james-allen.2pub.me/concepts/thought-and-circumstance.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 26,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["nietzsche", "tolstoy"],
+    "correct_thinkers": ["nietzsche", "tolstoy"],
+    "tempting_thinkers": ["schopenhauer", "larochefoucauld", "ignatius"],
+    "q": "Ницше называет смирение и полезный труд рабской моралью; Толстой — силой жизни. Синтезируй это противоречие с цитатами из обеих баз знаний.",
+    "required_facts": [
+      "Ницше: мораль рабов по существу — мораль полезности, рождённая страхом; отречение и сострадание — симптом слабой воли",
+      "Толстой: вера есть сила жизни — смирение и труд суть сила, а не слабость; знание смысла жизни, вследствие которого человек не уничтожает себя, а живёт",
+      "Ось (как её формулирует база): мораль рабов vs мораль господ, где Толстой стоит на противоположной стороне диагноза Ницше"
+    ],
+    "evidence": [
+      "Мораль рабов по существу своему есть мораль полезности.",
+      "Вера есть сила жизни.",
+      "Ось: мораль рабов vs мораль господ.",
+      "смирение и труд — сила жизни, а не слабость"
+    ],
+    "evidence_sources": [
+      "nietzsche.2pub.me/concepts/moral-rabov-i-gospod.md",
+      "tolstoy.2pub.me/concepts/vera-sila-zhizni.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "philosophers.2pub.me/ru/contradictions.md"
+    ]
+  },
+  {
+    "id": 27,
+    "kind": "contradiction-synthesis",
+    "split": "test",
+    "expect_kb": ["adler", "nietzsche"],
+    "correct_thinkers": ["adler", "nietzsche"],
+    "tempting_thinkers": ["hill", "lebon", "schopenhauer"],
+    "q": "Адлер и Ницше оба ставят стремление вверх в центр человеческой жизни, но выводят его из противоположных источников и расходятся об общности. Синтезируй это противоречие с цитатами из обеих баз знаний.",
+    "required_facts": [
+      "Адлер: стремление начинается с дефицита — чувство неполноценности есть движущая сила и отправная точка всякого детского стремления; чувство общности — единственный критерий ценности человека",
+      "Ницше: стремление — из избытка силы; чувство общности — стадная мораль (мораль в Европе нынче — мораль стадных животных)",
+      "Ось (как её формулирует база): стремление вверх из дефицита vs из избытка"
+    ],
+    "evidence": [
+      "Ось: стремление вверх из дефицита vs из избытка.",
+      "is the driving force, the starting point",
+      "is the sole criterion of human values",
+      "стремление — из избытка силы",
+      "Мораль в Европе есть нынче мораль стадных животных"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "adler.2pub.me/concepts/chuvstvo-nepolnotsennosti.md",
+      "adler.2pub.me/principles/chuvstvo-obshchnosti-edinstvennyy-kriteriy.md",
+      "philosophers.2pub.me/ru/contradictions.md",
+      "nietzsche.2pub.me/concepts/stadnaya-moral.md"
+    ]
+  },
+  {
+    "id": 28,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["laozi", "smiles"],
+    "correct_thinkers": ["laozi", "smiles"],
+    "tempting_thinkers": ["franklin", "hill", "james-allen", "ford"],
+    "q": "Самопомощь Смайлса и недеяние Лао-цзы прямо противоречат друг другу. Синтезируй противоречие с цитатами из обеих баз знаний.",
+    "required_facts": [
+      "Смайлс: небо помогает тем, кто помогает себе; помощь извне расслабляет, помощь изнутри неизменно укрепляет; упорство строит характер",
+      "Лао-цзы: нарочитое усилие разрушает то, что растёт само — кто действует с умыслом, вредит; мягкое побеждает твёрдое, слабое — сильное",
+      "Ось (как её формулирует база): самопомощь vs недеяние"
+    ],
+    "evidence": [
+      "небо помогает тем, кто помогает себе; упорство строит характер",
+      "Help from without is often enfeebling in its effects, but help from within invariably invigorates.",
+      "The soft overcomes the hard; and the weak the strong.",
+      "He who acts (with an ulterior purpose) does harm",
+      "Помощь извне часто расслабляет, а помощь изнутри неизменно укрепляет"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "smiles.2pub.me/concepts/self-help.md",
+      "laozi.2pub.me/concepts/rouruo.md",
+      "laozi.2pub.me/concepts/wuwei.md",
+      "smiles.2pub.me/concepts/self-help.md"
+    ]
+  },
+  {
+    "id": 29,
+    "kind": "contradiction-synthesis",
+    "split": "test",
+    "expect_kb": ["rockefeller", "tolstoy"],
+    "correct_thinkers": ["rockefeller", "tolstoy"],
+    "also_defensible": ["larochefoucauld"],
+    "tempting_thinkers": ["ford", "franklin", "hill"],
+    "q": "Рокфеллер проповедует научную филантропию; Толстой называет «эффективную филантропию» самооправданием богатого. Синтезируй это противоречие с цитатами из обеих баз знаний.",
+    "required_facts": [
+      "Рокфеллер: лучшая филантропия приносит больше всего добра и меньше всего вреда; даяние — дисциплина, а не воскресный импульс сердца; деньги без изучения — жалкое подношение",
+      "Толстой: отрёкся от жизни своего круга как паразитизма; ответ — не администрирование богатства, а отказ от собственности («эффективная филантропия» — самооправдание богатого)",
+      "Ось (как её формулирует база): администрирование богатства vs раздать и покаяться"
+    ],
+    "evidence": [
+      "«эффективная филантропия» — самооправдание богатого",
+      "The best philanthropy, the help that does the most good and the least harm",
+      "не воскресный импульс сердца, а дисциплина",
+      "Я отрекся от жизни нашего круга",
+      "Толстой требует не «эффективного» распределения богатства, а отказа от собственности"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "rockefeller.2pub.me/principles/davat-nado-nauchno.md",
+      "rockefeller.2pub.me/principles/davat-nado-nauchno.md",
+      "tolstoy.2pub.me/concepts/parazity-zhizni.md",
+      "rockefeller.2pub.me/principles/davat-nado-nauchno.md"
+    ]
+  },
+  {
+    "id": 30,
+    "kind": "contradiction-synthesis",
+    "split": "train",
+    "expect_kb": ["montaigne", "nietzsche"],
+    "correct_thinkers": ["montaigne", "nietzsche"],
+    "tempting_thinkers": ["epictetus", "pascal", "goethe"],
+    "q": "Монтень призывает жить по общей мере человека; Ницше видит величие в отдельности и возвышении типа «человек». Синтезируй это противоречие с цитатами из обеих баз знаний.",
+    "required_facts": [
+      "Монтень: трансцендентальные капризы пугают его — желающие выйти из человека превращаются в зверей, а не в ангелов; и на ходулях идёшь своими ногами; прекраснейшие жизни равняются на общую человеческую модель",
+      "Ницше: самый великий тот, кто может быть самым одиноким, самым непохожим; всякое возвышение типа «человек» — дело аристократического общества",
+      "Ось (как её формулирует база): общая мера человека vs сверхчеловек/величие-в-отдельности"
+    ],
+    "evidence": [
+      "Ось: общая мера человека vs сверхчеловек.",
+      "на ходулях всё равно идёшь своими ногами",
+      "instead of transforming themselves into angels, they transform themselves into beasts",
+      "самый великий тот, кто может быть самым одиноким",
+      "Всякое возвышение типа «человек» было до сих пор — и будет всегда — делом аристократического общества"
+    ],
+    "evidence_sources": [
+      "philosophers.2pub.me/ru/contradictions.md",
+      "montaigne.2pub.me/concepts/obshchaya-mera-cheloveka.md",
+      "montaigne.2pub.me/concepts/obshchaya-mera-cheloveka.md",
+      "nietzsche.2pub.me/principles/velichie-v-otdelnosti.md",
+      "nietzsche.2pub.me/concepts/znatnost-ranga.md"
+    ]
+  }
+]
