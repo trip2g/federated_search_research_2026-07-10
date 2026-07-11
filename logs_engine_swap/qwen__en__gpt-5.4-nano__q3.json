@@ -1,0 +1,228 @@
+{
+  "model": "openai/gpt-5.4-nano",
+  "condition": "flat-hybrid-qwen",
+  "lang": "en",
+  "qid": 3,
+  "q": "State Epictetus's core principle about what is and is not 'up to us', with a verbatim quote from the knowledge base in the source language.",
+  "kind": "principle understanding",
+  "wall_s": 37.9,
+  "judge": {
+    "verdict": "partial",
+    "facts_covered": [
+      2
+    ],
+    "note": "Ответ дает цитату о том, что неподвластное не касается нас, но не перечисляет ни «наши акты» (мнение/желание и т.п.), ни «вещи в нашей власти свободны и не скованы», которые требуются в фактах 1 и 3.",
+    "raw": "{\n  \"facts_covered\": [2],\n  \"note\": \"Ответ дает цитату о том, что неподвластное не касается нас, но не перечисляет ни «наши акты» (мнение/желание и т.п.), ни «вещи в нашей власти свободны и не скованы», которые требуются в фактах 1 и 3.\"\n}",
+    "judge_cost": 0.000177
+  },
+  "confusion": {
+    "misattributions": [],
+    "blending": false,
+    "note": "Буквальная цитата и приписывание относятся к Эпиктету; приписываний чужих позиций или смешения мыслителей не обнаружено.",
+    "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"Буквальная цитата и приписывание относятся к Эпиктету; приписываний чужих позиций или смешения мыслителей не обнаружено.\"\n}",
+    "judge_cost": 0.000162
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Epictetus: epictetus/concepts/dihotomiya-kontrolya — core principle of control: if it concerns what is not in our power, say “it does not concern me.”",
+        "path": "epictetus/concepts/dihotomiya-kontrolya",
+        "corpus": "epictetus",
+        "named": [
+          "epictetus"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 1,
+    "fabricated": 0,
+    "hub_cites": 0,
+    "judgeable": 1,
+    "author_mismatch": 0,
+    "provenance_ok": 1
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-nano",
+    "lang": "en",
+    "qid": 3,
+    "verdict": "partial",
+    "facts_covered": 1,
+    "facts_required": 3,
+    "misattributions": 0,
+    "blending": false,
+    "cites": 1,
+    "cites_fabricated": 0,
+    "cites_judgeable": 1,
+    "cites_author_mismatch": 0,
+    "cites_hub": 0,
+    "retrieval_results": 24,
+    "retrieval_offtarget": 4,
+    "origins": {
+      "HYBRID": 3,
+      "VECTOR": 21
+    },
+    "quotes": 1,
+    "quotes_valid": 0,
+    "tool_calls": 3,
+    "first_relevant_call": null,
+    "forced_final": false,
+    "cost_usd": 0.00133,
+    "wall_s": 37.9
+  },
+  "trace": [
+    {
+      "cost": 0.0001,
+      "model_ms": 1799,
+      "tokens": {
+        "in": 317,
+        "out": 30
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет что от нас зависит что не от нас цитата"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/proairesis",
+            "epictetus/operatsionnaya-ramka",
+            "epictetus/concepts/sudzhdeniya-ne-veshchi",
+            "schopenhauer/concepts/zdorove_osnova",
+            "wattles/concepts/epictetus_kontrast",
+            "philosophers/ru/topics/sudba_i_kontrol",
+            "philosophers/ru/topics/svoboda",
+            "epictetus/moc"
+          ],
+          "origins": [
+            "HYBRID",
+            "HYBRID",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/proairesis\n[HYBRID score=0.985] Проайресис (προαίρεσις) — способность выбора\n……ность выбора\nЯдро человека для Эпиктета — не тело и не обстоятельства, а προαίρεσις:способность выбирать, соглашаться, стремиться и уклоняться. У Лонга она названапросто «will» (воля). Именно она — то……\n\n### epictetus/operatsionnaya-ramka\n[HYBRID score=0.968] Операционная рамка: дихотомия контроля как модель управления (для управления и агентов)\n……е, а исход отпустить. Ниже — рамки из этой базы; цитата —подлинные слова Эпиктета (в переводе базы), «Применение» — уже наш комментарий,не часть цитаты.\n1. Раздели вход и исход\nКорневой раздел всей си……\n\n### epictetus/concepts/sudzhdeniya-ne-veshchi\n[VECTOR score=0.701] Беспокоят не вещи, а суждения о них\n…# Беспокоят не вещи, а суждения о них Са",
+          "ms": 8938
+        }
+      ]
+    },
+    {
+      "cost": 0.00028,
+      "model_ms": 1377,
+      "tokens": {
+        "in": 1183,
+        "out": 38
+      },
+      "tool_calls": [
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет τὰ ἐφ' ἡμῖν не в нашей власти цитата"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/moc",
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "wattles/concepts/epictetus_kontrast",
+            "epictetus/quote_authenticity",
+            "philosophers/ru/contradictions",
+            "epictetus/concepts/bezrazlichie-k-vneshnemu",
+            "epictetus/principles/razlichay-podvlastnoe",
+            "epictetus/operatsionnaya-ramka"
+          ],
+          "origins": [
+            "HYBRID",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/moc\n[HYBRID score=0.999] Эпиктет — карта базы знаний\n…… — «перевод наш». Для тем без опоры в корпусе база отвечаетNO_RELEVANT_KB_EVIDENCE.\nПонятия (concepts/)\nЯдро: что в нашей власти\ndihotomiya-kontrolya — раздел «наше / не наше» (τὰ ἐφ&#39; ἡμῖν)proairesis ……\n\n### epictetus/concepts/dihotomiya-kontrolya\n[VECTOR score=0.656] Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n…�о не в нашей власти; и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается». ## Links - [[proairesis]] — то единственное «в нашей власти» и есть προαίρεσις,...…\n\n### wattles/concepts/epictetus_kontrast\n[VECTOR score=0.633] Контраст для дебатов: Уоттлс против Эпиктета\n…изни» и оба зовут действовать в настоящем — но расходятся в исходной аксиоме о том, что вообще в нашей власти. ## Ось ",
+          "ms": 8377
+        }
+      ]
+    },
+    {
+      "cost": 0.00047,
+      "model_ms": 1499,
+      "tokens": {
+        "in": 2099,
+        "out": 39
+      },
+      "tool_calls": [
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "«оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается» Эпиктет"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "wattles/concepts/epictetus_kontrast",
+            "epictetus/principles/razlichay-podvlastnoe",
+            "philosophers/en/hub/epictetus",
+            "epictetus/moc",
+            "philosophers/ru/hub/epictetus",
+            "philosophers/ru/contradictions",
+            "philosophers/ru/topics/vlast"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/dihotomiya-kontrolya\n[VECTOR score=0.982] Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n…�о не в нашей власти; и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается». ## Links - [[proairesis]] — то единственное «в нашей власти» и есть προαίρεσις,...…\n\n### wattles/concepts/epictetus_kontrast\n[VECTOR score=0.962] Контраст для дебатов: Уоттлс против Эпиктета\n…изни» и оба зовут действовать в настоящем — но расходятся в исходной аксиоме о том, что вообще в нашей власти. ## Ось спора **«Внешнее не в нашей власти» → «внешнее ты можешь вызвать мыслью».**...…\n\n### epictetus/principles/razlichay-podvlastnoe\n[VECTOR score=0.915] Различай подвластное и неподвластное — и живи только в первом\n…idion I. Перевод наш: «...и если оно касается чего-либо не в наше",
+          "ms": 10129
+        }
+      ]
+    },
+    {
+      "cost": 0.00048,
+      "model_ms": 1989,
+      "tokens": {
+        "in": 2965,
+        "out": 132
+      },
+      "final_text": "Эпиктет проводит базовую границу между тем, что подвластно нам, и тем, что — нет:  \n\n«**…если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается».**»  \n\n(В источнике это формулируется как принцип дихотомии контроля: различать подвластное и неподвластное.)  \n\n## SOURCES\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — core principle of control: if it concerns what is not in our power, say “it does not concern me.”"
+    }
+  ],
+  "final": "Эпиктет проводит базовую границу между тем, что подвластно нам, и тем, что — нет:  \n\n«**…если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается».**»  \n\n(В источнике это формулируется как принцип дихотомии контроля: различать подвластное и неподвластное.)  \n\n## SOURCES\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — core principle of control: if it concerns what is not in our power, say “it does not concern me.”",
+  "forced_final": false,
+  "tool_calls": 3,
+  "first_relevant_call": null,
+  "model_ms": 6664,
+  "tool_ms": 27444,
+  "grounding": {
+    "quotes": 1,
+    "quotes_in_retrieval": 0
+  },
+  "retrieved_chars": 7083,
+  "retrieval": {
+    "results": 24,
+    "offtarget": 4,
+    "offtarget_corpora": {
+      "schopenhauer": 1,
+      "wattles": 3
+    },
+    "origins": {
+      "HYBRID": 3,
+      "VECTOR": 21
+    }
+  }
+}

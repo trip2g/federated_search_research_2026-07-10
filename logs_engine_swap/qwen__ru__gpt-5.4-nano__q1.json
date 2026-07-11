@@ -1,0 +1,238 @@
+{
+  "model": "openai/gpt-5.4-nano",
+  "condition": "flat-hybrid-qwen",
+  "lang": "ru",
+  "qid": 1,
+  "q": "Что Ницше понимает под волей к власти? Ответь только по базе знаний и приведи дословную цитату на языке источника.",
+  "kind": "single-corpus grounding",
+  "wall_s": 31.5,
+  "judge": {
+    "verdict": "partial",
+    "facts_covered": [
+      2
+    ],
+    "note": "Ответ дословно подтверждает, что воля к власти — не самосохранение; про стремление проявлять силу/рост/присваивать/навязывать форму в требуемом виде, а также про непреимущественно политическую жажду и распространение на познание/философию — не подтверждено полностью.",
+    "raw": "{\"facts_covered\":[2],\"note\":\"Ответ дословно подтверждает, что воля к власти — не самосохранение; про стремление проявлять силу/рост/присваивать/навязывать форму в требуемом виде, а также про непреимущественно политическую жажду и распространение на познание/философию — не подтверждено полностью.\"}",
+    "judge_cost": 0.00022
+  },
+  "confusion": {
+    "misattributions": [],
+    "blending": false,
+    "note": "Атрибуция в целом верная: оба цитируемых тезиса относятся к Ницше, и «не самосохранение» приписано ему же; смешения разных мыслителей нет.",
+    "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"Атрибуция в целом верная: оба цитируемых тезиса относятся к Ницше, и «не самосохранение» приписано ему же; смешения разных мыслителей нет.\"\n}",
+    "judge_cost": 0.000206
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Ницше: nietzsche/concepts/volya_k_vlasti — определяет волю к власти как не самосохранение, а стремление проявлять силу (рост, присвоение, навязывание формы)",
+        "path": "nietzsche/concepts/volya_k_vlasti",
+        "corpus": "nietzsche",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Ницше: philosophers/ru/hub/nietzsche — кратко: «жизнь как воля к власти, не самосохранение (bge.13)»",
+        "path": "philosophers/ru/hub/nietzsche",
+        "corpus": "philosophers",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": true,
+        "author_match": null
+      }
+    ],
+    "total": 2,
+    "fabricated": 0,
+    "hub_cites": 1,
+    "judgeable": 1,
+    "author_mismatch": 0,
+    "provenance_ok": 1
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-nano",
+    "lang": "ru",
+    "qid": 1,
+    "verdict": "partial",
+    "facts_covered": 1,
+    "facts_required": 3,
+    "misattributions": 0,
+    "blending": false,
+    "cites": 2,
+    "cites_fabricated": 0,
+    "cites_judgeable": 1,
+    "cites_author_mismatch": 0,
+    "cites_hub": 1,
+    "retrieval_results": 24,
+    "retrieval_offtarget": 1,
+    "origins": {
+      "VECTOR": 23,
+      "HYBRID": 1
+    },
+    "quotes": 3,
+    "quotes_valid": 1,
+    "tool_calls": 3,
+    "first_relevant_call": 1,
+    "forced_final": false,
+    "cost_usd": 0.00146,
+    "wall_s": 31.5
+  },
+  "trace": [
+    {
+      "cost": 0.00011,
+      "model_ms": 1333,
+      "tokens": {
+        "in": 316,
+        "out": 36
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Ницше воля к власти что понимает под волей к власти дословная цитата"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "nietzsche/moc",
+            "philosophers/ru/hub/nietzsche",
+            "philosophers/ru/topics/volya",
+            "schopenhauer/concepts/volya_k_zhizni",
+            "philosophers/ru/contradictions",
+            "philosophers/ru/topics/vlast",
+            "nietzsche/concepts/volya_k_istine"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=1.000] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а...…\n\n### nietzsche/moc\n[VECTOR score=0.982] Ницше — карта базы знаний\n…## Понятия (concepts/) ### Ядро: власть, истина, перспектива - [[volya-k-vlasti]] — жизнь как воля к власти, не самосохранение - [[volya-k-istine]] — подозрение к «истине любой ценой» -...…\n\n### philosophers/ru/hub/nietzsche\n[VECTOR score=0.964] Ницше — По ту сторону добра и зла\n…�я к власти](https://nietzsche.2pub.me/volya-k-vlasti) — жизнь как воля к власти, не самосохранение (bge.13); самый уплощаемый термин. ## Не уплощать - Воля к власти ≠ политическая ",
+          "ms": 6308
+        }
+      ]
+    },
+    {
+      "cost": 0.00028,
+      "model_ms": 1529,
+      "tokens": {
+        "in": 1101,
+        "out": 44
+      },
+      "tool_calls": [
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "нет самосохранение стремление проявлять силу расти присваивать навязывать форму BGE воля к власти дословно"
+          },
+          "result_ok": true,
+          "paths": [
+            "nietzsche/concepts/volya_k_vlasti",
+            "nietzsche/principles/zhizn_est_volya_k_vlasti",
+            "nietzsche/concepts/samopreodolenie",
+            "nietzsche/chains/ot_voli_k_istine_k_vole_k_vlasti",
+            "nietzsche/concepts/volya_k_istine",
+            "nietzsche/concepts/kritika_svobody_voli",
+            "nietzsche/concepts/nigilizm",
+            "philosophers/en/hub/nietzsche"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=1.000] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а...…\n\n### nietzsche/principles/zhizn_est_volya_k_vlasti\n[VECTOR score=0.982] Жизнь есть воля к власти, а не самосохранение\n…ika-svobody-voli]] — хотение как отношение команды и подчинения - [[zhestokost-i-poznanie]] — познание как форма власти над собой ### Обоснование > Прежде всего нечто живое хочет проявлять свою силу...…\n\n### nietzsche/concepts/samopreodolenie\n[VECTOR score=0.964] Самопреодоление\n…ства своего предназначения к независимости и к повелеванию; и нужно сделать это своевременно. > — BGE 41, unit `bge.41` ## Связи ",
+          "ms": 6065
+        }
+      ]
+    },
+    {
+      "cost": 0.00044,
+      "model_ms": 3854,
+      "tokens": {
+        "in": 1920,
+        "out": 41
+      },
+      "tool_calls": [
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "BGE 13 воля к власти не самосохранение цитата \"не самосохранение\" Ницше"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/ru/hub/nietzsche",
+            "nietzsche/concepts/volya_k_vlasti",
+            "nietzsche/principles/zhizn_est_volya_k_vlasti",
+            "philosophers/en/hub/nietzsche",
+            "nietzsche/moc",
+            "nietzsche/concepts/volya_k_istine",
+            "nietzsche/periods",
+            "nietzsche/concepts/znatnost_ranga"
+          ],
+          "origins": [
+            "HYBRID",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/ru/hub/nietzsche\n[HYBRID score=1.000] Ницше — По ту сторону добра и зла\n…… от воли к истине к воле к власти — магистральный аргумент BGE 1→211.Концепт воля к власти — жизнь как воля к власти, не самосохранение (bge.13); самый уплощаемый термин.Не уплощать\nВоля к власти ≠ по……\n\n### nietzsche/concepts/volya_k_vlasti\n[VECTOR score=0.656] Воля к власти\n…Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму. В BGE воля к власти — не политическая жажда господства, а...…\n\n### nietzsche/principles/zhizn_est_volya_k_vlasti\n[VECTOR score=0.645] Жизнь есть воля к власти, а не самосохранение\n…ika-svobody-voli]] — хотение как отношение команды и подчинения - [[zhestokost-i-poznanie]] — познание как форма вл",
+          "ms": 6260
+        }
+      ]
+    },
+    {
+      "cost": 0.00063,
+      "model_ms": 2982,
+      "tokens": {
+        "in": 2748,
+        "out": 288
+      },
+      "final_text": "В базе знаний есть формулировка смысла «воли к власти» у Ницше, где прямо сказано, что это **не** «самосохранение», а другое стремление:\n\n> «…не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.» — **nietzsche/concepts/volya_k_vlasti**\n\nТакже в базе знаний зафиксировано (как краткое определение концепта):\n\n> «Концепт воля к власти — жизнь как воля к власти, не самосохранение (bge.13)…» — **philosophers/ru/hub/nietzsche**\n\nЕсли нужно именно дословно из §13 *По ту сторону добра и зла*, в найденных фрагментах этого текста полностью нет — есть только указание на bge.13 и переформулировка в заметках базы.\n\n## SOURCES\n- Ницше: nietzsche/concepts/volya_k_vlasti — определяет волю к власти как не самосохранение, а стремление проявлять силу (рост, присвоение, навязывание формы)\n- Ницше: philosophers/ru/hub/nietzsche — кратко: «жизнь как воля к власти, не самосохранение (bge.13)»"
+    }
+  ],
+  "final": "В базе знаний есть формулировка смысла «воли к власти» у Ницше, где прямо сказано, что это **не** «самосохранение», а другое стремление:\n\n> «…не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.» — **nietzsche/concepts/volya_k_vlasti**\n\nТакже в базе знаний зафиксировано (как краткое определение концепта):\n\n> «Концепт воля к власти — жизнь как воля к власти, не самосохранение (bge.13)…» — **philosophers/ru/hub/nietzsche**\n\nЕсли нужно именно дословно из §13 *По ту сторону добра и зла*, в найденных фрагментах этого текста полностью нет — есть только указание на bge.13 и переформулировка в заметках базы.\n\n## SOURCES\n- Ницше: nietzsche/concepts/volya_k_vlasti — определяет волю к власти как не самосохранение, а стремление проявлять силу (рост, присвоение, навязывание формы)\n- Ницше: philosophers/ru/hub/nietzsche — кратко: «жизнь как воля к власти, не самосохранение (bge.13)»",
+  "forced_final": false,
+  "tool_calls": 3,
+  "first_relevant_call": 1,
+  "model_ms": 9698,
+  "tool_ms": 18633,
+  "grounding": {
+    "quotes": 3,
+    "quotes_in_retrieval": 1
+  },
+  "retrieved_chars": 6749,
+  "retrieval": {
+    "results": 24,
+    "offtarget": 1,
+    "offtarget_corpora": {
+      "schopenhauer": 1
+    },
+    "origins": {
+      "VECTOR": 23,
+      "HYBRID": 1
+    }
+  }
+}

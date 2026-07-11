@@ -1,0 +1,358 @@
+{
+  "model": "openai/gpt-5.4-mini",
+  "condition": "flat-hybrid-qwen",
+  "lang": "ru",
+  "qid": 3,
+  "q": "Сформулируй главный принцип Эпиктета о том, что в нашей власти и что не в нашей власти, с дословной цитатой из базы знаний на языке источника.",
+  "kind": "principle understanding",
+  "wall_s": 71.7,
+  "judge": {
+    "verdict": "partial",
+    "facts_covered": [
+      1,
+      2
+    ],
+    "note": "Ответ явно приводит разделение на «в нашей власти» (суждение, желание, побуждение, уклонение) и «не в нашей власти» (тело, имущество, слава, должности) с дословной цитатой; факт 3 про свободу/рабство и про несчастье от смешения двух списков не сформулирован полностью.",
+    "raw": "{\"facts_covered\":[1,2],\"note\":\"Ответ явно приводит разделение на «в нашей власти» (суждение, желание, побуждение, уклонение) и «не в нашей власти» (тело, имущество, слава, должности) с дословной цитатой; факт 3 про свободу/рабство и про несчастье от смешения двух списков не сформулирован полностью.\"}",
+    "judge_cost": 0.000223
+  },
+  "confusion": {
+    "misattributions": [],
+    "blending": false,
+    "note": "Атрибуция верная: приписывается Эпиктету и используются его же формулировки/термины (τὰ ἐφ' ἡμῖν, προαίρεσις); смешения с другими мыслителями нет.",
+    "raw": "{\n  \"misattributions\": [],\n  \"blending\": false,\n  \"note\": \"Атрибуция верная: приписывается Эпиктету и используются его же формулировки/термины (τὰ ἐφ' ἡμῖν, προαίρεσις); смешения с другими мыслителями нет.\"\n}",
+    "judge_cost": 0.00022
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Epictetus: epictetus/principles/razlichay-podvlastnoe — divide everything into what is in our power and what is not",
+        "path": "epictetus/principles/razlichay-podvlastnoe",
+        "corpus": "epictetus",
+        "named": [
+          "epictetus"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Epictetus: epictetus/concepts/dihotomiya-kontrolya — what is not in our power “does not concern me”; power is tied to προαίρεσις",
+        "path": "epictetus/concepts/dihotomiya-kontrolya",
+        "corpus": "epictetus",
+        "named": [
+          "epictetus"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 2,
+    "fabricated": 0,
+    "hub_cites": 0,
+    "judgeable": 2,
+    "author_mismatch": 0,
+    "provenance_ok": 2
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-mini",
+    "lang": "ru",
+    "qid": 3,
+    "verdict": "partial",
+    "facts_covered": 2,
+    "facts_required": 3,
+    "misattributions": 0,
+    "blending": false,
+    "cites": 2,
+    "cites_fabricated": 0,
+    "cites_judgeable": 2,
+    "cites_author_mismatch": 0,
+    "cites_hub": 0,
+    "retrieval_results": 48,
+    "retrieval_offtarget": 3,
+    "origins": {
+      "VECTOR": 48
+    },
+    "quotes": 2,
+    "quotes_valid": 0,
+    "tool_calls": 6,
+    "first_relevant_call": null,
+    "forced_final": false,
+    "cost_usd": 0.00962,
+    "wall_s": 71.7
+  },
+  "trace": [
+    {
+      "cost": 0.00039,
+      "model_ms": 1375,
+      "tokens": {
+        "in": 326,
+        "out": 32
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет в нашей власти не в нашей власти дословная цитата"
+          },
+          "result_ok": true,
+          "paths": [
+            "wattles/concepts/epictetus_kontrast",
+            "epictetus/moc",
+            "philosophers/ru/contradictions",
+            "philosophers/ru/topics/vlast",
+            "epictetus/operatsionnaya-ramka",
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "philosophers/en/contradictions",
+            "epictetus/principles/razlichay-podvlastnoe"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### wattles/concepts/epictetus_kontrast\n[VECTOR score=1.000] Контраст для дебатов: Уоттлс против Эпиктета\n…изни» и оба зовут действовать в настоящем — но расходятся в исходной аксиоме о том, что вообще в нашей власти. ## Ось спора **«Внешнее не в нашей власти» → «внешнее ты можешь вызвать мыслью».**...…\n\n### epictetus/moc\n[VECTOR score=0.977] Эпиктет — карта базы знаний\n…## Понятия (concepts/) ### Ядро: что в нашей власти - [[dihotomiya-kontrolya]] — раздел «наше / не наше» (τὰ ἐφ' ἡμῖν) - [[proairesis]] — способность выбора, «ведущее начало» -...…\n\n### philosophers/ru/contradictions\n[VECTOR score=0.945] Индекс противоречий\n…astnoe`, `proairesis` - lebon: толпа за минуты растворяет личность, волю и суждение. Опора: `v-tolpe-lichnost-ischezaet`, `vlast-derzhitsya-prestizhem` ## epictetus ↔ ",
+          "ms": 7871
+        }
+      ]
+    },
+    {
+      "cost": 0.0011,
+      "model_ms": 1408,
+      "tokens": {
+        "in": 1167,
+        "out": 49
+      },
+      "tool_calls": [
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "site:epictetus/concepts/dihotomiya-kontrolya τὰ ἐφ' ἡμῖν цитата в нашей власти"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "epictetus/moc",
+            "philosophers/ru/hub/epictetus",
+            "epictetus/operatsionnaya-ramka",
+            "philosophers/en/hub/epictetus",
+            "epictetus/quote_authenticity",
+            "wattles/concepts/epictetus_kontrast",
+            "epictetus/concepts/sudzhdeniya-ne-veshchi"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/dihotomiya-kontrolya\n[VECTOR score=1.000] Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n…�о не в нашей власти; и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается». ## Links - [[proairesis]] — то единственное «в нашей власти» и есть προαίρεσις,...…\n\n### epictetus/moc\n[VECTOR score=0.982] Эпиктет — карта базы знаний\n…## Понятия (concepts/) ### Ядро: что в нашей власти - [[dihotomiya-kontrolya]] — раздел «наше / не наше» (τὰ ἐφ' ἡμῖν) - [[proairesis]] — способность выбора, «ведущее начало» -...…\n\n### philosophers/ru/hub/epictetus\n[VECTOR score=0.964] Эпиктет — Энхиридион\n…�уала, главы I → XIX. - Концепт [дихотомия контроля](https://epictetus.2pub.me/dihotomiya-kontrolya) — самый искажаемый термин корпуса. ## Не уплощать - Дихотомия контроля — н",
+          "ms": 8070
+        }
+      ]
+    },
+    {
+      "cost": 0.001,
+      "model_ms": 1420,
+      "tokens": {
+        "in": 2045,
+        "out": 36
+      },
+      "tool_calls": [
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "Энхиридион I дословно что в нашей власти не в нашей власти quote source"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/ru/hub/epictetus",
+            "epictetus/principles/filosofiya-eto-dela-ne-slova",
+            "epictetus/principles/razlichay-podvlastnoe",
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "epictetus/principles/tebya-ranit-suzhdenie",
+            "philosophers/en/hub/epictetus",
+            "epictetus/principles/svoboda-cherez-otkaz-ot-vneshnego",
+            "epictetus/chains/ot_dihotomii_k_svobode"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/ru/hub/epictetus\n[VECTOR score=0.997] Эпиктет — Энхиридион\n…pictetus.2pub.me · `kb_id: epictetus` · якорь цитаты: `Encheiridion ` (например `Encheiridion I`, `Encheiridion XIV`) + verbatim-цитата Лонга ## Голос Суровый наставник, обращающийся к...…\n\n### epictetus/principles/filosofiya-eto-dela-ne-slova\n[VECTOR score=0.980] Философия — это дела, а не теоремы\n…> but the most necessary and that on which we ought to rest is the first. But we do the contrary. — Encheiridion LI ([[progress-uchenika]]). Перевод наш: «...но самое необходимое и то, на чём должно...…\n\n### epictetus/principles/razlichay-podvlastnoe\n[VECTOR score=0.964] Различай подвластное и неподвластное — и живи только в первом\n…idion I. Перевод наш: «...и если оно касается чего-либо не в нашей власти, будь готов с",
+          "ms": 9165
+        }
+      ]
+    },
+    {
+      "cost": 0.00241,
+      "model_ms": 1687,
+      "tokens": {
+        "in": 2960,
+        "out": 42
+      },
+      "tool_calls": [
+        {
+          "n": 4,
+          "name": "search",
+          "args": {
+            "query": "site:epictetus/principles/razlichay-podvlastnoe long quote Encheiridion I"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/hub/epictetus",
+            "epictetus/principles/tebya-ranit-suzhdenie",
+            "epictetus/principles/filosofiya-eto-dela-ne-slova",
+            "philosophers/ru/hub/epictetus",
+            "epictetus/quote_authenticity",
+            "epictetus/principles/razlichay-podvlastnoe",
+            "epictetus/sources/source_manifest",
+            "epictetus/chains/terapiya_suzhdeniya"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/hub/epictetus\n[VECTOR score=1.000] Epictetus — Enchiridion\n…**Base:** https://epictetus.2pub.me · `kb_id: epictetus` · quote anchor: `Encheiridion ` (e.g. `Encheiridion I`, `Encheiridion XIV`) + verbatim Long quote ## Voice A stern...…\n\n### epictetus/principles/tebya-ranit-suzhdenie\n[VECTOR score=0.970] Тебя ранит не событие, а твоё суждение о нём\n…— Encheiridion V. Перевод наш: «...будем винить не других, но себя — то есть свои мнения». **Как проявляется:** [[sudzhdeniya-ne-veshchi]], [[dve-ruchki]], [[phantasiai-i-soglasie]],...…\n\n### epictetus/principles/filosofiya-eto-dela-ne-slova\n[VECTOR score=0.949] Философия — это дела, а не теоремы\n…> but the most necessary and that on which we ought to rest is the first. But we do the contrary. — Encheiridion LI ([[progress-uc",
+          "ms": 7772
+        }
+      ]
+    },
+    {
+      "cost": 0.00129,
+      "model_ms": 1491,
+      "tokens": {
+        "in": 3826,
+        "out": 34
+      },
+      "tool_calls": [
+        {
+          "n": 5,
+          "name": "search",
+          "args": {
+            "query": "epictetus/principles/razlichay-podvlastnoe quote long"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/hub/epictetus",
+            "epictetus/quote_authenticity",
+            "epictetus/moc",
+            "epictetus/sources/source_manifest",
+            "philosophers/en/contradictions",
+            "philosophers/ru/hub/epictetus",
+            "epictetus/terminology",
+            "epictetus/principles/razlichay-podvlastnoe"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/hub/epictetus\n[VECTOR score=0.999] Epictetus — Enchiridion\n…**Base:** https://epictetus.2pub.me · `kb_id: epictetus` · quote anchor: `Encheiridion ` (e.g. `Encheiridion I`, `Encheiridion XIV`) + verbatim Long quote ## Voice A stern...…\n\n### epictetus/quote_authenticity\n[VECTOR score=0.980] QUOTE_AUTHENTICITY — fake/floating quote policy (Epictetus)\n…corpus match answers `NO_RELEVANT_KB_EVIDENCE`, never confirms — and if the idea is genuine but the wording is another translator's, it answers with the Long wording, flagged `translation_variant`....…\n\n### epictetus/moc\n[VECTOR score=0.964] Эпиктет — карта базы знаний\n…φύσιν) - [[nevozmutimost]] — «тихое течение жизни» (ἀπάθεια / ἀταραξία) - [[progress-uchenika]] — признаки продвижения (προκοπή) ## Принципы (principles/) - ",
+          "ms": 8733
+        }
+      ]
+    },
+    {
+      "cost": 0.00121,
+      "model_ms": 1535,
+      "tokens": {
+        "in": 4641,
+        "out": 33
+      },
+      "tool_calls": [
+        {
+          "n": 6,
+          "name": "search",
+          "args": {
+            "query": "Encheiridion I \"Some things are in our power\" quote Russian base"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/hub/epictetus",
+            "epictetus/sources/source_manifest",
+            "epictetus/principles/tebya-ranit-suzhdenie",
+            "philosophers/ru/hub/epictetus",
+            "larochefoucauld/quote_authenticity",
+            "epictetus/chains/ot_dihotomii_k_svobode",
+            "epictetus/principles/razlichay-podvlastnoe",
+            "epictetus/principles/filosofiya-eto-dela-ne-slova"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/hub/epictetus\n[VECTOR score=0.982] Epictetus — Enchiridion\n…**Base:** https://epictetus.2pub.me · `kb_id: epictetus` · quote anchor: `Encheiridion ` (e.g. `Encheiridion I`, `Encheiridion XIV`) + verbatim Long quote ## Voice A stern...…\n\n### epictetus/sources/source_manifest\n[VECTOR score=0.942] SOURCE_MANIFEST — Epictetus\n…ong himself prints the Greek transliterations inline in brackets (`[Greek: hormae]`, `[Greek: echchlisis]`, `[Greek: phantasion]`), so his key terms are anchored to the Greek within the corpus...…\n\n### epictetus/principles/tebya-ranit-suzhdenie\n[VECTOR score=0.896] Тебя ранит не событие, а твоё суждение о нём\n…— Encheiridion V. Перевод наш: «...будем винить не других, но себя — то есть свои мнения». **Как проявляется:** [[sudzhdeniya-ne-veshchi]], [[d",
+          "ms": 13269
+        }
+      ]
+    },
+    {
+      "cost": 0.00222,
+      "model_ms": 2720,
+      "tokens": {
+        "in": 5520,
+        "out": 264
+      },
+      "final_text": "Главный принцип Эпиктета в базе сформулирован так: нужно разделять всё на то, что в нашей власти, и то, что не в нашей власти. В найденной записи это прямо сказано: «**Раздели всё на то, что в твоей власти (суждение, желание, побуждение, уклонение), и то, что не в твоей власти (тело, имущество, слава, должности)**».  \nТакже в той же записи дано близкое по смыслу указание: «**и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается**».  \nВ материалах поиска указано, что этот принцип связан с **τὰ ἐφ' ἡμῖν** и с **proairesis** как тем, что действительно «в нашей власти».\n\nSOURCES\n- Epictetus: epictetus/principles/razlichay-podvlastnoe — divide everything into what is in our power and what is not\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — what is not in our power “does not concern me”; power is tied to προαίρεσις\n"
+    }
+  ],
+  "final": "Главный принцип Эпиктета в базе сформулирован так: нужно разделять всё на то, что в нашей власти, и то, что не в нашей власти. В найденной записи это прямо сказано: «**Раздели всё на то, что в твоей власти (суждение, желание, побуждение, уклонение), и то, что не в твоей власти (тело, имущество, слава, должности)**».  \nТакже в той же записи дано близкое по смыслу указание: «**и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается**».  \nВ материалах поиска указано, что этот принцип связан с **τὰ ἐφ' ἡμῖν** и с **proairesis** как тем, что действительно «в нашей власти».\n\nSOURCES\n- Epictetus: epictetus/principles/razlichay-podvlastnoe — divide everything into what is in our power and what is not\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — what is not in our power “does not concern me”; power is tied to προαίρεσις\n",
+  "forced_final": false,
+  "tool_calls": 6,
+  "first_relevant_call": null,
+  "model_ms": 11636,
+  "tool_ms": 54880,
+  "grounding": {
+    "quotes": 2,
+    "quotes_in_retrieval": 0
+  },
+  "retrieved_chars": 14115,
+  "retrieval": {
+    "results": 48,
+    "offtarget": 3,
+    "offtarget_corpora": {
+      "wattles": 2,
+      "larochefoucauld": 1
+    },
+    "origins": {
+      "VECTOR": 48
+    }
+  }
+}

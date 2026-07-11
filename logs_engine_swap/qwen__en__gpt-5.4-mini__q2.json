@@ -1,0 +1,246 @@
+{
+  "model": "openai/gpt-5.4-mini",
+  "condition": "flat-hybrid-qwen",
+  "lang": "en",
+  "qid": 2,
+  "q": "How does Nietzsche's will to power differ from Schopenhauer's will to live? Draw on the knowledge base for both thinkers and cite each in the source language.",
+  "kind": "cross-corpus contrast",
+  "wall_s": 33.6,
+  "judge": {
+    "verdict": "correct",
+    "facts_covered": [
+      1,
+      2,
+      3
+    ],
+    "note": "Answer states Schopenhauer’s blind will to live with suffering/futility and denial (1); Nietzsche’s inversion/affirmation arising from Schopenhauer (2); and Nietzsche’s will to power as life-drive with self-preservation only indirect (3).",
+    "raw": "{\"facts_covered\":[1,2,3],\"note\":\"Answer states Schopenhauer’s blind will to live with suffering/futility and denial (1); Nietzsche’s inversion/affirmation arising from Schopenhauer (2); and Nietzsche’s will to power as life-drive with self-preservation only indirect (3).\"}",
+    "judge_cost": 0.000228
+  },
+  "confusion": {
+    "misattributions": [
+      {
+        "claim": "The knowledge base says Nietzsche's will to power is defined as 'will to life → will to power'",
+        "attributed_to": "Schopenhauer",
+        "belongs_to": "Nietzsche"
+      }
+    ],
+    "blending": false,
+    "note": "No clear blending; only a suspect attribution: the 'воля к жизни → воля к власти' contrast is presented as a general 'knowledge base' claim tied to Nietzsche.",
+    "raw": "{\n  \"misattributions\": [\n    {\n      \"claim\": \"The knowledge base says Nietzsche's will to power is defined as 'will to life → will to power'\",\n      \"attributed_to\": \"Schopenhauer\",\n      \"belongs_to\": \"Nietzsche\"\n    }\n  ],\n  \"blending\": false,\n  \"note\": \"No clear blending; only a suspect attribution: the 'воля к жизни → воля к власти' contrast is presented as a general 'knowledge base' claim tied to Nietzsche.\"\n}",
+    "judge_cost": 0.000296
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Schopenhauer: schopenhauer/concepts/volya_k_zhizni — blind, groundless will to live as metaphysical core; suffering follows",
+        "path": "schopenhauer/concepts/volya_k_zhizni",
+        "corpus": "schopenhauer",
+        "named": [
+          "schopenhauer"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Schopenhauer: philosophers/en/contradictions — denial of the will as the way out of striving’s futility",
+        "path": "philosophers/en/contradictions",
+        "corpus": "philosophers",
+        "named": [
+          "schopenhauer"
+        ],
+        "retrieved": true,
+        "hub": true,
+        "author_match": null
+      },
+      {
+        "line": "- Nietzsche: schopenhauer/concepts/nietzsche_predtecha — explicit contrast: will to live → will to power",
+        "path": "schopenhauer/concepts/nietzsche_predtecha",
+        "corpus": "schopenhauer",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": false
+      },
+      {
+        "line": "- Nietzsche: nietzsche/concepts/volya_k_vlasti — will to power as growth, strength, appropriation, and form-giving; not self-preservation",
+        "path": "nietzsche/concepts/volya_k_vlasti",
+        "corpus": "nietzsche",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 4,
+    "fabricated": 0,
+    "hub_cites": 1,
+    "judgeable": 3,
+    "author_mismatch": 1,
+    "provenance_ok": 2
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-mini",
+    "lang": "en",
+    "qid": 2,
+    "verdict": "correct",
+    "facts_covered": 3,
+    "facts_required": 3,
+    "misattributions": 1,
+    "blending": false,
+    "cites": 4,
+    "cites_fabricated": 0,
+    "cites_judgeable": 3,
+    "cites_author_mismatch": 1,
+    "cites_hub": 1,
+    "retrieval_results": 24,
+    "retrieval_offtarget": 0,
+    "origins": {
+      "VECTOR": 23,
+      "HYBRID": 1
+    },
+    "quotes": 4,
+    "quotes_valid": 2,
+    "tool_calls": 3,
+    "first_relevant_call": 1,
+    "forced_final": false,
+    "cost_usd": 0.00491,
+    "wall_s": 33.6
+  },
+  "trace": [
+    {
+      "cost": 0.00068,
+      "model_ms": 2559,
+      "tokens": {
+        "in": 318,
+        "out": 99
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Nietzsche will to power Schopenhauer will to live difference note"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/hub/schopenhauer",
+            "philosophers/en/contradictions",
+            "philosophers/ru/contradictions",
+            "philosophers/en/topics/volya",
+            "schopenhauer/concepts/nietzsche_predtecha",
+            "philosophers/en/hub/nietzsche",
+            "philosophers/ru/topics/volya",
+            "philosophers/ru/hub/nietzsche"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/hub/schopenhauer\n[VECTOR score=0.998] Schopenhauer — The Wisdom of Life / Counsels and Maxims\n…tsanie-voli`, `esteticheskoe-sozertsanie` - Chains → `put-pessimizma-o-schaste`, `chto-chelovek-est-imeet-predstavlyaet` - Bridge to the debates → `nietzsche-predtecha` (routing, no corpus quotes) ##...…\n\n### philosophers/en/contradictions\n[VECTOR score=0.980] Contradiction index\n…e will is blind and insatiable, striving is doomed; the way out is denial of the will. Grounding: `otritsanie-voli`, `futilnost-stremleniya` Bridge: `nietzsche-predtecha` (in the `schopenhauer`...…\n\n### philosophers/ru/contradictions\n[VECTOR score=0.964] Индекс противоречий\n…Прямые оппоненты» и графы споров в `see-also` каждой базы, мосты — ноты `debate_bridge`. Каждая пара встречается один раз. ## n",
+          "ms": 6968
+        },
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "Ницше воля к власти Шопенгауэр воля к жизни различие"
+          },
+          "result_ok": true,
+          "paths": [
+            "schopenhauer/concepts/nietzsche_predtecha",
+            "philosophers/ru/contradictions",
+            "philosophers/ru/topics/volya",
+            "philosophers/ru/hub/nietzsche",
+            "nietzsche/concepts/volya_k_vlasti",
+            "nietzsche/moc",
+            "schopenhauer/concepts/volya_k_zhizni",
+            "philosophers/en/hub/schopenhauer"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### schopenhauer/concepts/nietzsche_predtecha\n[VECTOR score=1.000] Шопенгауэр как предтеча и мишень Ницше\n…а их собственных, цитатно-опорных страницах; тексты Ницше — в базе Ницше, тексты Шопенгауэра — в «Афоризмах». ## Три оси спора **1. Воля к жизни → воля к власти.** Для Шопенгауэра воля слепа,...…\n\n### philosophers/ru/contradictions\n[VECTOR score=0.981] Индекс противоречий\n…Прямые оппоненты» и графы споров в `see-also` каждой базы, мосты — ноты `debate_bridge`. Каждая пара встречается один раз. ## nietzsche ↔ schopenhauer Ось: тщета воли и отказ от неё vs её утверждение...…\n\n### philosophers/ru/topics/volya\n[VECTOR score=0.964] Воля\n…�на: деятельность требует знания и меры, свобода — власти над собой. Опора: `svoboda-i-samoobladanie`, `deyatelnost-trebuet-znaniya-i-mery`. ## Воля — сле",
+          "ms": 7162
+        },
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "Schopenhauer will to live Nietzsche will to power notes"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/contradictions",
+            "philosophers/en/hub/schopenhauer",
+            "philosophers/en/topics/volya",
+            "schopenhauer/concepts/nietzsche_predtecha",
+            "philosophers/en/hub/nietzsche",
+            "philosophers/ru/contradictions",
+            "philosophers/ru/topics/volya",
+            "schopenhauer/terminology"
+          ],
+          "origins": [
+            "HYBRID",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/contradictions\n[HYBRID score=0.999] Contradiction index\n……denial of the will. Grounding: otritsanie-voli, futilnost-stremleniyaBridge: nietzsche-predtecha (in the schopenhauer base).goethe ↔ nietzsche\nAxis: work and measure vs the will to power.\ngoethe: stre……\n\n### philosophers/en/hub/schopenhauer\n[VECTOR score=0.660] Schopenhauer — The Wisdom of Life / Counsels and Maxims\n…tsanie-voli`, `esteticheskoe-sozertsanie` - Chains → `put-pessimizma-o-schaste`, `chto-chelovek-est-imeet-predstavlyaet` - Bridge to the debates → `nietzsche-predtecha` (routing, no corpus quotes) ##...…\n\n### philosophers/en/topics/volya\n[VECTOR score=0.655] Will\n…ethe`) — will without self-mastery is ruinous: activity requires knowledge and measure, and freedom is power over oneself. Grounding: `svo",
+          "ms": 8615
+        }
+      ]
+    },
+    {
+      "cost": 0.00423,
+      "model_ms": 3865,
+      "tokens": {
+        "in": 2810,
+        "out": 471
+      },
+      "final_text": "Nietzsche’s “will to power” and Schopenhauer’s “will to live” are presented in the knowledge base as opposed interpretations of what fundamentally drives life.\n\nFor Schopenhauer, the will is described as a blind metaphysical force: “Метафизическое ядро Шопенгауэра: мир есть воля и представление, а вещь-в-себе — слепая, безосновная **воля к жизни**, объективирующаяся во всём сущем.” This will to live is the basis from which suffering follows: “из неё выводятся страдание.” The same material also says the way out is denial: “Grounding: `otritsanie-voli`, `futilnost-stremleniya`,” and in the contradiction index: “denial of the will.”  \n\nFor Nietzsche, the knowledge base explicitly contrasts this with a different driving force: “**Воля к жизни → воля к власти.**” It further defines Nietzsche’s will to power as “Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.” It also warns not to reduce it to politics: “Воля к власти ≠ политическая «жажда власти».”  \n\nSo, in the terms of the notes: Schopenhauer’s will is a blind “воля к жизни” that ends in suffering and is answered by denial, while Nietzsche’s is “воля к власти,” understood as expansion, growth, appropriation, and form-giving rather than mere self-preservation.\n\nSOURCES\n- Schopenhauer: schopenhauer/concepts/volya_k_zhizni — blind, groundless will to live as metaphysical core; suffering follows\n- Schopenhauer: philosophers/en/contradictions — denial of the will as the way out of striving’s futility\n- Nietzsche: schopenhauer/concepts/nietzsche_predtecha — explicit contrast: will to live → will to power\n- Nietzsche: nietzsche/concepts/volya_k_vlasti — will to power as growth, strength, appropriation, and form-giving; not self-preservation\n"
+    }
+  ],
+  "final": "Nietzsche’s “will to power” and Schopenhauer’s “will to live” are presented in the knowledge base as opposed interpretations of what fundamentally drives life.\n\nFor Schopenhauer, the will is described as a blind metaphysical force: “Метафизическое ядро Шопенгауэра: мир есть воля и представление, а вещь-в-себе — слепая, безосновная **воля к жизни**, объективирующаяся во всём сущем.” This will to live is the basis from which suffering follows: “из неё выводятся страдание.” The same material also says the way out is denial: “Grounding: `otritsanie-voli`, `futilnost-stremleniya`,” and in the contradiction index: “denial of the will.”  \n\nFor Nietzsche, the knowledge base explicitly contrasts this with a different driving force: “**Воля к жизни → воля к власти.**” It further defines Nietzsche’s will to power as “Основная гипотеза Ницше о том, что движет живым: не самосохранение, а стремление проявлять силу, расти, присваивать, навязывать форму.” It also warns not to reduce it to politics: “Воля к власти ≠ политическая «жажда власти».”  \n\nSo, in the terms of the notes: Schopenhauer’s will is a blind “воля к жизни” that ends in suffering and is answered by denial, while Nietzsche’s is “воля к власти,” understood as expansion, growth, appropriation, and form-giving rather than mere self-preservation.\n\nSOURCES\n- Schopenhauer: schopenhauer/concepts/volya_k_zhizni — blind, groundless will to live as metaphysical core; suffering follows\n- Schopenhauer: philosophers/en/contradictions — denial of the will as the way out of striving’s futility\n- Nietzsche: schopenhauer/concepts/nietzsche_predtecha — explicit contrast: will to live → will to power\n- Nietzsche: nietzsche/concepts/volya_k_vlasti — will to power as growth, strength, appropriation, and form-giving; not self-preservation\n",
+  "forced_final": false,
+  "tool_calls": 3,
+  "first_relevant_call": 1,
+  "model_ms": 6424,
+  "tool_ms": 22745,
+  "grounding": {
+    "quotes": 4,
+    "quotes_in_retrieval": 2
+  },
+  "retrieved_chars": 6848,
+  "retrieval": {
+    "results": 24,
+    "offtarget": 0,
+    "offtarget_corpora": {},
+    "origins": {
+      "VECTOR": 23,
+      "HYBRID": 1
+    }
+  }
+}

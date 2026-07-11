@@ -1,0 +1,185 @@
+{
+  "model": "openai/gpt-5.4-mini",
+  "condition": "flat-hybrid-qwen",
+  "lang": "en",
+  "qid": 3,
+  "q": "State Epictetus's core principle about what is and is not 'up to us', with a verbatim quote from the knowledge base in the source language.",
+  "kind": "principle understanding",
+  "wall_s": 24.8,
+  "judge": {
+    "verdict": "partial",
+    "facts_covered": [
+      3
+    ],
+    "note": "The answer gives the up-to-us vs not-up-to-us distinction with a verbatim quote, but it does not explicitly list the specific categories (opinions/judgment/impulse/desire/aversion vs body/property/reputation/offices) required by facts 1 and 2.",
+    "raw": "{\"facts_covered\":[3],\"note\":\"The answer gives the up-to-us vs not-up-to-us distinction with a verbatim quote, but it does not explicitly list the specific categories (opinions/judgment/impulse/desire/aversion vs body/property/reputation/offices) required by facts 1 and 2.\"}",
+    "judge_cost": 0.00017
+  },
+  "confusion": {
+    "misattributions": [],
+    "blending": false,
+    "note": "No attribution errors: the answer correctly assigns the 'in our power / not in our power' core principle to Epictetus, matching the key; the provided Russian quote is also used in an Epictetan context.",
+    "raw": "{\"misattributions\":[],\"blending\":false,\"note\":\"No attribution errors: the answer correctly assigns the 'in our power / not in our power' core principle to Epictetus, matching the key; the provided Russian quote is also used in an Epictetan context.\"}",
+    "judge_cost": 0.000169
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Epictetus: epictetus/concepts/dihotomiya-kontrolya — core distinction between what is in our power and what is not; if something is not in our power, it should be treated as not concerning us.",
+        "path": "epictetus/concepts/dihotomiya-kontrolya",
+        "corpus": "epictetus",
+        "named": [
+          "epictetus"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      }
+    ],
+    "total": 1,
+    "fabricated": 0,
+    "hub_cites": 0,
+    "judgeable": 1,
+    "author_mismatch": 0,
+    "provenance_ok": 1
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-mini",
+    "lang": "en",
+    "qid": 3,
+    "verdict": "partial",
+    "facts_covered": 1,
+    "facts_required": 3,
+    "misattributions": 0,
+    "blending": false,
+    "cites": 1,
+    "cites_fabricated": 0,
+    "cites_judgeable": 1,
+    "cites_author_mismatch": 0,
+    "cites_hub": 0,
+    "retrieval_results": 16,
+    "retrieval_offtarget": 2,
+    "origins": {
+      "VECTOR": 16
+    },
+    "quotes": 1,
+    "quotes_valid": 1,
+    "tool_calls": 2,
+    "first_relevant_call": null,
+    "forced_final": false,
+    "cost_usd": 0.00312,
+    "wall_s": 24.8
+  },
+  "trace": [
+    {
+      "cost": 0.00039,
+      "model_ms": 1444,
+      "tokens": {
+        "in": 317,
+        "out": 34
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет что в нашей власти что не в нашей власти up to us quote"
+          },
+          "result_ok": true,
+          "paths": [
+            "wattles/concepts/epictetus_kontrast",
+            "philosophers/ru/topics/vlast",
+            "epictetus/moc",
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "epictetus/operatsionnaya-ramka",
+            "epictetus/quote_authenticity",
+            "philosophers/ru/contradictions",
+            "philosophers/en/hub/epictetus"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### wattles/concepts/epictetus_kontrast\n[VECTOR score=1.000] Контраст для дебатов: Уоттлс против Эпиктета\n…изни» и оба зовут действовать в настоящем — но расходятся в исходной аксиоме о том, что вообще в нашей власти. ## Ось спора **«Внешнее не в нашей власти» → «внешнее ты можешь вызвать мыслью».**...…\n\n### philosophers/ru/topics/vlast\n[VECTOR score=0.980] Власть\n…�авитель тот, о ком едва знают: чем больше запретов и вмешательства, тем беднее народ. Опора: `pravlenie`, `wuwei`, `shengren`. ## Власть только над собой - **Эпиктет** (`epictetus`) — подвластно...…\n\n### epictetus/moc\n[VECTOR score=0.963] Эпиктет — карта базы знаний\n…## Понятия (concepts/) ### Ядро: что в нашей власти - [[dihotomiya-kontrolya]] — раздел «наше / не наше» (τὰ ἐφ' ἡμῖν) - [[proairesis]] — способность выбора, «веду",
+          "ms": 8805
+        }
+      ]
+    },
+    {
+      "cost": 0.00112,
+      "model_ms": 2314,
+      "tokens": {
+        "in": 1175,
+        "out": 53
+      },
+      "tool_calls": [
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "site:epictetus/concepts/dihotomiya-kontrolya τὰ ἐφ' ἡμῖν quote что в нашей власти не в нашей власти"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/dihotomiya-kontrolya",
+            "epictetus/moc",
+            "philosophers/ru/hub/epictetus",
+            "epictetus/operatsionnaya-ramka",
+            "wattles/concepts/epictetus_kontrast",
+            "philosophers/en/hub/epictetus",
+            "epictetus/principles/razlichay-podvlastnoe",
+            "epictetus/principles/svoboda-cherez-otkaz-ot-vneshnego"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/dihotomiya-kontrolya\n[VECTOR score=1.000] Дихотомия контроля (τὰ ἐφ' ἡμῖν)\n…�о не в нашей власти; и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается». ## Links - [[proairesis]] — то единственное «в нашей власти» и есть προαίρεσις,...…\n\n### epictetus/moc\n[VECTOR score=0.982] Эпиктет — карта базы знаний\n…## Понятия (concepts/) ### Ядро: что в нашей власти - [[dihotomiya-kontrolya]] — раздел «наше / не наше» (τὰ ἐφ' ἡμῖν) - [[proairesis]] — способность выбора, «ведущее начало» -...…\n\n### philosophers/ru/hub/epictetus\n[VECTOR score=0.964] Эпиктет — Энхиридион\n…�уала, главы I → XIX. - Концепт [дихотомия контроля](https://epictetus.2pub.me/dihotomiya-kontrolya) — самый искажаемый термин корпуса. ## Не уплощать - Дихотомия контроля — н",
+          "ms": 6625
+        }
+      ]
+    },
+    {
+      "cost": 0.00161,
+      "model_ms": 2185,
+      "tokens": {
+        "in": 2083,
+        "out": 164
+      },
+      "final_text": "Epictetus’s core principle is the distinction between what is “in our power” and what is not: he says to concern ourselves only with what depends on us, and to treat what does not as not belonging to us.\n\nVerbatim quote from the knowledge base:\n> «...и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается».\n\nThat is the core practical rule: what is not up to us should be set aside; what is up to us is the proper focus of attention.\n\nSOURCES\n\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — core distinction between what is in our power and what is not; if something is not in our power, it should be treated as not concerning us."
+    }
+  ],
+  "final": "Epictetus’s core principle is the distinction between what is “in our power” and what is not: he says to concern ourselves only with what depends on us, and to treat what does not as not belonging to us.\n\nVerbatim quote from the knowledge base:\n> «...и если оно касается чего-либо не в нашей власти, будь готов сказать: это меня не касается».\n\nThat is the core practical rule: what is not up to us should be set aside; what is up to us is the proper focus of attention.\n\nSOURCES\n\n- Epictetus: epictetus/concepts/dihotomiya-kontrolya — core distinction between what is in our power and what is not; if something is not in our power, it should be treated as not concerning us.",
+  "forced_final": false,
+  "tool_calls": 2,
+  "first_relevant_call": null,
+  "model_ms": 5943,
+  "tool_ms": 15430,
+  "grounding": {
+    "quotes": 1,
+    "quotes_in_retrieval": 1
+  },
+  "retrieved_chars": 4727,
+  "retrieval": {
+    "results": 16,
+    "offtarget": 2,
+    "offtarget_corpora": {
+      "wattles": 2
+    },
+    "origins": {
+      "VECTOR": 16
+    }
+  }
+}

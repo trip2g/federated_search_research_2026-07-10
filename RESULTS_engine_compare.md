@@ -1,137 +1,176 @@
 # v6 — engine vs models: trip2g on qmd's models (EmbeddingGemma + Qwen3)
 
-**TL;DR: the model swap itself worked flawlessly — the benchmark of it could
-not be run, and the reason IS the finding.** trip2g re-indexed the clean vault
-onto EmbeddingGemma-300m (768d, a live dimension change) hands-off, and
-Qwen3-Reranker-0.6B served through the product's rerank stage — but at
-~3.5 s per passage on CPU (~25× slower than bge-reranker-v2-m3), a reranked
-search takes 40–70 s even with the candidate set cut from 50 to 10, and the
-app's own HTTP deadline sometimes expires first (408). A stack whose single
-search flirts with the server timeout is not benchmarkable and not shippable:
-the 24-run sweep was abandoned after its probe query 408'd, per plan.
-**Verdict: the alternative reranker is not worth it on CPU** — no accuracy
-evidence in its favor (the qmd arm, which uses the same Qwen3 reranker family,
-showed the *same* confusion failure as trip2g+bge), and a latency penalty that
-crosses from "slow" into "unservable."
+**TL;DR: the sweep that was unrunnable on CPU has now run on Apple-silicon
+Metal — and the model swap buys nothing on accuracy.** Same engine (trip2g),
+same clean 924-note vault, qmd's models (EmbeddingGemma-300m 768d +
+Qwen3-Reranker-0.6B) instead of bge-m3 + bge-CE: correctness 9/24 vs v5's
+8/24, hard misattribution 17 vs 12 under one mechanical bilingual filter
+(same scale, same failure pattern), provenance still near-perfect (42/43,
+0 fabricated). The confusion failure tracks the flat corpus, not the models —
+now shown by direct measurement, not inference. On latency, Metal moves Qwen3
+from "unservable" (~3.5 s/passage CPU, 408s at the app deadline) to **0.14
+s/passage — a full reranked search at the product default top_n=50 in
+median 7.6 s**, 5× faster than v5's bge-on-CPU (37 s). But naive torch/MPS
+serving is NOT turnkey: it took four fixes (fp16, micro-batching, a process
+lock, explicit cache release) to stop the sidecar from OOMing, crashing, and
+degrading request-over-request. llama.cpp/GGUF (qmd's approach) gets all of
+that for free.
+
+Completed on a MacBook M3 Max (48 GB), 2026-07-11; the earlier CPU-VM attempt
+and its findings are preserved below. Harness:
+[`flat_hybrid_clean_bench.py`](./flat_hybrid_clean_bench.py) (v5's, env-swapped);
+raw runs: [`logs_engine_swap/`](./logs_engine_swap/); rollup:
+[`results/summary_engine_swap.json`](./results/summary_engine_swap.json).
+Setup/fix log: `~/projects/research_fixes.md`. Sweep cost $0.107, no halt.
 
 ## What was tested
 
 Hold the engine constant (trip2g, clean 924-note vault from
 [v5](./RESULTS_flat_hybrid_clean.md)), swap the models to qmd's:
 
-| | embedding | reranker |
-|---|---|---|
-| trip2g+bge (v5) | BAAI/bge-m3, 1024d | BAAI/bge-reranker-v2-m3 (cross-encoder) |
-| trip2g+qmd-models (this) | EmbeddingGemma-300m, 768d | Qwen/Qwen3-Reranker-0.6B (LLM yes/no logit) |
-| qmd engine ([RESULTS_qmd.md](./RESULTS_qmd.md)) | EmbeddingGemma-300M GGUF | Qwen3-Reranker-0.6B GGUF |
+| | embedding | reranker | hardware |
+|---|---|---|---|
+| trip2g+bge (v5) | BAAI/bge-m3, 1024d | bge-reranker-v2-m3 (cross-encoder) | CPU (Linux VM) |
+| trip2g+qmd-models (this) | EmbeddingGemma-300m, 768d | Qwen3-Reranker-0.6B (LLM yes/no logit) | **Metal (M3 Max)** |
+| qmd engine ([RESULTS_qmd.md](./RESULTS_qmd.md)) | EmbeddingGemma-300M GGUF | Qwen3-Reranker-0.6B GGUF | CPU (Linux VM) |
 
 The retriever sidecar (`retriever/` on trip2g branch
-`feat/memcli-embedded-reranker`) selects both models by env
-(`MODEL_NAME`, `RERANKER_MODEL`); Qwen3 gets the official yes/no-logit scoring
-backend rather than the CrossEncoder path.
+`feat/memcli-embedded-reranker`) runs **natively** on the Mac (Docker on macOS
+gives containers no Metal access); the app container reaches it via
+`host.docker.internal`. Both models selected by env, Qwen3 scored with the
+official yes/no-logit template. Reranker `top_n=50` — the product default,
+no CPU-era cut to 10.
 
 ## Finding 1 — the live model+dimension swap is hands-off (product finding)
 
-Swapping a running instance from bge-m3 (1024d) to EmbeddingGemma (768d)
-required only new env/FEATURES values (`model`, `dimensions: 768`, and
-EmbeddingGemma's documented prompts as `query_prefix`/`passage_prefix`) —
-no manual index wipe, no migration:
+Held from the CPU attempt and reconfirmed on the Mac from a fresh vault:
+bge-m3 1024d → EmbeddingGemma 768d needs only new FEATURES values (`model`,
+`dimensions: 768`, EmbeddingGemma's documented `query_prefix`/
+`passage_prefix`). The embedding config is part of the note-content hash, so
+`regenerate_note_embeddings` re-enqueues everything itself; stale-dimension
+vectors are skipped at query time (search degrades to BM25, never breaks).
+Indexing 925 notes took **~5 min on Metal** (~55 min on the VM's CPU).
+`google/embeddinggemma-300m` is gated on HF; the ungated
+`unsloth/embeddinggemma-300m` mirror was used.
 
-- the embedding config is part of the note-content hash, so the
-  `regenerate_note_embeddings` cron re-enqueued **all 924 notes by itself**;
-- stored 1024d vectors are skipped (dimension mismatch) at query time until
-  replaced, so search degrades to BM25 instead of breaking;
-- re-index took ~55 min on CPU (~16 notes/min — comparable to bge-m3 despite
-  the smaller model).
+One product bug surfaced by the Mac run: the snippet highlighter in the
+current `ghcr.io/trip2g/trip2g:latest` cuts highlight windows at byte, not
+rune, boundaries — Cyrillic snippets can carry invalid UTF-8 into the GraphQL
+JSON (orphaned continuation byte at window start, half a rune at end). The
+harness now decodes with `errors="replace"`; the server-side fix belongs in
+the highlighter.
 
-Two deployment notes: `google/embeddinggemma-300m` is **gated** on HF (401
-without an accepted license + token); the ungated `unsloth/embeddinggemma-300m`
-mirror (same weights, full sentence-transformers stack) was used instead. And
-retrieval quality passed the smoke probe: the RU will-to-power paraphrase
-returned `nietzsche/concepts/volya_k_vlasti` first — subjectively a cleaner
-top-5 than bge-m3 gave the same query in v4/v5.
+## Finding 2 — Qwen3 latency: unservable on CPU, servable on Metal, but not free
 
-## Finding 2 — Qwen3-Reranker on CPU: from slow to unservable
-
-Measured on this arm64 box (same conditions as the v5 bge numbers):
-
-| | bge-reranker-v2-m3 | Qwen3-Reranker-0.6B |
+| | CPU (VM, v6 first attempt) | Metal (M3 Max, this run) |
 |---|---|---|
-| cold first call | ~28 s | ~30 s |
-| warm, per passage | ~0.14 s | **~3.5 s** (~25×) |
-| 30 medium passages | ~7 s | ~105 s |
-| full search @ top_n=50 (v5 default) | 25–35 s | est. **5–6 min** |
-| full search @ top_n=10 | — | 40–70 s |
+| warm, per passage | ~3.5 s | **~0.14 s** (~25×) |
+| rerank 50 passages (product top_n) | est. 5–6 min | 3.6–7.6 s |
+| full hybrid search, reranked @ top_n=50 | 408s / abandoned | **median 7.6 s, p90 9.1 s** (24-run sweep, n=98 searches) |
+| v5 baseline (bge-CE, CPU) for the same search | median 37.3 s, p90 55.8 s | — |
 
-At the product default (rerank top 50 candidates) a single search costs 5–6
-minutes — an 8–10 h sweep, abandoned before starting. Even after cutting
-`top_n` to 10 (a documented deviation), the 40–70 s search runs into the app's
-own HTTP request deadline: the sweep's very first probe query got **HTTP 408**
-from the GraphQL endpoint and the harness exited; a manual retry of the same
-search returned 200 in 41.6 s. That flakiness is the practical ceiling: when
-p50 latency sits at the server's timeout, half your searches fail regardless
-of quality. (The graceful-degradation path from v4 — rerank timeout → RRF
-order — does not help here, because it is the *outer request*, not the rerank
-call, that dies.)
+So the same stack that flirted with the server's 60 s deadline on CPU now
+answers in single-digit seconds — 5× faster than the bge arm ever ran on its
+CPU box — and the 24-run sweep completed with **zero timeouts**.
 
-LLM-logit rerankers of this class need a GPU to be interactive; on commodity
-CPU they are not a drop-in alternative to a small cross-encoder.
+The caveat that belongs in any reproduction attempt: **naive torch/MPS serving
+degraded to unservable within ~10 requests** until four fixes landed in the
+sidecar (all in `retriever/server.py` on the branch):
 
-## Finding 3 — no accuracy case for the swap (3-way, with caveats)
+1. **Micro-batched rerank scoring** (batch 8): a single padded batch of 50
+   real passages OOMs MPS — the LM head materializes batch×seq×vocab logits
+   (~19 GiB requested).
+2. **One process-wide inference lock**: FastAPI's thread pool issued
+   concurrent encode/predict calls; torch-on-MPS answered with heap
+   corruption inside the MPSGraph/MLIR compiler (SIGABRT) — the process
+   simply died mid-sweep.
+3. **fp16 for the reranker** (fp32 softmax at the end): halves the activation
+   footprint.
+4. **`torch.mps.empty_cache()` after every request**: the MPS caching
+   allocator grows monotonically across differently-shaped batches; left
+   alone, query embeds degraded 0.15 s → 34 s and reranks 8 s → 25 s as the
+   process slid into swap.
 
-No sweep ran on trip2g+qmd-models, so there is no direct accuracy row for it.
-The best available evidence is the qmd arm, which used the **same**
-EmbeddingGemma + Qwen3 models inside a different engine, on the matched slice
-(gpt-5.4-nano, Q1–Q5, polluted 1344-note vault):
+Even on a top-end M3 Max the interactive verdict is qualified: ~7 s per
+search is *servable* (it clears every timeout with 8× headroom) but not
+*snappy*, and the per-passage cost is only at parity with a small
+cross-encoder on CPU. qmd sidesteps this entire class of problems by running
+quantized GGUF models in-process via llama.cpp, which has a native Metal
+backend and no torch allocator. For trip2g the strategic reading: a
+llama.cpp-backed sidecar speaking the same TEI wire would beat torch/MPS on
+both robustness and memory.
 
-| arm | models | correct | hard misattr | per-query tool time |
+## Finding 3 — no accuracy case for the swap (now measured, not inferred)
+
+Full 24-run sweep (nano+mini × EN+RU × 6 questions), identical harness,
+judges, and cite-and-verify metric as v5. `misattr` = hard flags after **one
+mechanical bilingual noise filter applied identically to both arms' stored
+judge outputs** (drop entries whose `belongs_to` self-declares correctness
+in EN or RU, or where `attributed_to` = `belongs_to`; counts therefore differ
+slightly from v5's published hand-audited numbers — the *comparison* is
+filter-consistent):
+
+| cell | correct (v5 → swap) | misattr (v5 → swap) |
+|---|---|---|
+| nano EN | 0/6 → 1/6 | 1 → 3 |
+| nano RU | 4/6 → 3/6 | 3 → 4 |
+| mini EN | 3/6 → 3/6 | 5 → 6 |
+| mini RU | 1/6 → 2/6 | 3 → 4 |
+| **total** | **8/24 → 9/24** | **12 → 17** |
+
+- **Correctness: unchanged** (±1 run is noise at n=6/cell). Facts covered
+  42/64 vs v5's 43/64.
+- **Confusion: not cured, if anything marginally worse.** Blending flagged in
+  4/24 runs in both arms. The swap arm retrieves off-corpus at 9–15% per cell
+  — same band as v5.
+- **Provenance: the v5 finding replicates exactly.** 42/43 judgeable
+  citations name the right thinker, **0 fabricated paths** (v5: 45/45, 2
+  fabricated). Forcing the claim→source binding into the output format
+  remains the one intervention that reliably works.
+
+Three-way, on the matched slice (gpt-5.4-nano, Q1–Q5, EN):
+
+| arm | models | engine | correct | hard misattr |
 |---|---|---|---|---|
-| trip2g+bge, clean (v5, nano EN, Q1–6) | bge-m3 + bge-CE | 0/6 | 1 | ~25–35 s |
-| trip2g+bge, polluted (v4, nano, Q1–6) | bge-m3 + bge-CE | 1/6 | 3 | ~25–35 s |
-| qmd engine (nano, Q1–5, polluted) | EmbeddingGemma + Qwen3 | 1/5 | 3 | ~2.4 min (~4.5×) |
-| trip2g+qmd-models (this) | EmbeddingGemma + Qwen3 | — abandoned — | — | 40–70 s @ top_n=10, 408-flaky |
+| trip2g+bge, clean (v5) | bge-m3 + bge-CE | trip2g | 0/5 | 1 |
+| qmd (polluted vault, n=5) | Gemma + Qwen3 GGUF | qmd | 1/5 | 3 |
+| trip2g+qmd-models, clean (this) | Gemma + Qwen3 | trip2g | 1/5 | 1 |
 
-Same correctness, same misattribution count, same failure *pattern*
-(success-literature corpora invading will/drive questions; comparison notes
-blended) on both model stacks. Nothing in that table suggests Qwen3/Gemma
-would have improved trip2g's accuracy or confusion — and it costs 25× the
-rerank compute. The confusion failure tracks the *flat corpus*, not the
-engine or the models: that is now shown across three stacks
-(v4/v5 trip2g+bge, qmd, and — by failure mode — the walled hub itself).
+Two engines × two model stacks, every combination lands in the same narrow
+band. **The confusion failure is a property of flat semantic retrieval over
+this corpus** — v4/v5's conclusion, now closed with the direct same-models
+measurement that was missing.
 
 ## Honest limits
 
-- The abandoned sweep means "no accuracy difference" is an inference from the
-  qmd arm, not a measurement of this exact stack. If a GPU box appears, the
-  sweep is one command away (below).
-- The probe crash was partly a harness bug: HTTP 408 raises `HTTPError`,
-  which the retry wrapper (built for `TimeoutError`/`OSError`) did not catch,
-  so the probe made a single attempt. With a retry it might have limped
-  through — into 8-per-question searches each flirting with the same 408.
-  The conclusion stands; the mechanism is worth recording.
-- qmd's row is n=5, one model, on the polluted vault (its run predates the
-  dedup) — directional only.
-- `top_n=10` vs v5's 50 means the latency rows compare different work per
-  query; the per-passage number (3.5 s vs 0.14 s) is the clean comparison.
+- n=6 per cell, 1 run each — differences of 1–2 runs are noise; only the
+  provenance counts are large enough to lean on.
+- v5 ran on CPU/Linux, this on Metal/macOS and a *fresh re-index* of the same
+  vault (925 vs 924 notes — one AGENTS.md seed difference; all 925 embedded
+  here vs 883/924 in v5). Engine image differs too (ghcr latest vs the
+  branch build). None of these plausibly reverse an accuracy null, but they
+  are not controlled.
+- The misattribution filter was re-implemented mechanically; v5's published
+  counts (6 EN / 8 RU) came from a hand-audited pass and differ by ±1 per RU
+  cell from this recount. Both arms here use the same code path
+  (see `research_fixes.md`).
+- The qmd row remains n=5, one model, polluted vault — directional only.
+- Latency numbers compare different hardware by design: the claim is "Metal
+  makes this stack servable", not "Metal beats CPU on like hardware".
 
 ## Reproduce
 
 ```bash
-# retriever with qmd's models (image built from trip2g:feat/memcli-embedded-reranker retriever/)
-docker run -d --name <name>-embedding --network <name>-net -p 127.0.0.1:24093:8000 \
-  -v /mnt/extssd/models:/data \
-  -e MODEL_NAME=unsloth/embeddinggemma-300m \
-  -e LOAD_RERANKER=1 -e RERANKER_MODEL=Qwen/Qwen3-Reranker-0.6B \
-  trip2g-embedding-server
-# app FEATURES (custom model = explicit overrides):
-#   vector_search: { model: "unsloth/embeddinggemma-300m", dimensions: 768,
-#     max_input_tokens: 2048,
-#     query_prefix: "task: search result | query: ",
-#     passage_prefix: "title: none | text: ",
-#     reranker: { enabled: true, model: "Qwen/Qwen3-Reranker-0.6B",
-#       top_n: 10, timeout_seconds: 600, base_url: "http://<name>-embedding:8000/rerank" } }
-# then trigger regenerate_note_embeddings and wait for the re-index; sweep:
+# native retriever (Metal), from trip2g branch feat/memcli-embedded-reranker:
+cd trip2g/retriever && MODEL_NAME=unsloth/embeddinggemma-300m \
+  RERANKER_MODEL=Qwen/Qwen3-Reranker-0.6B LOAD_RERANKER=1 \
+  python3 -m uvicorn server:app --host 0.0.0.0 --port 8900
+# app: ghcr.io/trip2g/trip2g:latest via patched memcli (FEATURES_JSON env
+# override), FEATURES → host.docker.internal:8900, dimensions 768, Gemma
+# prefixes, reranker top_n 50 timeout 120; CRONJOBS_RUN_ON_START=1 to index.
+# See ~/projects/research_fixes.md for the full setup + gotchas.
 LOG_DIR=logs_engine_swap SUMMARY_FILE=summary_engine_swap.json \
   CONDITION=flat-hybrid-qwen SEARCH_TIMEOUT=900 \
-  VAULT=~/projects/trip2g_all_kbs_clean python3 flat_hybrid_clean_bench.py
+  VAULT=~/projects/trip2g_mac_vault OPENROUTER_KEY=... \
+  python3 flat_hybrid_clean_bench.py   # ~$0.11, ~1.5h
 ```

@@ -1,0 +1,423 @@
+{
+  "model": "openai/gpt-5.4-mini",
+  "condition": "flat-hybrid-qwen",
+  "lang": "ru",
+  "qid": 4,
+  "q": "Кто из мыслителей в этой базе знаний наиболее прямо спорит со стоической невозмутимостью (Эпиктетом) и на каких основаниях? Обоснуй ответ по базе знаний.",
+  "kind": "hub orientation",
+  "wall_s": 83.0,
+  "judge": {
+    "verdict": "correct",
+    "facts_covered": [
+      1,
+      2
+    ],
+    "note": "Ответ утверждает наличие оппонента Ницше против стоической невозмутимости (1) и объясняет разногласие через контраст из базы epictetus↔nietzsche: покой/отказ от непoдвластного vs утверждение жизни/патос воли и интерпретацию «apatheia» как отказ от жизни (2).",
+    "raw": "{\"facts_covered\":[1,2],\"note\":\"Ответ утверждает наличие оппонента Ницше против стоической невозмутимости (1) и объясняет разногласие через контраст из базы epictetus↔nietzsche: покой/отказ от непoдвластного vs утверждение жизни/патос воли и интерпретацию «apatheia» как отказ от жизни (2).\"}",
+    "judge_cost": 0.000278
+  },
+  "confusion": {
+    "misattributions": [
+      {
+        "claim": "В карточке Эпиктета невозмутимость описана как «свободу от страстей, свободу и безмятежность» и как механизм согласования воли с ходом вещей.",
+        "attributed_to": "Ницше",
+        "belongs_to": "Эпиктет"
+      },
+      {
+        "claim": "Для Ницше сказано, что это было бы «renunciation of life; apatheia against the pathos of the will» — то есть эпиктетовская апатия интерпретируется как отказ от жизни, а не как добродетель.",
+        "attributed_to": "Ницше",
+        "belongs_to": "Эпиктет (апатия/невозмутимость как стоическая добродетель); интерпретация должна приписываться оппоненту/фрейму, не самой позиции Эпиктета"
+      }
+    ],
+    "blending": true,
+    "note": "Ответ в целом верно выбирает Ницше, но приписывает/переносит части формулировок про «апатию» и про ось желания между Эпиктетом и Ницше, не различая явно кто именно утверждает отказ/согласование и кто интерпретирует стоическую апатию как «renunciation of life».",
+    "raw": "{\"misattributions\":[{\"claim\":\"В карточке Эпиктета невозмутимость описана как «свободу от страстей, свободу и безмятежность» и как механизм согласования воли с ходом вещей.\",\"attributed_to\":\"Ницше\",\"belongs_to\":\"Эпиктет\"},{\"claim\":\"Для Ницше сказано, что это было бы «renunciation of life; apatheia against the pathos of the will» — то есть эпиктетовская апатия интерпретируется как отказ от жизни, а не как добродетель.\",\"attributed_to\":\"Ницше\",\"belongs_to\":\"Эпиктет (апатия/невозмутимость как стоиче",
+    "judge_cost": 0.000521
+  },
+  "provenance": {
+    "cites": [
+      {
+        "line": "- Nietzsche: philosophers/ru/contradictions — прямой оппонент Эпиктета; ось покой/утверждение жизни",
+        "path": "philosophers/ru/contradictions",
+        "corpus": "philosophers",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": true,
+        "author_match": null
+      },
+      {
+        "line": "- Epictetus: epictetus/concepts/nevozmutimost — невозмутимость как свобода от страстей и согласие воли с ходом вещей",
+        "path": "epictetus/concepts/nevozmutimost",
+        "corpus": "epictetus",
+        "named": [
+          "epictetus"
+        ],
+        "retrieved": true,
+        "hub": false,
+        "author_match": true
+      },
+      {
+        "line": "- Nietzsche: philosophers/en/hub/epictetus — апатия у Ницше трактуется как отказ от жизни; «apatheia against the pathos of the will»",
+        "path": "philosophers/en/hub/epictetus",
+        "corpus": "philosophers",
+        "named": [
+          "nietzsche"
+        ],
+        "retrieved": true,
+        "hub": true,
+        "author_match": null
+      },
+      {
+        "line": "- Wattle(s): wattles/concepts/epictetus_kontrast — стоик гасит желание, другой лагерь раздувает его как «порыв жизни»",
+        "path": "wattles/concepts/epictetus_kontrast",
+        "corpus": "wattles",
+        "named": [],
+        "retrieved": true,
+        "hub": false,
+        "author_match": null
+      }
+    ],
+    "total": 4,
+    "fabricated": 0,
+    "hub_cites": 2,
+    "judgeable": 1,
+    "author_mismatch": 0,
+    "provenance_ok": 1
+  },
+  "summary_row": {
+    "model": "openai/gpt-5.4-mini",
+    "lang": "ru",
+    "qid": 4,
+    "verdict": "correct",
+    "facts_covered": 2,
+    "facts_required": 2,
+    "misattributions": 2,
+    "blending": true,
+    "cites": 4,
+    "cites_fabricated": 0,
+    "cites_judgeable": 1,
+    "cites_author_mismatch": 0,
+    "cites_hub": 2,
+    "retrieval_results": 64,
+    "retrieval_offtarget": 23,
+    "origins": {
+      "VECTOR": 64
+    },
+    "quotes": 3,
+    "quotes_valid": 3,
+    "tool_calls": 8,
+    "first_relevant_call": 1,
+    "forced_final": false,
+    "cost_usd": 0.00999,
+    "wall_s": 83.0
+  },
+  "trace": [
+    {
+      "cost": 0.00112,
+      "model_ms": 3367,
+      "tokens": {
+        "in": 329,
+        "out": 193
+      },
+      "tool_calls": [
+        {
+          "n": 1,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет стоическая невозмутимость противостояние критика спорит с Эпиктетом"
+          },
+          "result_ok": true,
+          "paths": [
+            "wattles/concepts/epictetus_kontrast",
+            "epictetus/critic_report",
+            "philosophers/en/hub/epictetus",
+            "philosophers/en/contradictions",
+            "philosophers/ru/contradictions",
+            "philosophers/ru/hub/epictetus",
+            "goethe/concepts/svoboda_i_samoobladanie",
+            "james_allen/see_also"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### wattles/concepts/epictetus_kontrast\n[VECTOR score=1.000] Контраст для дебатов: Уоттлс против Эпиктета\n…iy-mentalny-obraz]]. Где стоик гасит желание, чтобы стать свободным, Уоттлс раздувает его как «порыв жизни» ([[priumnozhenie]]). ## Общее — и почему расхождение фундаментально - Оба зовут держать ум...…\n\n### epictetus/critic_report\n[VECTOR score=0.981] CRITIC_REPORT — Epictetus KB, v1\n…ssent ✓ · desire vs aversion ✓ · role/duty kathēkon ✓ · indifference to externals ✓ · apatheia ✓ · three disciplines ✓ · \"not things but judgments\" ✓ · philosopher's progress ✓ ### Adversarial tests...…\n\n### philosophers/en/hub/epictetus\n[VECTOR score=0.963] Epictetus — Enchiridion\n…htoby-bylo-kak-est` - Duty and role → `dolzhnoe-i-rol`, `igray-svoyu-rol-horosho` - The student's path → `progress-uchenik",
+          "ms": 6794
+        },
+        {
+          "n": 2,
+          "name": "search",
+          "args": {
+            "query": "stoic tranquility Epictetus critique opposition philosopher basis"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/hub/epictetus",
+            "epictetus/critic_report",
+            "james_allen/see_also",
+            "wattles/concepts/epictetus_kontrast",
+            "philosophers/ru/contradictions",
+            "philosophers/en/hub/montaigne",
+            "philosophers/en/hub/james_allen",
+            "epictetus/quote_authenticity"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/hub/epictetus\n[VECTOR score=0.990] Epictetus — Enchiridion\n…htoby-bylo-kak-est` - Duty and role → `dolzhnoe-i-rol`, `igray-svoyu-rol-horosho` - The student's path → `progress-uchenika`; chains `ot-dihotomii-k-svobode`, `terapiya-suzhdeniya`, `put-uchenika` ##...…\n\n### epictetus/critic_report\n[VECTOR score=0.960] CRITIC_REPORT — Epictetus KB, v1\n…ssent ✓ · desire vs aversion ✓ · role/duty kathēkon ✓ · indifference to externals ✓ · apatheia ✓ · three disciplines ✓ · \"not things but judgments\" ✓ · philosopher's progress ✓ ### Adversarial tests...…\n\n### james_allen/see_also\n[VECTOR score=0.947] Другие голоса: карта созвездия\n…�шают то, что растёт само (`wu wei`). Если вопрос про естественность и вред напряжённого целеполагания — база `laozi`. ## Стоические собеседники (та ж",
+          "ms": 7152
+        },
+        {
+          "n": 3,
+          "name": "search",
+          "args": {
+            "query": "невозмутимость стоицизм Эпиктет критика эмоциональность страдание воля к власти"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/nevozmutimost",
+            "philosophers/en/hub/epictetus",
+            "epictetus/concepts/sudzhdeniya-ne-veshchi",
+            "epictetus/concepts/proairesis",
+            "james_allen/see_also",
+            "epictetus/critic_report",
+            "philosophers/ru/hub/epictetus",
+            "wattles/concepts/epictetus_kontrast"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/nevozmutimost\n[VECTOR score=1.000] Невозмутимость (ἀπάθεια / ἀταραξία)\n…Перевод наш: «Взвесь всё это, если хочешь выменять на это свободу от страстей, свободу и безмятежность». ## Links - [[soglasie-s-prirodoy]] — механизм невозмутимости: согласовать волю с ходом вещей....…\n\n### philosophers/en/hub/epictetus\n[VECTOR score=0.962] Epictetus — Enchiridion\n…htoby-bylo-kak-est` - Duty and role → `dolzhnoe-i-rol`, `igray-svoyu-rol-horosho` - The student's path → `progress-uchenika`; chains `ot-dihotomii-k-svobode`, `terapiya-suzhdeniya`, `put-uchenika` ##...…\n\n### epictetus/concepts/sudzhdeniya-ne-veshchi\n[VECTOR score=0.952] Беспокоят не вещи, а суждения о них\n…# Беспокоят не вещи, а суждения о них Самая цитируемая мысль Эпиктета — и его психологический механизм. Между со",
+          "ms": 6828
+        },
+        {
+          "n": 4,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет аффекты страдание трагедия философия против"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/ru/topics/stradanie",
+            "philosophers/en/topics/stradanie",
+            "philosophers/en/contradictions",
+            "philosophers/en/hub/schopenhauer",
+            "philosophers/ru/hub/schopenhauer",
+            "epictetus/concepts/sudzhdeniya-ne-veshchi",
+            "philosophers/ru/contradictions",
+            "nietzsche/concepts/distsiplina_stradaniya"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/ru/topics/stradanie\n[VECTOR score=1.000] Страдание\n…�о в развлечение; страдание — правда о положении человека без Бога. Опора: `divertissement`, `begstvo-ot-sebya`, `nichtozhestvo-i-velichie`. ## Страдание — суждение: убери мнение, уйдёт боль -...…\n\n### philosophers/en/topics/stradanie\n[VECTOR score=0.963] Suffering\n…left alone with his own wretchedness and flees it into diversion; suffering is the truth about man's condition without God. Grounding: `divertissement`, `begstvo-ot-sebya`,...…\n\n### philosophers/en/contradictions\n[VECTOR score=0.941] Contradiction index\n…nding: `otritsanie-voli`, `tshcheta-sushchestvovaniya` - tolstoy: cites Schopenhauer among the sages, but finds the way out in the faith of the people. Grounding: `otvet-mudretsov`,...…\n\n### philosophers/en/hu",
+          "ms": 6780
+        },
+        {
+          "n": 5,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет радость страдание невозмутимость философия жизни"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/ru/hub/schopenhauer",
+            "philosophers/en/hub/schopenhauer",
+            "schopenhauer/principles/schaste_otritsatelno",
+            "philosophers/ru/topics/stradanie",
+            "philosophers/en/topics/stradanie",
+            "philosophers/ru/topics/schaste",
+            "philosophers/ru/contradictions",
+            "schopenhauer/chains/put_pessimizma_o_schaste"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/ru/hub/schopenhauer\n[VECTOR score=0.998] Шопенгауэр — Афоризмы житейской мудрости\n…высшей цели. - Эпиктет (`epictetus`) — тоже свобода от страдания, но через суждение и согласие, а не метафизику воли. ## С чего начать - https://schopenhauer.2pub.me/put-pessimizma-o-schaste —...…\n\n### philosophers/en/hub/schopenhauer\n[VECTOR score=0.981] Schopenhauer — The Wisdom of Life / Counsels and Maxims\n…ife and \"the demand of the day\" against freedom from pain as the highest aim. - Epictetus (`epictetus`) — also freedom from suffering, but through judgment and assent, not a metaphysics of the will....…\n\n### schopenhauer/principles/schaste_otritsatelno\n[VECTOR score=0.902] Счастье отрицательно, страдание положительно\n…**Принцип:** Боль — единственный положительный, реально ощущаемый э",
+          "ms": 6152
+        },
+        {
+          "n": 6,
+          "name": "search",
+          "args": {
+            "query": "Эпиктет аскеза страсть против аффектов"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/ru/topics/strasti_i_ego",
+            "philosophers/en/topics/strasti_i_ego",
+            "ignatius/principles/affekt_zakazyvaetsya",
+            "philosophers/en/hub/epictetus",
+            "epictetus/concepts/nevozmutimost",
+            "ignatius/translation/04_ad_i_dopolneniya",
+            "philosophers/ru/hub/schopenhauer",
+            "epictetus/chains/terapiya_suzhdeniya"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/ru/topics/strasti_i_ego\n[VECTOR score=0.964] Страсти и эго\n…кость и инстинкт — материал познания и роста, обращённый прежде всего на себя. Опора: `instinkt-i-razum`, `zhestokost-i-poznanie`. ## Страсти дисциплинируют и отсекают - **Эпиктет** (`epictetus`) —...…\n\n### philosophers/en/topics/strasti_i_ego\n[VECTOR score=0.940] Passions and Ego\n…ssions are not to be extirpated but spiritualized: cruelty and instinct are material for knowledge and growth, turned first of all upon oneself. Grounding: `instinkt-i-razum`,...…\n\n### ignatius/principles/affekt_zakazyvaetsya\n[VECTOR score=0.925] Аффект — планируемый результат, не погода\n…ие и сорадование]] — грамматика точных аффектов - [[../concepts/nedeli|четыре Недели]] — перенастройка среды по аффекту ### Обоснование > Прошение дол",
+          "ms": 6651
+        }
+      ]
+    },
+    {
+      "cost": 0.00413,
+      "model_ms": 1518,
+      "tokens": {
+        "in": 5330,
+        "out": 29
+      },
+      "tool_calls": [
+        {
+          "n": 7,
+          "name": "search",
+          "args": {
+            "query": "nietzsche epictetus contradiction index direct opposition stoic calm basis"
+          },
+          "result_ok": true,
+          "paths": [
+            "philosophers/en/contradictions",
+            "philosophers/ru/contradictions",
+            "philosophers/en/hub/epictetus",
+            "philosophers/en/hub/schopenhauer",
+            "philosophers/en/hub/montaigne",
+            "philosophers/ru/hub/schopenhauer",
+            "philosophers/en/hub/goethe",
+            "goethe/concepts/svoboda_i_samoobladanie"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### philosophers/en/contradictions\n[VECTOR score=1.000] Contradiction index\n…unding: `proairesis`, `dihotomiya-kontrolya` - montaigne: the soul is inconstant and patchwork; live by the common measure, not by a system. Grounding: `nepostoyanstvo-dushi`,...…\n\n### philosophers/ru/contradictions\n[VECTOR score=0.982] Индекс противоречий\n…ontrolya` - montaigne: душа непостоянна и лоскутна; жить по общей мере, а не по системе. Опора: `nepostoyanstvo-dushi`, `zhivi-po-obshchey-mere` ## epictetus ↔ nietzsche Ось: покой через отказ от...…\n\n### philosophers/en/hub/epictetus\n[VECTOR score=0.964] Epictetus — Enchiridion\n…htoby-bylo-kak-est` - Duty and role → `dolzhnoe-i-rol`, `igray-svoyu-rol-horosho` - The student's path → `progress-uchenika`; chains `ot-dihotomii-k-svobode`, `terapiya-suzhdeniya`, `p",
+          "ms": 8284
+        }
+      ]
+    },
+    {
+      "cost": 0.00131,
+      "model_ms": 1532,
+      "tokens": {
+        "in": 6184,
+        "out": 29
+      },
+      "tool_calls": [
+        {
+          "n": 8,
+          "name": "search",
+          "args": {
+            "query": "nietzsche against stoic apatheia in base knowledge direct quote"
+          },
+          "result_ok": true,
+          "paths": [
+            "epictetus/concepts/nevozmutimost",
+            "philosophers/ru/contradictions",
+            "philosophers/en/hub/epictetus",
+            "philosophers/en/contradictions",
+            "philosophers/en/hub/goethe",
+            "philosophers/ru/hub/schopenhauer",
+            "philosophers/en/hub/james_allen",
+            "philosophers/en/hub/montaigne"
+          ],
+          "origins": [
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR",
+            "VECTOR"
+          ],
+          "result_preview": "### epictetus/concepts/nevozmutimost\n[VECTOR score=0.945] Невозмутимость (ἀπάθεια / ἀταραξία)\n…Перевод наш: «Взвесь всё это, если хочешь выменять на это свободу от страстей, свободу и безмятежность». ## Links - [[soglasie-s-prirodoy]] — механизм невозмутимости: согласовать волю с ходом вещей....…\n\n### philosophers/ru/contradictions\n[VECTOR score=0.943] Индекс противоречий\n…ontrolya` - montaigne: душа непостоянна и лоскутна; жить по общей мере, а не по системе. Опора: `nepostoyanstvo-dushi`, `zhivi-po-obshchey-mere` ## epictetus ↔ nietzsche Ось: покой через отказ от...…\n\n### philosophers/en/hub/epictetus\n[VECTOR score=0.915] Epictetus — Enchiridion\n…, for Nietzsche, a renunciation of life; apatheia against the pathos of the will. - Aurelius (`aurelius`, base not built) — a direct pupil: the",
+          "ms": 8143
+        }
+      ]
+    },
+    {
+      "cost": 0.00343,
+      "model_ms": 15182,
+      "tokens": {
+        "in": 7025,
+        "out": 513
+      },
+      "final_text": "По базе знаний **наиболее прямо спорит с эпиктетовской невозмутимостью Ницше**.\n\nПочему именно он:\n- В индексе противоречий прямо зафиксирована ось **`epictetus ↔ nietzsche`**: у Эпиктета — «покой через отказ от…», а у Ницше — противоположная установка на утверждение жизни и её сил.\n- В карточке Эпиктета невозмутимость описана как **«свободу от страстей, свободу и безмятежность»** и как механизм согласования воли с ходом вещей.\n- В том же корпусе про Ницше сказано, что для него это было бы **«renunciation of life; apatheia against the pathos of the will»** — то есть эпиктетовская апатия интерпретируется как отказ от жизни, а не как добродетель.\n- В той же базе есть и более общий контраст: у Эпиктета нужно **гасить желание**, а у противоположного лагеря желание, напротив, раздувается как **«порыв жизни»**. Хотя эта формулировка прямо дана про Уоттлса, она показывает саму ось спора: стоическое подавление желания против его утверждения.\n\nИтак, если отвечать строго по базе знаний, то **Ницше — самый прямой антагонист Эпиктета по вопросу невозмутимости**, потому что база явно описывает их как противостояние **покоя/апатии** и **утверждения жизни/патоса воли**.\n\nSOURCES\n- Nietzsche: philosophers/ru/contradictions — прямой оппонент Эпиктета; ось покой/утверждение жизни\n- Epictetus: epictetus/concepts/nevozmutimost — невозмутимость как свобода от страстей и согласие воли с ходом вещей\n- Nietzsche: philosophers/en/hub/epictetus — апатия у Ницше трактуется как отказ от жизни; «apatheia against the pathos of the will»\n- Wattle(s): wattles/concepts/epictetus_kontrast — стоик гасит желание, другой лагерь раздувает его как «порыв жизни»"
+    }
+  ],
+  "final": "По базе знаний **наиболее прямо спорит с эпиктетовской невозмутимостью Ницше**.\n\nПочему именно он:\n- В индексе противоречий прямо зафиксирована ось **`epictetus ↔ nietzsche`**: у Эпиктета — «покой через отказ от…», а у Ницше — противоположная установка на утверждение жизни и её сил.\n- В карточке Эпиктета невозмутимость описана как **«свободу от страстей, свободу и безмятежность»** и как механизм согласования воли с ходом вещей.\n- В том же корпусе про Ницше сказано, что для него это было бы **«renunciation of life; apatheia against the pathos of the will»** — то есть эпиктетовская апатия интерпретируется как отказ от жизни, а не как добродетель.\n- В той же базе есть и более общий контраст: у Эпиктета нужно **гасить желание**, а у противоположного лагеря желание, напротив, раздувается как **«порыв жизни»**. Хотя эта формулировка прямо дана про Уоттлса, она показывает саму ось спора: стоическое подавление желания против его утверждения.\n\nИтак, если отвечать строго по базе знаний, то **Ницше — самый прямой антагонист Эпиктета по вопросу невозмутимости**, потому что база явно описывает их как противостояние **покоя/апатии** и **утверждения жизни/патоса воли**.\n\nSOURCES\n- Nietzsche: philosophers/ru/contradictions — прямой оппонент Эпиктета; ось покой/утверждение жизни\n- Epictetus: epictetus/concepts/nevozmutimost — невозмутимость как свобода от страстей и согласие воли с ходом вещей\n- Nietzsche: philosophers/en/hub/epictetus — апатия у Ницше трактуется как отказ от жизни; «apatheia against the pathos of the will»\n- Wattle(s): wattles/concepts/epictetus_kontrast — стоик гасит желание, другой лагерь раздувает его как «порыв жизни»",
+  "forced_final": false,
+  "tool_calls": 8,
+  "first_relevant_call": 1,
+  "model_ms": 21599,
+  "tool_ms": 56784,
+  "grounding": {
+    "quotes": 3,
+    "quotes_in_retrieval": 3
+  },
+  "retrieved_chars": 18402,
+  "retrieval": {
+    "results": 64,
+    "offtarget": 23,
+    "offtarget_corpora": {
+      "wattles": 3,
+      "epictetus": 11,
+      "goethe": 2,
+      "james_allen": 3,
+      "schopenhauer": 2,
+      "ignatius": 2
+    },
+    "origins": {
+      "VECTOR": 64
+    }
+  }
+}

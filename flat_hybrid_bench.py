@@ -60,7 +60,10 @@ def _post(url, payload, headers, timeout=HTTP_TIMEOUT):
                  "user-agent": "trip2g-federated-search-research/flat-hybrid", **headers},
         method="POST")
     with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode())
+        # errors="replace": the app's snippet highlighter can cut a multibyte
+        # rune in half at window edges, yielding invalid UTF-8 inside a JSON
+        # string; a replacement char in a snippet is harmless to the run.
+        return json.loads(r.read().decode(errors="replace"))
 
 
 def _norm(s):
