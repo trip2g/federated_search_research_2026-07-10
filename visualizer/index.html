@@ -98,7 +98,7 @@
 </header>
 <main>
   <div id="config">
-    <div>
+    <div id="keybox">
       <label>OpenRouter API key</label>
       <input type="password" id="apikey" placeholder="sk-or-v1-… (stored in localStorage)">
     </div>
@@ -170,6 +170,17 @@ let qCounter = 0;
 
 $('apikey').value = localStorage.getItem('or_key') || '';
 $('apikey').addEventListener('change', e => localStorage.setItem('or_key', e.target.value.trim()));
+
+// env mode: proxy started with OPENROUTER_KEY serves /config and holds the key
+// server-side; the browser never sees it (no input, no localStorage, no trace).
+let serverKey = false;
+fetch('config').then(r => r.ok ? r.json() : null).then(c => {
+  if (c && c.hasKey) {
+    serverKey = true;
+    $('keybox').style.display = 'none';
+    $('apikey').value = '';
+  }
+}).catch(() => {});
 $('turns').addEventListener('input', e => $('turnsval').textContent = e.target.value);
 $('mode-task').onclick = () => setMode('task');
 $('mode-wander').onclick = () => setMode('wander');
@@ -448,8 +459,8 @@ const SYS_WANDER = `You are a curious wanderer in a knowledge graph, with no tas
 Before each tool call, say in 1-2 sentences what pulls you there. After roughly {N} hops, settle: stop calling tools and describe your final resting place — which note you ended on, the theme that emerged along the walk, and the most surprising connection you found.`;
 
 async function runLive() {
-  const key = $('apikey').value.trim();
-  if (!key) { showAnswer('Enter an OpenRouter API key (or press Demo).', true); return; }
+  const key = serverKey ? '' : $('apikey').value.trim();
+  if (!serverKey && !key) { showAnswer('Enter an OpenRouter API key (or press Demo).', true); return; }
   const endpoint = $('endpoint').value.trim();
   const model = $('model').value.trim();
   const maxTurns = +$('turns').value;
@@ -476,9 +487,10 @@ async function runLive() {
     for (let turn = 1; turn <= maxTurns && !stopFlag; turn++) {
       journalTurn(turn);
       setStatus(`turn ${turn}/${maxTurns} — thinking (${model})…`);
-      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const res = await fetch(serverKey ? 'openrouter' : 'https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
-        headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
+        headers: serverKey ? { 'Content-Type': 'application/json' }
+                           : { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
         body: JSON.stringify({ model, messages, tools, usage: { include: true } }),
       });
       const j = await res.json();

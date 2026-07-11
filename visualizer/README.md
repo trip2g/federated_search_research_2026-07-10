@@ -1,10 +1,11 @@
 # MCP Graph Walk — live visualizer
 
 Watch a model walk the trip2g MCP knowledge graph as an animated force-directed graph.
-Single-file `index.html` (no build, no dependencies), plus a 60-line CORS proxy.
+Single-file `index.html` (no build, no dependencies), plus a small stdlib proxy that
+serves the app, bridges CORS to the hub, and can hold the OpenRouter key server-side.
 
-**TL;DR:** `python3 proxy.py` in one terminal, open `index.html` in a browser, paste an
-OpenRouter key, press **Start walk**. Or press **Demo** — no key needed.
+**TL;DR:** `OPENROUTER_KEY=sk-or-... python3 proxy.py` → open <http://localhost:8787>
+→ **Start walk**. Or press **Demo** — no key needed.
 
 ## What you see
 
@@ -22,19 +23,27 @@ OpenRouter key, press **Start walk**. Or press **Demo** — no key needed.
 
 ## Usage
 
+One command:
+
 ```
 cd visualizer
-python3 proxy.py                 # terminal 1: CORS proxy on :8787
-python3 -m http.server 8000      # terminal 2 (or just open index.html via file://)
-# open http://localhost:8000
+OPENROUTER_KEY=sk-or-... python3 proxy.py
+# open http://localhost:8787
 ```
 
-1. Paste your OpenRouter API key (password field; stored in `localStorage` only — it is
-   never embedded in the file and never sent anywhere except `openrouter.ai`).
-2. Pick a model (default `openai/gpt-5.4-nano`; any OpenRouter model id works).
-3. Choose **TASK** (type a question) or **WANDER** (no task — a curiosity prompt makes
+With the env key set, the page (via `GET /config`) hides the key input entirely and
+routes model calls through the proxy's `POST /openrouter`, which adds the
+`Authorization` header server-side — the key never reaches the browser, localStorage,
+or exported traces.
+
+Fallback (no env key): run `python3 proxy.py` plain and either open
+<http://localhost:8787> or `index.html` via `file://`. Paste your OpenRouter key in the
+UI (stored in `localStorage` only; sent only to `openrouter.ai`, which is CORS-open).
+
+1. Pick a model (default `openai/gpt-5.4-nano`; any OpenRouter model id works).
+2. Choose **TASK** (type a question) or **WANDER** (no task — a curiosity prompt makes
    the model explore and then describe where it ended up and what theme emerged).
-4. Set max turns (default 12) and press **Start walk**.
+3. Set max turns (default 12) and press **Start walk**.
 
 **Replay** re-animates the last recorded walk from its trace (same hops, same
 latencies). **Export** downloads the trace as JSON. **Demo** replays a bundled
@@ -46,10 +55,16 @@ offline and without any key.
 
 `https://trip2g.com/_system/mcp` answers OPTIONS with 204 but sends **no
 `Access-Control-Allow-Origin` header**, so browsers block direct fetches. `proxy.py`
-(stdlib only) forwards POSTs from `http://localhost:8787` to the hub, adds a custom
-`User-Agent` (the hub 403s default library UAs), and adds CORS headers. Point it at
-another instance with `MCP_TARGET=https://other.host/_system/mcp python3 proxy.py`.
-OpenRouter itself is CORS-open and is called directly from the browser.
+(stdlib only) serves the app on `http://localhost:8787` and exposes:
+
+| Route | What it does |
+|---|---|
+| `GET /` | serves `index.html` |
+| `GET /config` | `{"hasKey": bool, "mcpTarget": "..."}` — the UI probes this on load |
+| `POST /openrouter` | forwards to OpenRouter, adding `Authorization` from `OPENROUTER_KEY` (403 if unset) |
+| `POST /` (anything else) | forwards JSON-RPC to the MCP hub, adding a custom `User-Agent` (the hub 403s default library UAs) |
+
+Point it at another instance with `MCP_TARGET=https://other.host/_system/mcp`.
 
 ## How it works
 
