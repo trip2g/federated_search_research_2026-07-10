@@ -141,7 +141,13 @@ def main():
     # default read timeout to 120s and retry a timed-out HTTP call once.
     _orig_post = b._post
 
+    # SEARCH_TIMEOUT lets slow rerankers (Qwen3 on CPU: minutes per query)
+    # override the 120s the search helper hardcodes for the local instance.
+    search_timeout = int(os.environ.get("SEARCH_TIMEOUT", "120"))
+
     def _patched_post(url, payload, headers, timeout=120):
+        if "localhost" in url or "127.0.0.1" in url:
+            timeout = max(timeout, search_timeout)
         try:
             return _orig_post(url, payload, headers, timeout)
         except (TimeoutError, OSError):
@@ -150,13 +156,19 @@ def main():
     b._post = _patched_post
 
     resume = os.environ.get("RESUME", "1") not in ("", "0", "false")
+    # A model-swap run (same engine, different embedding/reranker models)
+    # reuses this harness with its own log dir / summary / condition label.
+    log_dir = os.environ.get("LOG_DIR", "logs_flat_hybrid_clean")
+    summary_file = os.environ.get("SUMMARY_FILE", "summary_flat_hybrid_clean.json")
+    condition = os.environ.get("CONDITION", "flat-hybrid-clean")
+    tag = condition.split("-")[-1]
 
     probe = b.hybrid_search("воля к власти")
     if not probe.get("ok"):
         sys.exit(f"hybrid search probe failed: {probe.get('error')}")
     print(f"probe ok: {len(probe['paths'])} results, origins={probe['origins']}; "
           f"budget ${b.BUDGET_USD}")
-    os.makedirs(os.path.join(HERE, "logs_flat_hybrid_clean"), exist_ok=True)
+    os.makedirs(os.path.join(HERE, log_dir), exist_ok=True)
     os.makedirs(os.path.join(HERE, "results"), exist_ok=True)
     summary, halted = [], None
     try:
@@ -167,16 +179,16 @@ def main():
                     questions = [q for q in questions if str(q["id"]) == only_q]
                 for q in questions:
                     slug = model.split("/")[-1]
-                    log_path = os.path.join(HERE, "logs_flat_hybrid_clean",
-                                            f"clean__{lang}__{slug}__q{q['id']}.json")
+                    log_path = os.path.join(HERE, log_dir,
+                                            f"{tag}__{lang}__{slug}__q{q['id']}.json")
                     if resume and os.path.exists(log_path):
                         prev = json.load(open(log_path))
                         if "summary_row" in prev:
                             summary.append(prev["summary_row"])
-                            print(f"[clean|{lang}|{slug}] Q{q['id']} — resumed from log",
+                            print(f"[{tag}|{lang}|{slug}] Q{q['id']} — resumed from log",
                                   flush=True)
                             continue
-                    print(f"[clean|{lang}|{slug}] Q{q['id']} (spent ${b._spent:.4f})",
+                    print(f"[{tag}|{lang}|{slug}] Q{q['id']} (spent ${b._spent:.4f})",
                           flush=True)
                     t0 = time.time()
                     try:
@@ -215,7 +227,7 @@ def main():
                         "forced_final": out["forced_final"],
                         "cost_usd": round(cost_q, 5),
                         "wall_s": round(time.time() - t0, 1)}
-                    rec = {"model": model, "condition": "flat-hybrid-clean",
+                    rec = {"model": model, "condition": condition,
                            "lang": lang, "qid": q["id"], "q": q["q"],
                            "kind": q["kind"], "wall_s": row["wall_s"],
                            "judge": verdict, "confusion": confusion,
@@ -233,7 +245,7 @@ def main():
     except b.BudgetHit as e:
         halted = str(e)
         print(f"HALT: {e}", flush=True)
-    with open(os.path.join(HERE, "results", "summary_flat_hybrid_clean.json"), "w") as f:
+    with open(os.path.join(HERE, "results", summary_file), "w") as f:
         json.dump({"spent_usd": round(b._spent, 4), "budget_usd": b.BUDGET_USD,
                    "halted": halted, "runs": summary}, f,
                   ensure_ascii=False, indent=2)
