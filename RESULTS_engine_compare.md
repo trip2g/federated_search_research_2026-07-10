@@ -100,6 +100,44 @@ backend and no torch allocator. For trip2g the strategic reading: a
 llama.cpp-backed sidecar speaking the same TEI wire would beat torch/MPS on
 both robustness and memory.
 
+## Finding 2b — qmd on the same Mac: not faster cold, 10× faster repeated, and why
+
+Same vault (924 notes), same machine, qmd 2.5.3 in a fresh index
+(`qmd --index macbench`), 6 cold + 6 repeated `qmd query -n 8 --json`:
+
+| | trip2g+Qwen3 (Metal, this run) | qmd (Metal) |
+|---|---|---|
+| index/embed the vault | ~5 min (job queue over HTTP) | **36 s** (1482 chunks, in-process) |
+| novel query | median 7.6 s (warm server) | median 11.4 s, max 21 s (per-invocation CLI: boot + model mmap + **1.7B query expansion** + embed + rerank@40) |
+| repeated query | same 7.6 s (no cache) | **0.8 s** |
+| top-1 quality (6 probes, eyeball) | good | good (all 6 on-target) |
+| serving robustness | 4 hand-fixes to keep torch/MPS alive | zero config (llama.cpp Metal backend; launcher even sets `GGML_METAL_NO_RESIDENCY=1` to dodge a known llama.cpp bug) |
+
+So on cold queries the VM-era "qmd is 4.5× slower" collapses to roughly
+parity — Metal absorbs qmd's extra LLM stage — and trip2g's resident server
+is actually *faster* per novel query. qmd's real edge is elsewhere, and it is
+architectural, not model-level (from `dist/store.js` / `dist/llm.js`):
+
+1. **An `llm_cache` table in the index** — query-expansion and rerank outputs
+   cached by content hash. Every repeated (or paraphrase-canonicalized)
+   search costs 0.8 s instead of 10. trip2g's rerank stage recomputes 50
+   cross-encoder scores per search, always. **This is the transplantable
+   idea:** cache rerank scores keyed by `(query, passage content-hash,
+   model)` — in trip2g's case a small table behind
+   `internal/reranker/client.go` — and repeated searches (agents re-issuing
+   near-identical tool calls is the common case in our own traces) drop to
+   RRF cost.
+2. **Rerank work is bounded the same way ours is** (40 candidates vs our 50,
+   ~10 docs per llama context vs our micro-batch of 8) — qmd wins nothing
+   here; this is why cold latencies converge.
+3. **In-process quantized GGUF via node-llama-cpp** (Q8_0) — no HTTP hop, no
+   torch allocator, Metal for free. This is the robustness story from
+   Finding 2 restated positively: a llama.cpp-backed sidecar speaking the
+   same TEI wire is the shortest path for trip2g to inherit it.
+4. **Batch embedding in-process** explains 36 s vs our ~5 min: trip2g pays
+   per-note job + HTTP round-trip; batching notes per embedding call would
+   close most of that gap without changing backends.
+
 ## Finding 3 — no accuracy case for the swap (now measured, not inferred)
 
 Full 24-run sweep (nano+mini × EN+RU × 6 questions), identical harness,
